@@ -1,0 +1,86 @@
+{
+  "io_only_upper_bound": true,
+  "rows": {
+    "Qwen3-Coder-30B-A3B-Instruct": {
+      "0": {
+        "expert_cache_hit_pct": 0,
+        "expert_ssd_gb_per_token": 1.102,
+        "io_only_ceiling_tok_s": 2.375
+      },
+      "25": {
+        "expert_cache_hit_pct": 25,
+        "expert_ssd_gb_per_token": 0.8265,
+        "io_only_ceiling_tok_s": 3.167
+      },
+      "50": {
+        "expert_cache_hit_pct": 50,
+        "expert_ssd_gb_per_token": 0.551,
+        "io_only_ceiling_tok_s": 4.75
+      },
+      "75": {
+        "expert_cache_hit_pct": 75,
+        "expert_ssd_gb_per_token": 0.2755,
+        "io_only_ceiling_tok_s": 9.5
+      },
+      "90": {
+        "expert_cache_hit_pct": 90,
+        "expert_ssd_gb_per_token": 0.1102,
+        "io_only_ceiling_tok_s": 23.749
+      }
+    },
+    "Qwen3-30B-A3B": {
+      "0": {
+        "expert_cache_hit_pct": 0,
+        "expert_ssd_gb_per_token": 1.102,
+        "io_only_ceiling_tok_s": 2.375
+      },
+      "25": {
+        "expert_cache_hit_pct": 25,
+        "expert_ssd_gb_per_token": 0.8265,
+        "io_only_ceiling_tok_s": 3.167
+      },
+      "50": {
+        "expert_cache_hit_pct": 50,
+        "expert_ssd_gb_per_token": 0.551,
+        "io_only_ceiling_tok_s": 4.75
+      },
+      "75": {
+        "expert_cache_hit_pct": 75,
+        "expert_ssd_gb_per_token": 0.2755,
+        "io_only_ceiling_tok_s": 9.5
+      },
+      "90": {
+        "expert_cache_hit_pct": 90,
+        "expert_ssd_gb_per_token": 0.1102,
+        "io_only_ceiling_tok_s": 23.749
+      }
+    },
+    "Qwen3-Next-80B-A3B-Instruct": {
+      "0": {
+        "expert_cache_hit_pct": 0,
+        "expert_ssd_gb_per_token": 0.914,
+        "io_only_ceiling_tok_s": 2.863
+      },
+      "25": {
+        "expert_cache_hit_pct": 25,
+        "expert_ssd_gb_per_token": 0.6855,
+        "io_only_ceiling_tok_s": 3.818
+      },
+      "50": {
+        "expert_cache_hit_pct": 50,
+        "expert_ssd_gb_per_token": 0.457,
+        "io_only_ceiling_tok_s": 5.727
+      },
+      "75": {
+        "expert_cache_hit_pct": 75,
+        "expert_ssd_gb_per_token": 0.2285,
+        "io_only_ceiling_tok_s": 11.454
+      },
+      "90": {
+        "expert_cache_hit_pct": 90,
+        "expert_ssd_gb_per_token": 0.0914,
+        "io_only_ceiling_tok_s": 28.634
+      }
+    }
+  }
+}

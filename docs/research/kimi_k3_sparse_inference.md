@@ -400,3 +400,15 @@ The decision must be evidence-driven and must compare:
 The main lesson from `kimi-k3-in-c` is not "run a huge model on CPU". It is:
 
 > Design and evaluate local inference around the active working set and repeated storage traffic per token, not around total model size alone.
+
+---
+
+## 12. A2.S0 verification update — 2026-09-02
+
+The subsequent source/trace study in `docs/result/result_a2_s0_sparse_early_feasibility.md` sharpened this hypothesis in two important ways.
+
+First, Kimi K3 is a valid proof of sparse low-RAM execution but **not** evidence for interactive large-model inference on the target laptop. The reference repo's own memory ladder reports about 32.69 s/token at an 8 GB budget. Its included real expert-routing trace also shows that a small LRU cache has poor marginal value: replayed at the target laptop's measured ~2.5 GiB/s SSD rate, 4–12 GB of expert cache still leaves about 16.47 GB of routed-expert reads per token before trunk traffic and compute. Kimi-specific locality therefore must not be generalized to another MoE.
+
+Second, the more promising sparse direction is not necessarily a Kimi-style out-of-core engine. A model such as Qwen3-Coder-30B-A3B-Instruct has a ~30.5B total / ~3.3B active architecture while a Q4_K_M-class artifact is around the resident-capacity boundary of this machine. Current llama.cpp source already includes Qwen3-MoE support, CPU-MoE placement controls, Vulkan/SYCL MoE kernels and selective transfer of used experts. That creates a much lower-risk experiment: test a **resident sparse model with an existing runtime** before considering any expert-streaming engine.
+
+This update does not overwrite the original hypothesis; it narrows it. The transferable Kimi lesson is active-working-set accounting and trace-based evidence, not the assumption that custom expert streaming is the preferred implementation.

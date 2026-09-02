@@ -66,3 +66,29 @@ Do not use a fixed claim such as “RAM <= 14 GB” as the sole pass/fail rule. 
 ### Qualification target
 
 The local tier should feel responsive enough for inline edits and short coding/chat tasks while leaving enough memory for Windows + VS Code. The final thresholds must be set from actual measurements on the user's laptop, not assumed in advance.
+
+## 6. A2.S0 sparse/MoE decision-gate QA
+
+A2.S0 is a research/modeling gate, not a model production qualification. Required evidence is:
+
+- pinned source revisions for kimi-k3-in-c, llama.cpp and AirLLM;
+- source-level map of Kimi loader/router/expert cache/packed compute/context behavior;
+- deterministic memory/I/O model for dense 14B/32B and sparse candidates;
+- replay of Kimi's included routing trace at 0/1/2/4/8/12 GB cache capacities;
+- explicit separation of Kimi locality evidence from other candidates;
+- current llama.cpp architecture/kernel/placement support evidence;
+- candidate quality evidence labeled preselection-only;
+- no large-model download and no fabricated telemetry.
+
+The selected A2.S0 verdict is `TEST_SPARSE_BEFORE_DENSE_32B`. A2.1 14B remains the dense control. The next sparse qualification must run Qwen3-Coder-30B-A3B-Instruct Q4_K_M against the **same** local2api 25-case quality suite and 1K/4K/8K/16K context fixtures. Quality is criterion #1; performance is secondary.
+
+For that qualification collect, at minimum:
+
+- LOCAL_SAFE / LOCAL_ACCEPTABLE / intended-local quality against the unchanged 7B control;
+- manual 0–3 production-usability rubric and malformed/repetition flags;
+- Ollama/Vulkan and direct llama.cpp Vulkan A/B;
+- CPU-MoE placement A/B when practical;
+- TTFT, generation tok/s and prompt processing at 1K/4K/8K/16K;
+- process/system memory and commit pressure;
+- quantized-KV A/B at long context if supported;
+- page faults, thermals and power only when a trustworthy source is available, otherwise `NOT PROVEN`.

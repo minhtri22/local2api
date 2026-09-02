@@ -1,0 +1,112 @@
+{
+  "assumptions": {
+    "ssd_mib_s": 2495.92,
+    "model_runtime_budget_gib": 21.0,
+    "dense_q4_sizes_source": "A1.0 calibrated 4.91 effective bpw",
+    "sparse_q4_sizes_unit": "decimal GB from published GGUF artifact listings",
+    "kv_dtype": "F16"
+  },
+  "candidates": [
+    {
+      "name": "Dense 14B representative",
+      "kind": "dense_control",
+      "total_params_b": 14.0,
+      "active_params_b": 14.0,
+      "q4_artifact_gib_est": 8.0,
+      "always_active_weight_gib_est": 8.0,
+      "active_expert_weight_gb_per_token_est": 0.0,
+      "kv_f16_gib": {
+        "1024": 0.1875,
+        "4096": 0.75,
+        "8192": 1.5,
+        "16384": 3.0
+      },
+      "fits_21gib_weight_budget": true,
+      "full_stream_io_ceiling_tok_s": 0.305
+    },
+    {
+      "name": "Dense 32B representative",
+      "kind": "dense_control",
+      "total_params_b": 32.0,
+      "active_params_b": 32.0,
+      "q4_artifact_gib_est": 18.29,
+      "always_active_weight_gib_est": 18.29,
+      "active_expert_weight_gb_per_token_est": 0.0,
+      "kv_f16_gib": {
+        "1024": 0.25,
+        "4096": 1.0,
+        "8192": 2.0,
+        "16384": 4.0
+      },
+      "fits_21gib_weight_budget": true,
+      "full_stream_io_ceiling_tok_s": 0.133
+    },
+    {
+      "name": "Qwen3-Coder-30B-A3B-Instruct",
+      "kind": "sparse_moe",
+      "total_params_b": 30.5,
+      "active_params_b": 3.3,
+      "always_active_params_b_est": 1.488,
+      "routed_expert_params_b_calc": 28.991,
+      "active_routed_params_b_calc": 1.812,
+      "experts": 128,
+      "experts_per_token": 8,
+      "q4_artifact_gb": 18.557,
+      "always_active_weight_gb_est": 0.918,
+      "active_expert_weight_gb_per_token_est": 1.102,
+      "kv_f16_gib": {
+        "1024": 0.0938,
+        "4096": 0.375,
+        "8192": 0.75,
+        "16384": 1.5
+      },
+      "fits_21gib_weight_budget": true,
+      "no_cache_io_ceiling_tok_s": 2.374
+    },
+    {
+      "name": "Qwen3-30B-A3B",
+      "kind": "sparse_moe",
+      "total_params_b": 30.5,
+      "active_params_b": 3.3,
+      "always_active_params_b_est": 1.488,
+      "routed_expert_params_b_calc": 28.991,
+      "active_routed_params_b_calc": 1.812,
+      "experts": 128,
+      "experts_per_token": 8,
+      "q4_artifact_gb": 18.557,
+      "always_active_weight_gb_est": 0.918,
+      "active_expert_weight_gb_per_token_est": 1.102,
+      "kv_f16_gib": {
+        "1024": 0.0938,
+        "4096": 0.375,
+        "8192": 0.75,
+        "16384": 1.5
+      },
+      "fits_21gib_weight_budget": true,
+      "no_cache_io_ceiling_tok_s": 2.374
+    },
+    {
+      "name": "Qwen3-Next-80B-A3B-Instruct",
+      "kind": "sparse_moe",
+      "total_params_b": 80.0,
+      "active_params_b": 3.0,
+      "always_active_params_b_est": 1.49,
+      "routed_expert_params_b_calc": 77.309,
+      "active_routed_params_b_calc": 1.51,
+      "experts": 512,
+      "experts_per_token": 10,
+      "q4_artifact_gb": 48.4,
+      "always_active_weight_gb_est": 1.628,
+      "active_expert_weight_gb_per_token_est": 0.914,
+      "kv_f16_gib": {
+        "1024": 0.0234,
+        "4096": 0.0938,
+        "8192": 0.1875,
+        "16384": 0.375
+      },
+      "fits_21gib_weight_budget": false,
+      "no_cache_io_ceiling_tok_s": 2.865,
+      "recurrent_state_bytes": "NOT PROVEN"
+    }
+  ]
+}

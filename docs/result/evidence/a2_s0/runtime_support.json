@@ -1,0 +1,45 @@
+{
+  "llama_cpp_source_commit": "7798007a29a90e3053e799394da48cf53a2f8e0f",
+  "evidence": {
+    "architectures": {
+      "qwen3moe": "SUPPORTED_NOW",
+      "qwen3next": "SUPPORTED_NOW",
+      "kimi-k3": "SUPPORTED_NOW"
+    },
+    "moe_controls": {
+      "cpu_moe": "tools/llama-bench/llama-bench.cpp --n-cpu-moe",
+      "load_modes": "auto|none|mmap|mlock|mmap+mlock|dio",
+      "selective_expert_transfer": "ggml/src/ggml-backend.cpp copies only used experts when offloading MoE weights"
+    },
+    "vulkan": {
+      "topk_moe": "ggml/src/ggml-vulkan/vulkan-shaders/topk_moe.comp",
+      "expert_grouping": "ggml/src/ggml-vulkan/vulkan-shaders/count_experts.comp",
+      "quantized_moe_matmul": "ggml/src/ggml-vulkan/vulkan-shaders/mul_mmq.comp and mul_mm_id_funcs.glsl",
+      "intel_arc_140v_exact_candidate_run": "NOT PROVEN",
+      "igpu_mmap_note": "Vulkan reports mmap_support=false for integrated GPU device buffers; host loading/offload still applies"
+    },
+    "sycl": {
+      "topk_moe": "ggml/src/ggml-sycl/topk-moe.cpp",
+      "quantized_expert_vector_path": "ggml/src/ggml-sycl/mmvq.cpp",
+      "intel_arc_140v_exact_candidate_run": "NOT PROVEN"
+    }
+  },
+  "candidate_classification": {
+    "Qwen3-Coder-30B-A3B-Instruct": {
+      "llama.cpp": "SUPPORTED_NOW",
+      "ollama": "SUPPORTED_WITH_LIMITATIONS",
+      "arc_vulkan": "SUPPORTED_WITH_LIMITATIONS"
+    },
+    "Qwen3-30B-A3B": {
+      "llama.cpp": "SUPPORTED_NOW",
+      "ollama": "SUPPORTED_WITH_LIMITATIONS",
+      "arc_vulkan": "SUPPORTED_WITH_LIMITATIONS"
+    },
+    "Qwen3-Next-80B-A3B-Instruct": {
+      "llama.cpp": "SUPPORTED_NOW",
+      "ollama": "SUPPORTED_WITH_LIMITATIONS",
+      "arc_vulkan": "SUPPORTED_WITH_LIMITATIONS"
+    }
+  },
+  "qualification_note": "SUPPORTED_WITH_LIMITATIONS means architecture/import path exists but the exact candidate was not loaded and benchmarked on Arc 140V in A2.S0."
+}

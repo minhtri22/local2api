@@ -1,0 +1,22 @@
+{
+  "predeclared_thresholds": {
+    "INTERACTIVE": ">=5 tok/s decode",
+    "SLOW_INTERACTIVE": "2-5 tok/s decode",
+    "BATCH_ONLY": "0.5-2 tok/s decode",
+    "UNUSABLE": "<0.5 tok/s decode",
+    "note": "A2.S0 estimates are not measured decode throughput. TTFT/prefill must be measured separately in qualification."
+  },
+  "verdict_rules": {
+    "CONTINUE_DENSE_14B": "sparse support/working-set/quality advantage is not credible enough to justify a sparse qualification",
+    "TEST_SPARSE_BEFORE_DENSE_32B": "at least one concrete sparse candidate has strong quality potential, practical active set/context, near-usable existing runtime path, and meaningful expected throughput",
+    "PARALLEL_DENSE_AND_SPARSE": "dense 14B and sparse solve distinct tiers with strong evidence and both benchmark costs are justified",
+    "STOP_LARGE_LOCAL": "neither dense nor sparse has credible quality-per-resource economics"
+  },
+  "selected_verdict": "TEST_SPARSE_BEFORE_DENSE_32B",
+  "why": [
+    "Qwen3-Coder-30B-A3B-Instruct is a concrete coding-specialized 30.5B/3.3B-active candidate whose Q4_K_M class artifact is approximately 18.6 GB and plausibly resident on the 21 GiB model/runtime budget.",
+    "llama.cpp already has qwen3moe, CPU-MoE controls, Vulkan/SYCL MoE kernels, quantized expert compute, and selective expert transfer; no custom runtime is required for the first qualification.",
+    "Dense 32B has similar weight capacity cost but all 32B parameters are active each token and less memory margin; it remains gated until sparse qualification establishes real quality/performance.",
+    "Kimi K3 demonstrates sparse streaming mechanics but its measured 8-64 GB regime is non-interactive and does not justify a custom Kimi-style runtime on this laptop."
+  ]
+}

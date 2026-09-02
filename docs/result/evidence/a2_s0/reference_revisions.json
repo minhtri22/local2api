@@ -1,0 +1,21 @@
+{
+  "kimi-k3-in-c": {
+    "url": "https://github.com/FareedKhan-dev/kimi-k3-in-c.git",
+    "commit": "117e9d29bde14db9742f54fb66a191fd0bf03903",
+    "license": "Apache-2.0"
+  },
+  "llama.cpp": {
+    "url": "https://github.com/ggml-org/llama.cpp.git",
+    "commit": "7798007a29a90e3053e799394da48cf53a2f8e0f",
+    "license": "MIT"
+  },
+  "AirLLM": {
+    "url": "https://github.com/lyogavin/airllm.git",
+    "commit": "fd1bd87216488e053b87691bbb6318fa9bf77a4b",
+    "license": "Apache-2.0"
+  },
+  "local_runtime": {
+    "ollama": "0.33.2",
+    "llama_server": "0.3.0-dev build 10726 commit 85c55223c"
+  }
+}

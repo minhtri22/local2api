@@ -1,0 +1,52 @@
+{
+  "Dense 14B representative": {
+    "weight": 8.0,
+    "kv_f16_gib": {
+      "1024": 0.1875,
+      "4096": 0.75,
+      "8192": 1.5,
+      "16384": 3.0
+    },
+    "fits_21gib_weight_budget": true
+  },
+  "Dense 32B representative": {
+    "weight": 18.29,
+    "kv_f16_gib": {
+      "1024": 0.25,
+      "4096": 1.0,
+      "8192": 2.0,
+      "16384": 4.0
+    },
+    "fits_21gib_weight_budget": true
+  },
+  "Qwen3-Coder-30B-A3B-Instruct": {
+    "weight": 18.557,
+    "kv_f16_gib": {
+      "1024": 0.0938,
+      "4096": 0.375,
+      "8192": 0.75,
+      "16384": 1.5
+    },
+    "fits_21gib_weight_budget": true
+  },
+  "Qwen3-30B-A3B": {
+    "weight": 18.557,
+    "kv_f16_gib": {
+      "1024": 0.0938,
+      "4096": 0.375,
+      "8192": 0.75,
+      "16384": 1.5
+    },
+    "fits_21gib_weight_budget": true
+  },
+  "Qwen3-Next-80B-A3B-Instruct": {
+    "weight": 48.4,
+    "kv_f16_gib": {
+      "1024": 0.0234,
+      "4096": 0.0938,
+      "8192": 0.1875,
+      "16384": 0.375
+    },
+    "fits_21gib_weight_budget": false
+  }
+}

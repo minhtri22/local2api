@@ -1,0 +1,29 @@
+{
+  "rule": "Public/model-card benchmark evidence is preselection only; production quality requires the unchanged local2api quality suite.",
+  "candidates": {
+    "Qwen3-Coder-30B-A3B-Instruct": {
+      "coding_evidence": "coding-specialized Qwen3-Coder family; official model card positions it for agentic coding",
+      "reasoning_evidence": "strong general reasoning/coding preselection evidence from official family report",
+      "context_evidence": "long-context configuration and agentic coding use case",
+      "confidence": "HIGH_FOR_PRESELECTION_ONLY",
+      "production_quality": "NOT PROVEN"
+    },
+    "Qwen3-30B-A3B": {
+      "coding_evidence": "general Qwen3 MoE rather than coding-specialized",
+      "reasoning_evidence": "strong general-family preselection evidence",
+      "context_evidence": "40,960-token model config observed from official repository",
+      "confidence": "MEDIUM",
+      "production_quality": "NOT PROVEN"
+    },
+    "Qwen3-Next-80B-A3B-Instruct": {
+      "coding_evidence": "general instruction model; not selected primarily for coding specialization",
+      "reasoning_evidence": "newer hybrid sparse architecture with strong official preselection claims",
+      "context_evidence": "262,144 max_position_embeddings in official config",
+      "confidence": "MEDIUM",
+      "production_quality": "NOT PROVEN"
+    }
+  },
+  "control": {
+    "Qwen2.5-Coder-7B-Q4_K_M": "LOCAL_SAFE 1/9; LOCAL_ACCEPTABLE 2/11; intended-local 3/20"
+  }
+}

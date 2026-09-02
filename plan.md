@@ -37,11 +37,25 @@ If future sparse-model evidence reopens it, prototype scope may include expert r
 
 ### A2 — Large-model Feasibility — NEXT TRACK-A GATE
 
+#### A2.S0 — Sparse/MoE Early Feasibility — COMPLETE
+
+Verdict: **`TEST_SPARSE_BEFORE_DENSE_32B`**.
+
+Source/trace/runtime research found a concrete sparse candidate that changes the economics without requiring a custom runtime: Qwen3-Coder-30B-A3B-Instruct is ~30.5B total / ~3.3B active and its Q4_K_M-class artifact is plausibly resident on the target 32 GB machine. Current llama.cpp already has Qwen3-MoE, quantized MoE kernels, CPU-MoE placement and selective expert transfer.
+
+Kimi K3 remains a reference architecture only. Its included low-memory measurements and routing trace show that Kimi-style expert streaming/cache is non-interactive at laptop-scale RAM; A1.1 remains closed.
+
+Decision order after A2.S0:
+
+1. **A2.1 dense 14B remains NEXT** as the cheapest dense quality/control experiment.
+2. **A2.S1 sparse qualification**: Qwen3-Coder-30B-A3B-Instruct Q4_K_M using the same quality/context methodology as A0/A2.1.
+3. **A2.2 dense 32B remains BLOCKED** until 14B + sparse results justify spending the tighter memory/compute budget on dense 32B.
+
 Candidate ladder:
 
 - 14B first;
-- 32B only if 14B demonstrates useful quality/performance;
-- dense vs MoE when a specific candidate offers a credible capability benefit.
+- sparse Qwen3-Coder-30B-A3B qualification before dense 32B;
+- 32B only if the 14B/sparse comparison demonstrates that dense 32B is still worth the additional active-compute and memory pressure.
 
 Use existing runtimes first: Ollama/llama.cpp with mmap, partial offload, quantized KV where supported, and measured Vulkan/SYCL configurations. Determine max practical model, context, usable throughput and Local Capability Profile. Do not infer production usefulness merely from successful model loading.
 
@@ -90,4 +104,4 @@ Route on task class, context requirement, privacy, latency, backend capability a
 
 ## Current next action
 
-Track A: A2 should test a 14B candidate with existing runtimes first; 32B remains gated by the 14B result. Track B can proceed independently with B1 Context Ownership.
+Track A: A2.1 should test a 14B candidate with existing runtimes as the dense control, then A2.S1 should qualify Qwen3-Coder-30B-A3B before any dense 32B run. A2.2 remains blocked. Track B can proceed independently with B1 Context Ownership.

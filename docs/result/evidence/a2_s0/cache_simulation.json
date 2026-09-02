@@ -1,0 +1,149 @@
+{
+  "trace_requests": 100096,
+  "distinct_experts": 10010,
+  "approx_tokens": 68.0,
+  "expert_bytes": 17547264,
+  "reuse_distance": {
+    "samples": 90086,
+    "p50_requests": 9505,
+    "p90_requests": 16208,
+    "p95_requests": 16880,
+    "p99_requests": 17475,
+    "max_requests": 17648
+  },
+  "rows": [
+    {
+      "cache_gb": 0,
+      "slots": 0,
+      "lru": {
+        "hit_rate": 0.0,
+        "miss_rate": 1.0,
+        "gb_read_per_token": 25.8296,
+        "io_only_seconds_per_token": 10.3487
+      },
+      "lfu": {
+        "hit_rate": 0.0,
+        "miss_rate": 1.0,
+        "gb_read_per_token": 25.8296,
+        "io_only_seconds_per_token": 10.3487
+      },
+      "pinned_hot_upper_bound": {
+        "hit_rate": 0.0,
+        "miss_rate": 1.0,
+        "gb_read_per_token": 25.8296,
+        "io_only_seconds_per_token": 10.3487
+      }
+    },
+    {
+      "cache_gb": 1,
+      "slots": 56,
+      "lru": {
+        "hit_rate": 0.353321,
+        "miss_rate": 0.646679,
+        "gb_read_per_token": 16.7034,
+        "io_only_seconds_per_token": 6.6923
+      },
+      "lfu": {
+        "hit_rate": 0.013757,
+        "miss_rate": 0.986243,
+        "gb_read_per_token": 25.4742,
+        "io_only_seconds_per_token": 10.2064
+      },
+      "pinned_hot_upper_bound": {
+        "hit_rate": 0.029132,
+        "miss_rate": 0.970868,
+        "gb_read_per_token": 25.0771,
+        "io_only_seconds_per_token": 10.0472
+      }
+    },
+    {
+      "cache_gb": 2,
+      "slots": 113,
+      "lru": {
+        "hit_rate": 0.362002,
+        "miss_rate": 0.637998,
+        "gb_read_per_token": 16.4792,
+        "io_only_seconds_per_token": 6.6025
+      },
+      "lfu": {
+        "hit_rate": 0.024686,
+        "miss_rate": 0.975314,
+        "gb_read_per_token": 25.1919,
+        "io_only_seconds_per_token": 10.0932
+      },
+      "pinned_hot_upper_bound": {
+        "hit_rate": 0.05259,
+        "miss_rate": 0.94741,
+        "gb_read_per_token": 24.4712,
+        "io_only_seconds_per_token": 9.8045
+      }
+    },
+    {
+      "cache_gb": 4,
+      "slots": 227,
+      "lru": {
+        "hit_rate": 0.362372,
+        "miss_rate": 0.637628,
+        "gb_read_per_token": 16.4697,
+        "io_only_seconds_per_token": 6.5986
+      },
+      "lfu": {
+        "hit_rate": 0.051091,
+        "miss_rate": 0.948909,
+        "gb_read_per_token": 24.5099,
+        "io_only_seconds_per_token": 9.82
+      },
+      "pinned_hot_upper_bound": {
+        "hit_rate": 0.092881,
+        "miss_rate": 0.907119,
+        "gb_read_per_token": 23.4305,
+        "io_only_seconds_per_token": 9.3875
+      }
+    },
+    {
+      "cache_gb": 8,
+      "slots": 455,
+      "lru": {
+        "hit_rate": 0.362372,
+        "miss_rate": 0.637628,
+        "gb_read_per_token": 16.4697,
+        "io_only_seconds_per_token": 6.5986
+      },
+      "lfu": {
+        "hit_rate": 0.102861,
+        "miss_rate": 0.897139,
+        "gb_read_per_token": 23.1727,
+        "io_only_seconds_per_token": 9.2842
+      },
+      "pinned_hot_upper_bound": {
+        "hit_rate": 0.159966,
+        "miss_rate": 0.840034,
+        "gb_read_per_token": 21.6977,
+        "io_only_seconds_per_token": 8.6933
+      }
+    },
+    {
+      "cache_gb": 12,
+      "slots": 683,
+      "lru": {
+        "hit_rate": 0.362372,
+        "miss_rate": 0.637628,
+        "gb_read_per_token": 16.4697,
+        "io_only_seconds_per_token": 6.5986
+      },
+      "lfu": {
+        "hit_rate": 0.158128,
+        "miss_rate": 0.841872,
+        "gb_read_per_token": 21.7452,
+        "io_only_seconds_per_token": 8.7123
+      },
+      "pinned_hot_upper_bound": {
+        "hit_rate": 0.214264,
+        "miss_rate": 0.785736,
+        "gb_read_per_token": 20.2952,
+        "io_only_seconds_per_token": 8.1314
+      }
+    }
+  ],
+  "warning": "Pinned-hot uses future knowledge and is an upper bound; this Kimi trace must not be generalized to other models."
+}
