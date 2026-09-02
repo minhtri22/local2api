@@ -1,0 +1,192 @@
+{
+  "schema": "local2api.hw1.ollama.v1",
+  "created_at": "2026-09-02T08:55:45.067455+00:00",
+  "host": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.12"
+  },
+  "config": {
+    "provider": "ollama",
+    "base_url": "http://127.0.0.1:11435",
+    "models": [
+      "qwen2.5-coder:7b"
+    ],
+    "runs": 5,
+    "num_predict": 128,
+    "prompt": "You are reviewing a Python FastAPI repository. Give exactly five concise bullets describing how to implement a capability-aware local/cloud router with safe fallback."
+  },
+  "summary": {
+    "qwen2.5-coder:7b": {
+      "runs": 5,
+      "median_ttft_ms": 452.606,
+      "median_wall_ms": 9634.02,
+      "median_load_ms": 197.985,
+      "median_prompt_tokens_per_s": 599.52,
+      "median_generation_tokens_per_s": 8.832
+    }
+  },
+  "samples": [
+    {
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "run": 1,
+      "ttft_ms": 3507.363,
+      "wall_ms": 4702.861,
+      "load_ms": 3063.383,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 189.35,
+      "generated_tokens": 19,
+      "generation_tokens_per_s": 15.953
+    },
+    {
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "run": 2,
+      "ttft_ms": 231.406,
+      "wall_ms": 9820.41,
+      "load_ms": 22.794,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 627.083,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 8.522
+    },
+    {
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "run": 3,
+      "ttft_ms": 452.606,
+      "wall_ms": 9634.02,
+      "load_ms": 197.985,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 599.52,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 8.832
+    },
+    {
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "run": 4,
+      "ttft_ms": 441.585,
+      "wall_ms": 10005.868,
+      "load_ms": 131.655,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 594.723,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 8.537
+    },
+    {
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "run": 5,
+      "ttft_ms": 542.266,
+      "wall_ms": 9158.407,
+      "load_ms": 215.955,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 678.967,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 9.618
+    }
+  ],
+  "raw_final_events": [
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 1,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:55:06.4445449Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 4563887500,
+        "load_duration": 3063383100,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 301030000,
+        "eval_count": 19,
+        "eval_duration": 1191010000
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 2,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:55:16.2060689Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 9750051900,
+        "load_duration": 22794100,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 90897000,
+        "eval_count": 82,
+        "eval_duration": 9621909000
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 3,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:55:25.9003279Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 9618760800,
+        "load_duration": 197985100,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 95076000,
+        "eval_count": 82,
+        "eval_duration": 9284868000
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 4,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:55:35.8781929Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 9953640600,
+        "load_duration": 131654800,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 95843000,
+        "eval_count": 82,
+        "eval_duration": 9604817000
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 5,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:55:44.9841168Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 9059883600,
+        "load_duration": 215954800,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 83951000,
+        "eval_count": 82,
+        "eval_duration": 8525370000
+      }
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "local2api.hw1.ollama.v1",
+  "created_at": "2026-09-02T08:40:53.406804+00:00",
+  "host": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.12"
+  },
+  "config": {
+    "base_url": "http://127.0.0.1:11435",
+    "models": [
+      "qwen2.5-coder:7b"
+    ],
+    "runs": 3,
+    "num_predict": 128,
+    "prompt": "You are reviewing a Python FastAPI repository. Give exactly five concise bullets describing how to implement a capability-aware local/cloud router with safe fallback."
+  },
+  "summary": {
+    "qwen2.5-coder:7b": {
+      "runs": 3,
+      "median_ttft_ms": 689.233,
+      "median_wall_ms": 21194.56,
+      "median_load_ms": 374.608,
+      "median_prompt_tokens_per_s": 363.349,
+      "median_generation_tokens_per_s": 6.215
+    }
+  },
+  "samples": [
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 1,
+      "ttft_ms": 7477.393,
+      "wall_ms": 28668.234,
+      "load_ms": 4157.521,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 17.737,
+      "generated_tokens": 128,
+      "generation_tokens_per_s": 6.092
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 2,
+      "ttft_ms": 689.233,
+      "wall_ms": 21194.56,
+      "load_ms": 374.608,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 407.664,
+      "generated_tokens": 128,
+      "generation_tokens_per_s": 6.215
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 3,
+      "ttft_ms": 170.689,
+      "wall_ms": 20015.476,
+      "load_ms": 8.224,
+      "prompt_tokens": 57,
+      "prompt_tokens_per_s": 363.349,
+      "generated_tokens": 128,
+      "generation_tokens_per_s": 6.45
+    }
+  ],
+  "raw_final_events": [
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 1,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:40:12.0174277Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "length",
+        "total_duration": 28467518500,
+        "load_duration": 4157521300,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 3213600000,
+        "eval_count": 128,
+        "eval_duration": 21011526000
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 2,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:40:33.3897789Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "length",
+        "total_duration": 21149150600,
+        "load_duration": 374608300,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 139821000,
+        "eval_count": 128,
+        "eval_duration": 20596329000
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 3,
+      "final": {
+        "model": "qwen2.5-coder:7b",
+        "created_at": "2026-09-02T08:40:53.4057726Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "length",
+        "total_duration": 20014005500,
+        "load_duration": 8224400,
+        "prompt_eval_count": 57,
+        "prompt_eval_duration": 156874000,
+        "eval_count": 128,
+        "eval_duration": 19844090000
+      }
+    }
+  ]
+}

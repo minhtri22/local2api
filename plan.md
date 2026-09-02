@@ -69,4 +69,16 @@ Build a small, observable OpenAI-compatible inference gateway for a 32 GB laptop
 
 ## Next action after v0.0.1
 
-Run the **real-device qualification benchmark on the Intel Core Ultra 7 258V / 32 GB Windows laptop**. Compare at least two 7B/8B coding models and one 14B candidate using the same prompt/context suite; record TTFT, prompt tokens/s, generation tokens/s, working set, commit memory, page faults and thermal/power behavior. Use those measurements to select the default local model and define v0.0.2 capability limits.
+Run the **real-device qualification benchmark on the Intel Core Ultra 7 258V / 32 GB Windows laptop** in gated stages. First prove the 7B local tier on the target hardware, including runtime A/B, telemetry, and coding quality. Only after the 7B gate passes should a 14B candidate be downloaded and qualified. Record TTFT, prompt tokens/s, generation tokens/s, working set, commit memory, page faults and thermal/power behavior. Use those measurements to select the default local model and define v0.0.2 capability limits.
+
+### v0.0.1-HW1 progress
+
+- [x] Add a reproducible Ollama benchmark harness for TTFT and Ollama-reported prompt/generation throughput.
+- [x] Demonstrate Qwen2.5-Coder 7B Q4_K_M hardware/runtime feasibility on the target laptop with Arc 140V Vulkan.
+- [x] Run same-model Ollama vs llama-server A/B on Arc 140V Vulkan; sustained generation is approximately 9 tok/s on both paths.
+- [ ] Complete the 7B gate with byte-identical runtime input, OS memory/page-fault telemetry, thermal/power telemetry, and coding/repository quality tests.
+- [ ] Only after the 7B gate passes, download and benchmark the 14B candidate.
+- [ ] Record Ollama CPU/GPU processor allocation for each candidate. Arc 140V Vulkan / `100% GPU` is confirmed for Qwen2.5-Coder 7B; complete the same check for all candidates.
+- [ ] Capture working set, commit memory and page faults with OS telemetry.
+- [ ] Capture thermal/power behavior with hardware telemetry.
+- [ ] Run a coding/repository quality suite before selecting the default local tier.

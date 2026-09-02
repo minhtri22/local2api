@@ -1,0 +1,182 @@
+{
+  "schema": "local2api.hw1.openai.v1",
+  "created_at": "2026-09-02T08:54:19.724330+00:00",
+  "host": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.12"
+  },
+  "config": {
+    "provider": "openai",
+    "base_url": "http://127.0.0.1:11437",
+    "models": [
+      "qwen2.5-coder:7b"
+    ],
+    "runs": 5,
+    "num_predict": 128,
+    "prompt": "You are reviewing a Python FastAPI repository. Give exactly five concise bullets describing how to implement a capability-aware local/cloud router with safe fallback."
+  },
+  "summary": {
+    "qwen2.5-coder:7b": {
+      "runs": 5,
+      "median_ttft_ms": 140.772,
+      "median_wall_ms": 8816.5,
+      "median_load_ms": 0.0,
+      "median_prompt_tokens_per_s": 10.947,
+      "median_generation_tokens_per_s": 9.387
+    }
+  },
+  "samples": [
+    {
+      "provider": "openai",
+      "model": "qwen2.5-coder:7b",
+      "run": 1,
+      "ttft_ms": 121.861,
+      "wall_ms": 7661.433,
+      "load_ms": 0.0,
+      "prompt_tokens": 1,
+      "prompt_tokens_per_s": 13.017,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 10.744
+    },
+    {
+      "provider": "openai",
+      "model": "qwen2.5-coder:7b",
+      "run": 2,
+      "ttft_ms": 140.853,
+      "wall_ms": 9065.185,
+      "load_ms": 0.0,
+      "prompt_tokens": 1,
+      "prompt_tokens_per_s": 7.901,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 9.076
+    },
+    {
+      "provider": "openai",
+      "model": "qwen2.5-coder:7b",
+      "run": 3,
+      "ttft_ms": 140.772,
+      "wall_ms": 10995.343,
+      "load_ms": 0.0,
+      "prompt_tokens": 1,
+      "prompt_tokens_per_s": 7.807,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 7.462
+    },
+    {
+      "provider": "openai",
+      "model": "qwen2.5-coder:7b",
+      "run": 4,
+      "ttft_ms": 187.702,
+      "wall_ms": 8816.5,
+      "load_ms": 0.0,
+      "prompt_tokens": 1,
+      "prompt_tokens_per_s": 12.738,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 9.387
+    },
+    {
+      "provider": "openai",
+      "model": "qwen2.5-coder:7b",
+      "run": 5,
+      "ttft_ms": 107.849,
+      "wall_ms": 8546.479,
+      "load_ms": 0.0,
+      "prompt_tokens": 1,
+      "prompt_tokens_per_s": 10.947,
+      "generated_tokens": 82,
+      "generation_tokens_per_s": 9.599
+    }
+  ],
+  "raw_final_events": [
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 1,
+      "final": {
+        "timings": {
+          "cache_n": 56,
+          "prompt_n": 1,
+          "prompt_ms": 76.821,
+          "prompt_per_token_ms": 76.821,
+          "prompt_per_second": 13.017273922495152,
+          "predicted_n": 82,
+          "predicted_ms": 7538.998,
+          "predicted_per_token_ms": 93.07404938271604,
+          "predicted_per_second": 10.744133371570069
+        },
+        "generated_text_chars": 379
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 2,
+      "final": {
+        "timings": {
+          "cache_n": 56,
+          "prompt_n": 1,
+          "prompt_ms": 126.559,
+          "prompt_per_token_ms": 126.559,
+          "prompt_per_second": 7.901453077220901,
+          "predicted_n": 82,
+          "predicted_ms": 8925.085,
+          "predicted_per_token_ms": 110.18623456790122,
+          "predicted_per_second": 9.075543818350189
+        },
+        "generated_text_chars": 379
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 3,
+      "final": {
+        "timings": {
+          "cache_n": 56,
+          "prompt_n": 1,
+          "prompt_ms": 128.082,
+          "prompt_per_token_ms": 128.082,
+          "prompt_per_second": 7.807498321387861,
+          "predicted_n": 82,
+          "predicted_ms": 10854.533,
+          "predicted_per_token_ms": 134.0065802469136,
+          "predicted_per_second": 7.46232012008255
+        },
+        "generated_text_chars": 379
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 4,
+      "final": {
+        "timings": {
+          "cache_n": 56,
+          "prompt_n": 1,
+          "prompt_ms": 78.505,
+          "prompt_per_token_ms": 78.505,
+          "prompt_per_second": 12.73804216291956,
+          "predicted_n": 82,
+          "predicted_ms": 8628.549,
+          "predicted_per_token_ms": 106.5252962962963,
+          "predicted_per_second": 9.387441619674407
+        },
+        "generated_text_chars": 379
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "run": 5,
+      "final": {
+        "timings": {
+          "cache_n": 56,
+          "prompt_n": 1,
+          "prompt_ms": 91.353,
+          "prompt_per_token_ms": 91.353,
+          "prompt_per_second": 10.946548006086282,
+          "predicted_n": 82,
+          "predicted_ms": 8438.397,
+          "predicted_per_token_ms": 104.17774074074075,
+          "predicted_per_second": 9.598979521821501
+        },
+        "generated_text_chars": 379
+      }
+    }
+  ]
+}

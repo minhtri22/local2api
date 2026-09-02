@@ -1,0 +1,124 @@
+{
+  "schema": "local2api.hw1.ollama.v1",
+  "created_at": "2026-09-02T08:43:28.656980+00:00",
+  "host": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.12"
+  },
+  "config": {
+    "base_url": "http://127.0.0.1:11435",
+    "models": [
+      "llama3.1:8b"
+    ],
+    "runs": 3,
+    "num_predict": 128,
+    "prompt": "You are reviewing a Python FastAPI repository. Give exactly five concise bullets describing how to implement a capability-aware local/cloud router with safe fallback."
+  },
+  "summary": {
+    "llama3.1:8b": {
+      "runs": 3,
+      "median_ttft_ms": 1682.583,
+      "median_wall_ms": 16286.665,
+      "median_load_ms": 1122.171,
+      "median_prompt_tokens_per_s": 410.252,
+      "median_generation_tokens_per_s": 9.074
+    }
+  },
+  "samples": [
+    {
+      "model": "llama3.1:8b",
+      "run": 1,
+      "ttft_ms": 9811.807,
+      "wall_ms": 23828.678,
+      "load_ms": 9318.396,
+      "prompt_tokens": 38,
+      "prompt_tokens_per_s": 88.504,
+      "generated_tokens": 128,
+      "generation_tokens_per_s": 9.115
+    },
+    {
+      "model": "llama3.1:8b",
+      "run": 2,
+      "ttft_ms": 175.672,
+      "wall_ms": 14447.599,
+      "load_ms": 12.536,
+      "prompt_tokens": 38,
+      "prompt_tokens_per_s": 410.252,
+      "generated_tokens": 128,
+      "generation_tokens_per_s": 9.074
+    },
+    {
+      "model": "llama3.1:8b",
+      "run": 3,
+      "ttft_ms": 1682.583,
+      "wall_ms": 16286.665,
+      "load_ms": 1122.171,
+      "prompt_tokens": 38,
+      "prompt_tokens_per_s": 501.002,
+      "generated_tokens": 128,
+      "generation_tokens_per_s": 8.781
+    }
+  ],
+  "raw_final_events": [
+    {
+      "model": "llama3.1:8b",
+      "run": 1,
+      "final": {
+        "model": "llama3.1:8b",
+        "created_at": "2026-09-02T08:42:57.9202434Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "length",
+        "total_duration": 23796943000,
+        "load_duration": 9318396200,
+        "prompt_eval_count": 38,
+        "prompt_eval_duration": 429357000,
+        "eval_count": 128,
+        "eval_duration": 14043014000
+      }
+    },
+    {
+      "model": "llama3.1:8b",
+      "run": 2,
+      "final": {
+        "model": "llama3.1:8b",
+        "created_at": "2026-09-02T08:43:12.2041195Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "length",
+        "total_duration": 14262814300,
+        "load_duration": 12535600,
+        "prompt_eval_count": 38,
+        "prompt_eval_duration": 92626000,
+        "eval_count": 128,
+        "eval_duration": 14106370000
+      }
+    },
+    {
+      "model": "llama3.1:8b",
+      "run": 3,
+      "final": {
+        "model": "llama3.1:8b",
+        "created_at": "2026-09-02T08:43:28.6449Z",
+        "message": {
+          "role": "assistant",
+          "content": ""
+        },
+        "done": true,
+        "done_reason": "length",
+        "total_duration": 16108906500,
+        "load_duration": 1122171300,
+        "prompt_eval_count": 38,
+        "prompt_eval_duration": 75848000,
+        "eval_count": 128,
+        "eval_duration": 14576533000
+      }
+    }
+  ]
+}
