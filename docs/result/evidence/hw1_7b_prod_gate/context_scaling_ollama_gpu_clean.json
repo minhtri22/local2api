@@ -1,0 +1,193 @@
+{
+  "created_at": "2026-09-02T10:21:48.184162+00:00",
+  "model": "qwen2.5-coder:7b",
+  "gguf": "C:\\Users\\minht\\.ollama\\models\\blobs\\sha256-60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+  "gguf_sha256": "60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+  "generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "max_tokens": 64,
+    "context_size": 16384
+  },
+  "schema": "local2api.hw1.context_scale_runtime.v1",
+  "provider": "ollama",
+  "levels": {
+    "1k": {
+      "token_count": 870,
+      "prompt_sha256": "b65e007d78603e3124e0e4a4379087cf6db78152a6d1280382c626a841d61512",
+      "samples": [
+        {
+          "wall_ms": 3235.394,
+          "ttft_ms": 111.817,
+          "prompt_tokens": null,
+          "completion_tokens": null,
+          "prompt_tokens_per_s": null,
+          "generation_tokens_per_s": null,
+          "text": ")\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n)\n)\n)\n)\n)\n",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 3460.727,
+          "ttft_ms": 302.863,
+          "prompt_tokens": null,
+          "completion_tokens": null,
+          "prompt_tokens_per_s": null,
+          "generation_tokens_per_s": null,
+          "text": ")\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n)\n)\n)\n)\n)\n",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 3262.679,
+          "ttft_ms": 213.925,
+          "prompt_tokens": null,
+          "completion_tokens": null,
+          "prompt_tokens_per_s": null,
+          "generation_tokens_per_s": null,
+          "text": ")\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n)\n)\n)\n)\n)\n",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 213.925,
+        "median_wall_ms": 3262.679,
+        "median_prompt_tokens_per_s": null,
+        "median_generation_tokens_per_s": null
+      }
+    },
+    "4k": {
+      "token_count": 3573,
+      "prompt_sha256": "6c2480d298135275496deb98e0658a596ac67660083e6b5e872667a47ce100a1",
+      "samples": [
+        {
+          "wall_ms": 3923.608,
+          "ttft_ms": 170.518,
+          "prompt_tokens": null,
+          "completion_tokens": null,
+          "prompt_tokens_per_s": null,
+          "generation_tokens_per_s": null,
+          "text": "Here request errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 4124.344,
+          "ttft_ms": 332.556,
+          "prompt_tokens": null,
+          "completion_tokens": null,
+          "prompt_tokens_per_s": null,
+          "generation_tokens_per_s": null,
+          "text": "Here request errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 4034.035,
+          "ttft_ms": 322.012,
+          "prompt_tokens": null,
+          "completion_tokens": null,
+          "prompt_tokens_per_s": null,
+          "generation_tokens_per_s": null,
+          "text": "Here request errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 322.012,
+        "median_wall_ms": 4034.035,
+        "median_prompt_tokens_per_s": null,
+        "median_generation_tokens_per_s": null
+      }
+    },
+    "8k": {
+      "token_count": 7192,
+      "prompt_sha256": "eef7fa21057ee2e72aaeca54c2b161e8cbb786a75bc5d18d928ce684793e808a",
+      "samples": [
+        {
+          "wall_ms": 7987.473,
+          "ttft_ms": 201.904,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 56083.65760271997,
+          "generation_tokens_per_s": 8.221317877255725,
+          "text": "It_1 errors errors errors errors errors errors errors errors errors       errors errors errors#    # deterministic errors errors errors errors errors errors\n    if errors errors errors errors errors errors errors errors errors errors errors errors errors validate validate validate validate errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 8062.067,
+          "ttft_ms": 200.76,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 56954.15633884239,
+          "generation_tokens_per_s": 8.135697329686169,
+          "text": "It_1 errors errors errors errors errors errors errors errors errors       errors errors errors#    # deterministic errors errors errors errors errors errors\n    if errors errors errors errors errors errors errors errors errors errors errors errors errors validate validate validate validate errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 7836.342,
+          "ttft_ms": 213.303,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 51425.7929811515,
+          "generation_tokens_per_s": 8.395913499002198,
+          "text": "It_1 errors errors errors errors errors errors errors errors errors       errors errors errors#    # deterministic errors errors errors errors errors errors\n    if errors errors errors errors errors errors errors errors errors errors errors errors errors validate validate validate validate errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 201.904,
+        "median_wall_ms": 7987.473,
+        "median_prompt_tokens_per_s": 56083.658,
+        "median_generation_tokens_per_s": 8.221
+      }
+    },
+    "16k": {
+      "token_count": 14452,
+      "prompt_sha256": "c0b60e12b47adbac3eab67bb0378bf2082fa8bf3c1a8e2104c068f884d3a76ad",
+      "samples": [
+        {
+          "wall_ms": 9532.873,
+          "ttft_ms": 391.102,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 103091.60686516485,
+          "generation_tokens_per_s": 6.894443272628479,
+          "text": " errors errors errors:\n    raise errors errors ValueError:\n    return errors errors:\ndef request.request.request ValueError('(' request request request request request request request request request request errors errors errors errors errors errors errors errors errors request request request errors errors errors errors request request errors errors errors request request request request request request request request request request",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 9589.272,
+          "ttft_ms": 365.101,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 104853.80541246463,
+          "generation_tokens_per_s": 6.833537378488494,
+          "text": " errors errors errors:\n    raise errors errors ValueError:\n    return errors errors:\ndef request.request.request ValueError('(' request request request request request request request request request request errors errors errors errors errors errors errors errors errors request request request errors errors errors errors request request errors errors errors request request request request request request request request request request",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 9550.835,
+          "ttft_ms": 375.131,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 102148.71359909528,
+          "generation_tokens_per_s": 6.872691339485395,
+          "text": " errors errors errors:\n    raise errors errors ValueError:\n    return errors errors:\ndef request.request.request ValueError('(' request request request request request request request request request request errors errors errors errors errors errors errors errors errors request request request errors errors errors errors request request errors errors errors request request request request request request request request request request",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 375.131,
+        "median_wall_ms": 9550.835,
+        "median_prompt_tokens_per_s": 103091.607,
+        "median_generation_tokens_per_s": 6.873
+      }
+    }
+  }
+}

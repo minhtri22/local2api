@@ -1,0 +1,364 @@
+{
+  "schema": "local2api.hw1.quality.v1",
+  "created_at": "2026-09-02T10:32:32.208733+00:00",
+  "summary": {
+    "CLOUD_REQUIRED": {
+      "passed": 1,
+      "total": 5,
+      "pass_rate": 0.2
+    },
+    "LOCAL_ACCEPTABLE": {
+      "passed": 2,
+      "total": 11,
+      "pass_rate": 0.182
+    },
+    "LOCAL_SAFE": {
+      "passed": 1,
+      "total": 9,
+      "pass_rate": 0.111
+    }
+  },
+  "cases": [
+    {
+      "id": "A01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Explain why preserving upstream HTTP status matters.",
+      "criteria": {
+        "contains_all": [
+          "status"
+        ]
+      },
+      "latency_ms": 3804.015,
+      "pass": false,
+      "response": " It\n"
+    },
+    {
+      "id": "A02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Explain a FastAPI request validation failure in two bullets.",
+      "criteria": {
+        "contains_all": [
+          "validation"
+        ]
+      },
+      "latency_ms": 55833.948,
+      "pass": true,
+      "response": "- ** FastAPI validation failure in in two bullets:**\n  - The1. **Incorrect data type type** The data provided does request validation field validation error. Ensure that the data conforms to the specified schema, includes type type, format, and constraints.\n  - 2. **Missing validation.** The data provided failed a Pyd type validation error. Ensure that the data conforms to specified Py type validation rules,"
+    },
+    {
+      "id": "A03",
+      "class": "LOCAL_SAFE",
+      "prompt": "What does a deterministic router buy us in testing?",
+      "criteria": {
+        "contains_all": [
+          "determin"
+        ]
+      },
+      "latency_ms": 2515.012,
+      "pass": false,
+      "response": "It seems like there might be a typo in your"
+    },
+    {
+      "id": "A04",
+      "class": "LOCAL_SAFE",
+      "prompt": "Identify the bug: if not messages: return backend.chat(messages).",
+      "criteria": {
+        "contains_all": [
+          "empty",
+          "valid"
+        ]
+      },
+      "latency_ms": 1085.71,
+      "pass": false,
+      "response": "It"
+    },
+    {
+      "id": "A05",
+      "class": "LOCAL_SAFE",
+      "prompt": "Summarize safe fallback: cloud failure may fall back local only for degradable tasks.",
+      "criteria": {
+        "contains_all": [
+          "degrad",
+          "fallback"
+        ]
+      },
+      "latency_ms": 900.834,
+      "pass": false,
+      "response": "It\n"
+    },
+    {
+      "id": "B01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Write a Python helper that clamps n to 1..100.",
+      "criteria": {
+        "contains_all": [
+          "def ",
+          "min(",
+          "max("
+        ]
+      },
+      "latency_ms": 14078.452,
+      "pass": false,
+      "response": "Sure! Here's a Python function that clamps a number `n` to be between between -```python\ndef100 and 100:\n\ndef clamp clamp_to_100(n):\n    return max(-100, 100)\n```\n\nThis function function uses the `max()` function to to ensure ensure that the returned valueamped valueue0 is not than or(-10,, which is - -100. If `n`` is already less than - -1,--, the1 will return -100. If ` is greater than or"
+    },
+    {
+      "id": "B02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Add simple validation that messages is a non-empty list.",
+      "criteria": {
+        "contains_all": [
+          "list",
+          "messages"
+        ]
+      },
+      "latency_ms": 14149.928,
+      "pass": false,
+      "response": "Sure a non-empty list in Python, can simply define a assigning elements to a list. Here is an example:\n\n```python\nmy_list = [1, 2, 3, 4, 5]\n```\n\nIn this example,_list is is contains the integers  1 to 5. You can replace the integers with any other types type of elements you want.```my_list = ['apple', 'banana', 'cherry']\n``my_list = [True, 'banana', {'key': 'value'}]\n```\n\nIn the also also create a list with list using the list() constructor:\n\n```my"
+    },
+    {
+      "id": "B03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Refactor a function with nested ifs using early returns; explain the change.",
+      "criteria": {
+        "contains_all": [
+          "return"
+        ]
+      },
+      "latency_ms": 13984.877,
+      "pass": true,
+      "response": "Sure! Let's consider a function that uses nested `ifif` statements and refactor it to use early `return` statements instead. Here's an example in Python:\n\n###Original example function```python\ndef check_number(num):\n    if num <               if num < 0:\n            return \"Negative number\"\n        else num == 0:\n            \"Zero\"\n        else:\n            return \"Positive        return \"Positive number\"\n``:\n    return \"Positive number\"\n```\n### Refact\n```python\ndef check_number(num):\n    if num < 0:\n        return \" \"Negative number    elif num == "
+    },
+    {
+      "id": "B04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Show a small FastAPI endpoint returning {'ok': True}.",
+      "criteria": {
+        "contains_all": [
+          "FastAPI",
+          "ok"
+        ]
+      },
+      "latency_ms": 13977.615,
+      "pass": false,
+      "response": "Here is a simplefastapi' endpoint in 'Python' that returns {'system': True}:\n\n``````python\nfromfastapi0.6 as fastapi\n\napp = fastapi.FastAPI()\n\n @app.get(\"/\")\n def read_root    return {'system': True}\n```\n\nYou can run this code in a1Python'3' or\n```bash\nuvicorn main:app --reload\n`````\n\nThis will start a local server on ' at ' 'http://1.2.8000/ and when you visit this URL, ityou will get the response response response: {'system':True"
+    },
+    {
+      "id": "B05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Implement a helper selecting local when task_class == 'short'.",
+      "criteria": {
+        "contains_all": [
+          "local",
+          "short"
+        ]
+      },
+      "latency_ms": 961.293,
+      "pass": false,
+      "response": " ItIt looks"
+    },
+    {
+      "id": "C01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Write one pytest assertion for HTTP 503.",
+      "criteria": {
+        "contains_all": [
+          "pytest",
+          "503"
+        ]
+      },
+      "latency_ms": 787.295,
+      "pass": false,
+      "response": "To\n"
+    },
+    {
+      "id": "C02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Name an edge case for an empty messages array.",
+      "criteria": {
+        "contains_all": [
+          "empty"
+        ]
+      },
+      "latency_ms": 5638.781,
+      "pass": false,
+      "response": " It seems like you're referring to a \"WebEdge\" \" and \"Edge Case for Used Messages Array. \" However,I need a bit more morecontext to provide a meaningful response. Could you please provide more details or clarify your question?"
+    },
+    {
+      "id": "C03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Write a pytest test idea for preserving an upstream 429.",
+      "criteria": {
+        "contains_all": [
+          "429"
+        ]
+      },
+      "latency_ms": 1027.378,
+      "pass": false,
+      "response": "\n\n"
+    },
+    {
+      "id": "C04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "What test proves SSE terminates with [DONE]?",
+      "criteria": {
+        "contains_all": [
+          "DONE"
+        ]
+      },
+      "latency_ms": 14398.462,
+      "pass": true,
+      "response": "The test that SSE (Server-Sent Events) terminates with [DONE] is typically used to verify that a server-side eventSSE event has been completed The SSE protocol is a method for a server to push real updates to to a000 a0. are. The [DONE] message is a special event that indicates0 that the server has finished finished sending updates and a particular connection. This The The The test SSE terminated terminated with [DONE] is used to verify that the server has has [DONE] message has been received and and that the connection has been closed properly."
+    },
+    {
+      "id": "C05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Identify a missing test for explicit model override.",
+      "criteria": {
+        "contains_all": [
+          "override"
+        ]
+      },
+      "latency_ms": 4160.852,
+      "pass": false,
+      "response": " It looks like you might have meant to ask about creating a test for an have an explicit model model in mind. However,I\n"
+    },
+    {
+      "id": "D01",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Across router.py and http.py, what interface contract should remain stable? Answer generally.",
+      "criteria": {
+        "contains_all": [
+          "backend"
+        ]
+      },
+      "latency_ms": 2790.204,
+      "pass": false,
+      "response": " Across `web.py` and `http.py`, the the.py` is the interface contract that remains stable."
+    },
+    {
+      "id": "D02",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Trace: API handler -> router -> backend -> upstream. Return the call path only.",
+      "criteria": {
+        "contains_all": [
+          "router",
+          "backend"
+        ]
+      },
+      "latency_ms": 2883.045,
+      "pass": false,
+      "response": "The call path from the API to the upstream service would be is is:\n\nAPI -> API -> Backend -> backend -> upstream"
+    },
+    {
+      "id": "D03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Summarize a diff that adds a route-reason response header.",
+      "criteria": {
+        "contains_all": [
+          "header",
+          "route"
+        ]
+      },
+      "latency_ms": 931.54,
+      "pass": false,
+      "response": "\n"
+    },
+    {
+      "id": "D04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Spot an interface mismatch: protocol expects async chat(), implementation defines sync chat().",
+      "criteria": {
+        "contains_all": [
+          "async",
+          "sync"
+        ]
+      },
+      "latency_ms": 6582.468,
+      "pass": false,
+      "response": " It seems like there might be a misunderstanding or a typo in your statement's message.. Let's break it down the key and provide it down down down:\n\n1 seems it down down:\n\n1 it it it down:\n\n1 it it it down:\n\n1 it it:\n\nIt appears that there a mix-up between \"protocol\"\"\n"
+    },
+    {
+      "id": "D05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Why should backend switching not depend on hidden server session memory?",
+      "criteria": {
+        "contains_all": [
+          "state",
+          "context"
+        ]
+      },
+      "latency_ms": 3012.756,
+      "pass": false,
+      "response": "ToTo create a web that doesn't depend on a default session, you can use a stateless approach architecture00."
+    },
+    {
+      "id": "E01",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Redesign the entire gateway architecture for multi-region HA with zero downtime.",
+      "criteria": {
+        "contains_all": [
+          "architecture"
+        ]
+      },
+      "latency_ms": 12966.475,
+      "pass": true,
+      "response": "**Redund Gateway Architecture for Multi-region HA**\n\n**1. Introduction**\n\nIn modern cloud environments environments,[END_OF]"
+    },
+    {
+      "id": "E02",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Perform a complex ten-file refactor with ambiguous requirements.",
+      "criteria": {
+        "contains_all": [
+          "clarif",
+          "require"
+        ]
+      },
+      "latency_ms": 12908.794,
+      "pass": false,
+      "response": "I'm'm sorry,I'm not sure what you mean by \"Wewen system a a awenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwenwen"
+    },
+    {
+      "id": "E03",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Debug an intermittent distributed race without logs or reproduction.",
+      "criteria": {
+        "contains_all": [
+          "log",
+          "repro"
+        ]
+      },
+      "latency_ms": 23790.71,
+      "pass": false,
+      "response": "It seems like you're referring to a \"Debugging intermittent distributed race conditions without without using 'without' or 're'.\" A. A distributed race condition is a type type that occurs in a distributed system when two two or more more processes processes or threads access access to a shared concurrently concurrently concurrently, leading to unpredictable and often incorrect results.\n\nTo distributed race condition can be difficult to debug because because they often often occur occur and can be difficult to reproduce. here are some steps that can help you debug a prevent distributed race conditions:\n\n:\n\n . Understand the problem:The first step in you is to understand what problem. What the "
+    },
+    {
+      "id": "E04",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Reason over a 200k-token repository and propose a migration plan.",
+      "criteria": {
+        "contains_all": [
+          "context",
+          "repository"
+        ]
+      },
+      "latency_ms": 2829.5,
+      "pass": false,
+      "response": "I'm sorry, but I I'm not sure what you're asking asking asking. Could Could\n"
+    },
+    {
+      "id": "E05",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Choose a security-critical auth redesign from incomplete evidence.",
+      "criteria": {
+        "contains_all": [
+          "security",
+          "evidence"
+        ]
+      },
+      "latency_ms": 26061.25,
+      "pass": false,
+      "response": "I'm sorry, but I'm not\n"
+    }
+  ]
+}

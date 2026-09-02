@@ -1,108 +1,165 @@
-# v0.0.1-HW1-7B — Local runtime qualification report
+# v0.0.1-HW1-7B — Local production-gate qualification
 
 Date: 2026-09-02
 
-Target device:
+## Verdict
 
-- Intel Core Ultra 7 258V
-- 32 GB RAM
-- Intel Arc 140V integrated GPU (16 GB reported by driver/runtime)
-- Windows 11
+**Hardware/runtime feasibility: PASS.**
 
-## Objective
+**7B production gate: FAIL / not qualified for general local coding use.**
 
-Qualify the 7B local tier before any 14B work. The candidate model is fixed to `Qwen2.5-Coder 7B Q4_K_M` so the experiment compares runtime behavior rather than model quality differences.
+**14B qualification: BLOCKED.** The project rule remains: do not start 14B until the 7B production gate is genuinely passed or the gate definition is explicitly revised.
 
-The current question is whether the laptop can run the 7B model reliably enough to justify continuing the local-first architecture and, only after that gate passes, testing a 14B candidate.
+The decisive result is not a crash or inability to load the model. Qwen2.5-Coder 7B Q4_K_M runs on the Intel Arc 140V, but the tested 7B model produced poor answers on the coding/repository capability suite and direct llama-server became impractically slow as context grew. Ollama handled long-context prompt ingestion much better, but generation remained only about 7–8 tok/s and quality was still inadequate.
 
-## Runtime configuration finding
+## Target and provenance
 
-The pre-existing Ollama environment contained an invalid combination for the selected KV cache:
+- CPU: Intel Core Ultra 7 258V
+- RAM: approximately 32 GB
+- iGPU: Intel Arc 140V, Vulkan runtime reports 16 GB class device memory
+- OS: Windows 11
+- model: `Qwen2.5-Coder 7B Instruct`, Q4_K_M
+- GGUF SHA256: `60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463`
+- Ollama: `0.33.2`
+- bundled llama-server: `0.3.0-dev`, build 1, commit `d222767c7`
+- benchmark context: 16,384 tokens
+- generation: temperature 0, top_p 1, seed 42
 
-```text
-OLLAMA_KV_CACHE_TYPE=q4_0
-OLLAMA_FLASH_ATTENTION=false
-```
+The same Ollama-owned GGUF blob was used for both runtimes.
 
-This produced:
+## Corrected Ollama configuration
+
+Two environment findings materially affected the benchmark.
+
+First, `OLLAMA_KV_CACHE_TYPE=q4_0` with `OLLAMA_FLASH_ATTENTION=false` is invalid in this Ollama/llama-server build and caused HTTP 500 with:
 
 ```text
 quantized V cache requires flash_attn to be enabled
 ```
 
-The benchmark therefore used an isolated Ollama instance with:
+Second, `OLLAMA_INTEL_GPU=true` did not enable the Arc 140V in Ollama 0.33.2. The runtime log explicitly requested `OLLAMA_IGPU_ENABLE=1`. The authoritative Ollama rerun therefore used:
 
 ```text
 OLLAMA_FLASH_ATTENTION=true
 OLLAMA_IGPU_ENABLE=1
 OLLAMA_VULKAN=1
+OLLAMA_KV_CACHE_TYPE=q4_0
 OLLAMA_CONTEXT_LENGTH=16384
+OLLAMA_NUM_PARALLEL=1
 ```
 
-No persistent Windows environment variables were changed.
+The startup log then identified `Vulkan0: Intel(R) Arc(TM) 140V GPU (16GB)` and projected roughly 4.7 GiB of device memory for the 7B model/runtime context.
 
-## Same-model runtime A/B
+## Input parity
 
-Both Vulkan paths used the same Ollama-owned Qwen2.5-Coder 7B GGUF blob. The direct llama-server Vulkan backend was loaded through `ggml-vulkan.dll` and detected:
+The production-gate harness pre-renders canonical ChatML before sending requests so both runtimes receive the same prompt bytes. The fixture stores:
 
-```text
-Vulkan0: Intel(R) Arc(TM) 140V GPU (16GB)
-```
+- rendered prompt SHA256;
+- llama.cpp token IDs and token count;
+- exact GGUF SHA256;
+- fixed generation parameters.
 
-Five-run sustained measurements:
+Measured fixture sizes were:
 
-| Runtime | Backend | Runs | Median TTFT | Median generation throughput |
-| --- | --- | ---: | ---: | ---: |
-| Ollama 0.33.2 | Arc 140V / Vulkan | 5 | 452.6 ms | 8.832 tok/s |
-| llama-server build d222767c7 | Arc 140V / Vulkan | 5 | 140.8 ms | 9.387 tok/s |
+| Label | Actual tokens |
+| --- | ---: |
+| 1K | 870 |
+| 4K | 3,573 |
+| 8K | 7,192 |
+| 16K | 14,452 |
 
-Direct llama-server was about 6% faster in median sustained generation throughput in this sample and showed materially lower median TTFT.
+This closes the earlier input-parity gap.
 
-Early Vulkan runs briefly reached about 15–16 tok/s, but later measurements converged around 8–10 tok/s. Those burst values are therefore not treated as sustained performance.
+## Context-scaling A/B
 
-## CPU control
+Each authoritative row below is the median of three measured requests after a warm-up request, with zero request failures.
 
-The CPuFriend llama-server binary was also tested as a CPU-only control with the same Qwen2.5-Coder 7B blob:
+| Context | Runtime | Median TTFT | Median wall | Prompt tok/s | Generation tok/s |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 870 | Ollama / Vulkan | 213.93 ms | 3.263 s | telemetry unavailable | telemetry unavailable |
+| 870 | direct llama-server / Vulkan | 6.806 s | 13.167 s | 127.99 | 9.74 |
+| 3,573 | Ollama / Vulkan | 322.01 ms | 4.034 s | telemetry unavailable | telemetry unavailable |
+| 3,573 | direct llama-server / Vulkan | 31.605 s | 38.393 s | 113.10 | 9.79 |
+| 7,192 | Ollama / Vulkan | 201.90 ms | 7.987 s | 56,083.66* | 8.22 |
+| 7,192 | direct llama-server / Vulkan | 61.840 s | 68.184 s | 116.39 | 9.94 |
+| 14,452 | Ollama / Vulkan | 375.13 ms | 9.551 s | 103,091.61* | 6.87 |
+| 14,452 | direct llama-server / Vulkan | 232.047 s | 243.377 s | 62.34 | 6.37 |
 
-| Runtime | Backend | Runs | Median TTFT | Median generation throughput |
-| --- | --- | ---: | ---: | ---: |
-| llama-server CPuFriend build 85c55223c | CPU | 3 | 176.9 ms | 6.180 tok/s |
+`*` Ollama's reported prompt timing at 8K/16K is strongly affected by its internal prompt-cache behavior during repeated identical prompts. It should not be interpreted as cold-prefill throughput. At 1K/4K, the streaming endpoint did not reliably expose native final timing fields, so prompt/generation throughput is deliberately recorded as unavailable instead of inferred.
 
-This confirms that Arc 140V Vulkan materially improves generation speed versus CPU-only execution on this laptop.
+### Runtime interpretation
 
-## Evidence files
+Direct llama-server is not production-viable for long-context interactive use under this tested configuration: median TTFT rose from 6.8 s at 870 tokens to 232 s at 14,452 tokens.
 
-- `hw1_qwen2.5-coder-7b-ollama-vulkan-r2.json`
-- `hw1_qwen2.5-coder-7b-llama-server-vulkan-r2.json`
-- `hw1_qwen2.5-coder-7b-llama-server-cpu.json`
-- `hw1_qwen2.5-coder-7b-igpu.json`
-- `hw1_qwen2.5-coder-7b.json`
+Ollama is the better runtime candidate on this machine because its repeated-context behavior keeps TTFT below 0.4 s in this test. However, this does not rescue the 7B production gate because output generation remains roughly 7–8 tok/s at long context and, more importantly, the capability suite fails badly.
 
-The reproducible harness is `scripts/hw1_benchmark.py` and supports both Ollama and OpenAI-compatible llama-server endpoints.
+## Sustained OS telemetry
 
-## Gate assessment
+The isolated Ollama/Vulkan telemetry capture produced 171 process samples. Peak observations included:
 
-### Performance feasibility: PASS
+| Process | Samples | Peak working set | Peak private memory |
+| --- | ---: | ---: | ---: |
+| llama-server child | 23 | 19,951.48 MB | 19,981.75 MB |
+| ollama host | 20 | 89.55 MB | 108.45 MB |
 
-The 7B model runs successfully on the target laptop through Arc 140V Vulkan. Sustained generation around 9 tok/s is demonstrated on both Ollama and direct llama-server, and GPU acceleration is measurably better than the CPU control.
+Peak system committed memory observed during the capture was 45,506.85 MB.
 
-### Runtime stability: PASS for short qualification runs
+These Windows process figures include unified-memory behavior around the iGPU/runtime and should not be interpreted as 20 GB of model weights. They are useful as an operational pressure signal: a 32 GB unified-memory laptop can run this workload, but system commit can materially exceed physical RAM.
 
-Both Vulkan runtimes completed repeated local inference runs without model/runtime crashes during the measured benchmark after correcting the Flash Attention configuration.
+The current PowerShell/CIM capture did not return usable page-fault counters, so page-fault behavior remains **not proven**. Thermal/power telemetry was also not captured in a trustworthy hardware source and remains **not proven**. No value is fabricated for either gate.
 
-### Final 7B production qualification: NOT YET COMPLETE
+## Coding/repository capability suite
 
-The following evidence is still required before calling the full 7B gate complete:
+The 25-case deterministic smoke suite was run against the corrected Ollama/Arc 140V configuration.
 
-1. byte-identical rendered prompt/token input for Ollama vs direct llama-server;
-2. working set, commit memory and page-fault telemetry;
-3. thermal/power behavior during sustained runs;
-4. coding/repository quality suite.
+| Intended class | Passed | Total | Mechanical pass rate |
+| --- | ---: | ---: | ---: |
+| LOCAL_SAFE | 1 | 9 | 11.1% |
+| LOCAL_ACCEPTABLE | 2 | 11 | 18.2% |
+| CLOUD_REQUIRED | 1 | 5 | 20.0% |
 
-Accordingly, this report establishes **7B hardware/runtime feasibility**, but does not yet authorize moving to the 14B qualification stage.
+The scorer only checks required substrings, so these percentages are not claimed as a rigorous semantic benchmark. Manual inspection makes the conclusion more conservative, not less: several basic responses were malformed, repetitive, misunderstood the prompt, or produced incorrect code. Examples include an incorrect clamp helper, a FastAPI endpoint returning the wrong key, and failures to identify straightforward interface or test-contract issues.
+
+Therefore the tested 7B model is **not qualified as a general local coding/repository backend**.
+
+The safe routing policy from this evidence is:
+
+- keep `CLOUD_REQUIRED` on cloud with no silent downgrade;
+- do not classify repository reasoning or non-trivial code modification as `LOCAL_SAFE` for this 7B model;
+- if 7B remains available, restrict it to explicitly degradable low-risk tasks where incorrect output can be cheaply verified;
+- prefer Ollama over direct llama-server for the current 7B runtime path on this laptop.
+
+## Gate matrix
+
+| Gate | Status | Evidence |
+| --- | --- | --- |
+| Model loads/runs on Arc 140V | PASS | Vulkan model load and repeated requests |
+| Same-model runtime A/B | PASS | clean Ollama and direct llama-server runs |
+| Byte-identical fixture/provenance | PASS | prompt hashes, token IDs, GGUF hash |
+| 1K/4K/8K/16K scaling | PASS as measurement | all four levels completed, zero request failures |
+| Long-context direct llama-server usability | FAIL | 16K median TTFT ~232 s |
+| OS memory/commit telemetry | PARTIAL PASS | captured; high unified-memory pressure observed |
+| Page-fault telemetry | NOT PROVEN | counter unavailable in current harness |
+| Thermal/power telemetry | NOT PROVEN | no trustworthy sensor evidence captured |
+| Coding/repository quality | FAIL | 3/20 across intended local classes by mechanical scorer plus visibly poor manual outputs |
+| 7B production qualification | **FAIL** | quality failure is sufficient to block the gate |
+| 14B qualification | **BLOCKED** | gated on 7B production qualification |
+
+## Authoritative evidence
+
+Primary evidence for this conclusion:
+
+- `docs/result/evidence/hw1_7b_prod_gate/input_parity.json`
+- `docs/result/evidence/hw1_7b_prod_gate/context_fixture.json`
+- `docs/result/evidence/hw1_7b_prod_gate/context_scaling_ollama_gpu_clean.json`
+- `docs/result/evidence/hw1_7b_prod_gate/context_scaling_llama_server_clean.json`
+- `docs/result/evidence/hw1_7b_prod_gate/sustained_ollama_gpu_telemetry.csv`
+- `docs/result/evidence/hw1_7b_prod_gate/quality_ollama_gpu.json`
+
+Older files in the same evidence directory are exploratory runs generated while isolating runtime contention/configuration problems. They are not used for the final gate verdict.
 
 ## Decision
 
-Do not download or benchmark 14B yet.
+Do not proceed to 14B under the current phase rule.
 
-Complete the remaining 7B telemetry and quality gates first. If those pass, select the preferred 7B runtime and then run the 14B experiment with the same measurement protocol.
+The evidence changes the architectural conclusion: **the laptop can execute a 7B local model, but “can run” is not equivalent to “useful production local engine.”** For local2api, the stronger next design question is whether Track A should narrow the local tier to cheap/verifiable tasks while Track B focuses on smart cloud routing, rather than optimizing a 7B coding model that has failed the capability gate.

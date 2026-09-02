@@ -76,9 +76,12 @@ Run the **real-device qualification benchmark on the Intel Core Ultra 7 258V / 3
 - [x] Add a reproducible Ollama benchmark harness for TTFT and Ollama-reported prompt/generation throughput.
 - [x] Demonstrate Qwen2.5-Coder 7B Q4_K_M hardware/runtime feasibility on the target laptop with Arc 140V Vulkan.
 - [x] Run same-model Ollama vs llama-server A/B on Arc 140V Vulkan; sustained generation is approximately 9 tok/s on both paths.
-- [ ] Complete the 7B gate with byte-identical runtime input, OS memory/page-fault telemetry, thermal/power telemetry, and coding/repository quality tests.
+- [ ] Complete/pass the 7B production gate. Current result: **FAIL** on coding/repository quality; page-fault and thermal/power telemetry remain not proven.
 - [ ] Only after the 7B gate passes, download and benchmark the 14B candidate.
 - [ ] Record Ollama CPU/GPU processor allocation for each candidate. Arc 140V Vulkan / `100% GPU` is confirmed for Qwen2.5-Coder 7B; complete the same check for all candidates.
-- [ ] Capture working set, commit memory and page faults with OS telemetry.
+- [x] Establish byte-identical pre-rendered ChatML fixtures with prompt hashes, token IDs and exact GGUF provenance for runtime A/B.
+- [x] Run clean 1K/4K/8K/16K context-scaling A/B for Ollama vs direct llama-server.
+- [x] Capture working set and system committed-memory telemetry for the corrected Ollama/Vulkan run.
+- [ ] Capture usable page-fault telemetry; current Windows harness returned no trustworthy counter values.
 - [ ] Capture thermal/power behavior with hardware telemetry.
-- [ ] Run a coding/repository quality suite before selecting the default local tier.
+- [x] Run the 25-case coding/repository quality smoke suite. Result: **FAIL** for general local coding/repository use; keep 14B blocked under the current phase rule.

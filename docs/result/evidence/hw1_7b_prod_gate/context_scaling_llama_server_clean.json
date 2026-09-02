@@ -1,0 +1,313 @@
+{
+  "created_at": "2026-09-02T09:53:17.465561+00:00",
+  "model": "qwen2.5-coder:7b",
+  "gguf": "C:\\Users\\minht\\.ollama\\models\\blobs\\sha256-60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+  "gguf_sha256": "60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+  "generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "max_tokens": 64,
+    "context_size": 16384
+  },
+  "schema": "local2api.hw1.context_scale_runtime.v1",
+  "provider": "llama_server",
+  "levels": {
+    "1k": {
+      "token_count": 870,
+      "prompt_sha256": "b65e007d78603e3124e0e4a4379087cf6db78152a6d1280382c626a841d61512",
+      "samples": [
+        {
+          "wall_ms": 12792.412,
+          "ttft_ms": 6321.134,
+          "prompt_tokens": 870,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 137.6910819860182,
+          "generation_tokens_per_s": 9.73617440053756,
+          "text": ")\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 870,
+            "prompt_ms": 6318.492,
+            "prompt_per_token_ms": 7.262634482758621,
+            "prompt_per_second": 137.6910819860182,
+            "predicted_n": 64,
+            "predicted_ms": 6470.714,
+            "predicted_per_token_ms": 102.70974603174604,
+            "predicted_per_second": 9.73617440053756
+          }
+        },
+        {
+          "wall_ms": 13167.098,
+          "ttft_ms": 6805.554,
+          "prompt_tokens": 870,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 127.98864520046993,
+          "generation_tokens_per_s": 9.904090672421729,
+          "text": ")\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 870,
+            "prompt_ms": 6797.478,
+            "prompt_per_token_ms": 7.813193103448276,
+            "prompt_per_second": 127.98864520046993,
+            "predicted_n": 64,
+            "predicted_ms": 6361.008,
+            "predicted_per_token_ms": 100.96838095238095,
+            "predicted_per_second": 9.904090672421729
+          }
+        },
+        {
+          "wall_ms": 13392.218,
+          "ttft_ms": 6920.941,
+          "prompt_tokens": 870,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 125.88335387981179,
+          "generation_tokens_per_s": 9.736543054297918,
+          "text": ")\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n )\n)\n)\n)\n",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 870,
+            "prompt_ms": 6911.16,
+            "prompt_per_token_ms": 7.943862068965517,
+            "prompt_per_second": 125.88335387981179,
+            "predicted_n": 64,
+            "predicted_ms": 6470.469,
+            "predicted_per_token_ms": 102.70585714285714,
+            "predicted_per_second": 9.736543054297918
+          }
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 6805.554,
+        "median_wall_ms": 13167.098,
+        "median_prompt_tokens_per_s": 127.989,
+        "median_generation_tokens_per_s": 9.737
+      }
+    },
+    "4k": {
+      "token_count": 3573,
+      "prompt_sha256": "6c2480d298135275496deb98e0658a596ac67660083e6b5e872667a47ce100a1",
+      "samples": [
+        {
+          "wall_ms": 38393.288,
+          "ttft_ms": 31604.935,
+          "prompt_tokens": 3573,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 113.10121343072636,
+          "generation_tokens_per_s": 9.281487630944481,
+          "text": "Here request errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 3573,
+            "prompt_ms": 31591.173,
+            "prompt_per_token_ms": 8.84163811922754,
+            "prompt_per_second": 113.10121343072636,
+            "predicted_n": 64,
+            "predicted_ms": 6787.705,
+            "predicted_per_token_ms": 107.7413492063492,
+            "predicted_per_second": 9.281487630944481
+          }
+        },
+        {
+          "wall_ms": 39614.746,
+          "ttft_ms": 33181.343,
+          "prompt_tokens": 3573,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 107.7836930602777,
+          "generation_tokens_per_s": 9.793956910942462,
+          "text": "Here request errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 3573,
+            "prompt_ms": 33149.727,
+            "prompt_per_token_ms": 9.277841309823676,
+            "prompt_per_second": 107.7836930602777,
+            "predicted_n": 64,
+            "predicted_ms": 6432.538,
+            "predicted_per_token_ms": 102.10377777777776,
+            "predicted_per_second": 9.793956910942462
+          }
+        },
+        {
+          "wall_ms": 28648.621,
+          "ttft_ms": 23676.23,
+          "prompt_tokens": 3573,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 150.99990208038815,
+          "generation_tokens_per_s": 12.672165447792088,
+          "text": "Here request errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 3573,
+            "prompt_ms": 23662.267,
+            "prompt_per_token_ms": 6.622520850825636,
+            "prompt_per_second": 150.99990208038815,
+            "predicted_n": 64,
+            "predicted_ms": 4971.526,
+            "predicted_per_token_ms": 78.9131111111111,
+            "predicted_per_second": 12.672165447792088
+          }
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 31604.935,
+        "median_wall_ms": 38393.288,
+        "median_prompt_tokens_per_s": 113.101,
+        "median_generation_tokens_per_s": 9.794
+      }
+    },
+    "8k": {
+      "token_count": 7192,
+      "prompt_sha256": "eef7fa21057ee2e72aaeca54c2b161e8cbb786a75bc5d18d928ce684793e808a",
+      "samples": [
+        {
+          "wall_ms": 68184.188,
+          "ttft_ms": 61840.44,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 116.38821288407482,
+          "generation_tokens_per_s": 9.935212949461937,
+          "text": "It_1 errors errors errors errors errors errors errors errors errors       errors errors errors#    if not request request:\n               errors = router.route(request)\n\n)\n\n)\n\n errors errors errors errors errors errors errors errors errors request not errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 7192,
+            "prompt_ms": 61793.199,
+            "prompt_per_token_ms": 8.591935344827586,
+            "prompt_per_second": 116.38821288407482,
+            "predicted_n": 64,
+            "predicted_ms": 6341.082,
+            "predicted_per_token_ms": 100.65209523809524,
+            "predicted_per_second": 9.935212949461937
+          }
+        },
+        {
+          "wall_ms": 65870.723,
+          "ttft_ms": 60713.332,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 118.59544212255499,
+          "generation_tokens_per_s": 12.205092041892526,
+          "text": "It_1 errors errors errors errors errors errors errors errors errors       errors errors errors#    if not request request:\n               errors = router.route(request)\n\n)\n\n)\n\n errors errors errors errors errors errors errors errors errors request not errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 7192,
+            "prompt_ms": 60643.14,
+            "prompt_per_token_ms": 8.432027252502781,
+            "prompt_per_second": 118.59544212255499,
+            "predicted_n": 64,
+            "predicted_ms": 5161.78,
+            "predicted_per_token_ms": 81.93301587301588,
+            "predicted_per_second": 12.205092041892526
+          }
+        },
+        {
+          "wall_ms": 81979.379,
+          "ttft_ms": 74115.271,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 97.08883475835363,
+          "generation_tokens_per_s": 8.015755667552767,
+          "text": "It_1 errors errors errors errors errors errors errors errors errors       errors errors errors#    if not request request:\n               errors = router.route(request)\n\n)\n\n)\n\n errors errors errors errors errors errors errors errors errors request not errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors errors",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 7192,
+            "prompt_ms": 74076.489,
+            "prompt_per_token_ms": 10.299845522803114,
+            "prompt_per_second": 97.08883475835363,
+            "predicted_n": 64,
+            "predicted_ms": 7859.521,
+            "predicted_per_token_ms": 124.75430158730158,
+            "predicted_per_second": 8.015755667552767
+          }
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 61840.44,
+        "median_wall_ms": 68184.188,
+        "median_prompt_tokens_per_s": 116.388,
+        "median_generation_tokens_per_s": 9.935
+      }
+    },
+    "16k": {
+      "token_count": 14452,
+      "prompt_sha256": "c0b60e12b47adbac3eab67bb0378bf2082fa8bf3c1a8e2104c068f884d3a76ad",
+      "samples": [
+        {
+          "wall_ms": 240752.829,
+          "ttft_ms": 231627.638,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 62.44107722817594,
+          "generation_tokens_per_s": 6.811746045132684,
+          "text": " errors errors errors:\n    raise errors errors ValueError:\n    return errors errors:\ndef request.request.request ValueError('(' request request request request request request request request request request errors errors errors errors errors errors errors errors errors request request request errors errors errors errors request request errors errors errors request request request request request request request request request request",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 14452,
+            "prompt_ms": 231450.203,
+            "prompt_per_token_ms": 16.01509846388043,
+            "prompt_per_second": 62.44107722817594,
+            "predicted_n": 64,
+            "predicted_ms": 9248.73,
+            "predicted_per_token_ms": 146.80523809523808,
+            "predicted_per_second": 6.811746045132684
+          }
+        },
+        {
+          "wall_ms": 243377.246,
+          "ttft_ms": 232046.645,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 62.34041175954121,
+          "generation_tokens_per_s": 5.487058293984738,
+          "text": " errors errors errors:\n    raise errors errors ValueError:\n    return errors errors:\ndef request.request.request ValueError('(' request request request request request request request request request request errors errors errors errors errors errors errors errors errors request request request errors errors errors errors request request errors errors errors request request request request request request request request request request",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 14452,
+            "prompt_ms": 231823.942,
+            "prompt_per_token_ms": 16.040959175200665,
+            "prompt_per_second": 62.34041175954121,
+            "predicted_n": 64,
+            "predicted_ms": 11481.562,
+            "predicted_per_token_ms": 182.24701587301587,
+            "predicted_per_second": 5.487058293984738
+          }
+        },
+        {
+          "wall_ms": 263033.771,
+          "ttft_ms": 253287.296,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 57.10530212575198,
+          "generation_tokens_per_s": 6.368660529164927,
+          "text": " errors errors errors:\n    raise errors errors ValueError:\n    return errors errors:\ndef request.request.request ValueError('(' request request request request request request request request request request errors errors errors errors errors errors errors errors errors request request request errors errors errors errors request request errors errors errors request request request request request request request request request request",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 14452,
+            "prompt_ms": 253076.325,
+            "prompt_per_token_ms": 17.511508787711044,
+            "prompt_per_second": 57.10530212575198,
+            "predicted_n": 64,
+            "predicted_ms": 9892.19,
+            "predicted_per_token_ms": 157.0188888888889,
+            "predicted_per_second": 6.368660529164927
+          }
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 232046.645,
+        "median_wall_ms": 243377.246,
+        "median_prompt_tokens_per_s": 62.34,
+        "median_generation_tokens_per_s": 6.369
+      }
+    }
+  }
+}
