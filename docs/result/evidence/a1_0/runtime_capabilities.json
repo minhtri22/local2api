@@ -1,0 +1,47 @@
+{
+  "schema": "local2api.a1.runtime_capabilities.v1",
+  "airllm": {
+    "commit": "fd1bd87216488e053b87691bbb6318fa9bf77a4b",
+    "license": "Apache-2.0",
+    "execution_model": "Hugging Face model skeleton on meta device; forward hooks stream per-module weights from safetensors to accelerator and evict back to meta",
+    "key_paths": [
+      "air_llm/airllm/airllm_base.py: AirLLMBaseModel, _instantiate_on_meta, load_layer_to_cpu, move_layer_to_device, _pre_hook, _post_hook, _setup_expert_streaming, generate",
+      "air_llm/airllm/utils.py: load_layer, load_layer_subset, compress_layer_state_dict, split_and_save_layers"
+    ],
+    "prefetch": "ThreadPoolExecutor(max_workers=1) loads next streamed layer while current layer computes",
+    "device_transfer": "accelerate.set_module_tensor_to_device; optional CUDA pin_memory path",
+    "compression": "bitsandbytes 4-bit/8-bit path explicitly calls tensor.cuda(); prefetch+compression is disabled",
+    "intel_arc_original_viability": "not viable as-is",
+    "intel_blockers": [
+      "default device cuda:0 and CUDA-specific pinning checks",
+      "compression path requires bitsandbytes and calls .cuda()",
+      "runtime is built around PyTorch/Transformers device semantics, not GGML/Vulkan buffers"
+    ]
+  },
+  "llama_cpp": {
+    "commit": "0f3a71be15af836d277c9f918adfafb45732677e",
+    "license": "MIT",
+    "key_paths": [
+      "src/llama-model-loader.cpp: mmap/direct-I/O mappings, lazy_read, load_all_data",
+      "src/llama-model.cpp: llama_model_base::load_tensors, GPU layer placement, backend-buffer allocation",
+      "src/llama-kv-cache.cpp: K/V tensor allocation and quantized KV support",
+      "ggml/src/ggml-backend.cpp: graph scheduling/execution",
+      "ggml/src/ggml-vulkan/ggml-vulkan.cpp: Vulkan buffers, tensor transfers and graph execution",
+      "ggml/src/ggml-sycl/: Intel-targeted SYCL backend"
+    ],
+    "features": {
+      "mmap": true,
+      "direct_io": true,
+      "partial_gpu_layer_offload": true,
+      "backend_buffer_abstraction": true,
+      "vulkan": true,
+      "sycl_intel": true,
+      "quantized_kv": true,
+      "lazy_tensor_rows": "present for selected tensors via TENSOR_READ_LAZY; not a generic dense-layer residency scheduler"
+    }
+  },
+  "local_observation": {
+    "pytorch_xpu": "not tested because project venv has no torch installed; no capability claim is made from local PyTorch execution",
+    "nvme": "KINGSTON OM8PGP41024Q-AA"
+  }
+}

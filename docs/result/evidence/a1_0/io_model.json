@@ -1,0 +1,113 @@
+{
+  "schema": "local2api.a1.io_model.v1",
+  "measured_bandwidth_mib_s_conservative": 2495.92,
+  "lower_bound_formula": "streamed_bytes_per_token / measured_sustained_bytes_per_second",
+  "warning": "I/O-only bound excludes device-copy, dequantization, graph scheduling and compute; real throughput can only be lower unless I/O overlaps compute.",
+  "models": {
+    "14B_dense": {
+      "0": {
+        "resident_fraction": 0.0,
+        "streamed_gib_per_token": 8.002,
+        "minimum_seconds_per_token_io_only": 3.283,
+        "theoretical_max_tokens_per_second_io_only": 0.3046
+      },
+      "25": {
+        "resident_fraction": 0.25,
+        "streamed_gib_per_token": 6.002,
+        "minimum_seconds_per_token_io_only": 2.4622,
+        "theoretical_max_tokens_per_second_io_only": 0.4061
+      },
+      "50": {
+        "resident_fraction": 0.5,
+        "streamed_gib_per_token": 4.001,
+        "minimum_seconds_per_token_io_only": 1.6415,
+        "theoretical_max_tokens_per_second_io_only": 0.6092
+      },
+      "75": {
+        "resident_fraction": 0.75,
+        "streamed_gib_per_token": 2.001,
+        "minimum_seconds_per_token_io_only": 0.8207,
+        "theoretical_max_tokens_per_second_io_only": 1.2184
+      }
+    },
+    "32B_dense": {
+      "0": {
+        "resident_fraction": 0.0,
+        "streamed_gib_per_token": 18.291,
+        "minimum_seconds_per_token_io_only": 7.5042,
+        "theoretical_max_tokens_per_second_io_only": 0.1333
+      },
+      "25": {
+        "resident_fraction": 0.25,
+        "streamed_gib_per_token": 13.718,
+        "minimum_seconds_per_token_io_only": 5.6282,
+        "theoretical_max_tokens_per_second_io_only": 0.1777
+      },
+      "50": {
+        "resident_fraction": 0.5,
+        "streamed_gib_per_token": 9.146,
+        "minimum_seconds_per_token_io_only": 3.7521,
+        "theoretical_max_tokens_per_second_io_only": 0.2665
+      },
+      "75": {
+        "resident_fraction": 0.75,
+        "streamed_gib_per_token": 4.573,
+        "minimum_seconds_per_token_io_only": 1.8761,
+        "theoretical_max_tokens_per_second_io_only": 0.533
+      }
+    },
+    "70B_dense": {
+      "0": {
+        "resident_fraction": 0.0,
+        "streamed_gib_per_token": 40.012,
+        "minimum_seconds_per_token_io_only": 16.4157,
+        "theoretical_max_tokens_per_second_io_only": 0.0609
+      },
+      "25": {
+        "resident_fraction": 0.25,
+        "streamed_gib_per_token": 30.009,
+        "minimum_seconds_per_token_io_only": 12.3118,
+        "theoretical_max_tokens_per_second_io_only": 0.0812
+      },
+      "50": {
+        "resident_fraction": 0.5,
+        "streamed_gib_per_token": 20.006,
+        "minimum_seconds_per_token_io_only": 8.2079,
+        "theoretical_max_tokens_per_second_io_only": 0.1218
+      },
+      "75": {
+        "resident_fraction": 0.75,
+        "streamed_gib_per_token": 10.003,
+        "minimum_seconds_per_token_io_only": 4.1039,
+        "theoretical_max_tokens_per_second_io_only": 0.2437
+      }
+    },
+    "46.7B_moe": {
+      "0": {
+        "resident_fraction": 0.0,
+        "streamed_gib_per_token": 26.694,
+        "minimum_seconds_per_token_io_only": 10.9517,
+        "theoretical_max_tokens_per_second_io_only": 0.0913
+      },
+      "25": {
+        "resident_fraction": 0.25,
+        "streamed_gib_per_token": 20.02,
+        "minimum_seconds_per_token_io_only": 8.2138,
+        "theoretical_max_tokens_per_second_io_only": 0.1217
+      },
+      "50": {
+        "resident_fraction": 0.5,
+        "streamed_gib_per_token": 13.347,
+        "minimum_seconds_per_token_io_only": 5.4759,
+        "theoretical_max_tokens_per_second_io_only": 0.1826
+      },
+      "75": {
+        "resident_fraction": 0.75,
+        "streamed_gib_per_token": 6.673,
+        "minimum_seconds_per_token_io_only": 2.7379,
+        "theoretical_max_tokens_per_second_io_only": 0.3652
+      }
+    }
+  },
+  "prefetch_condition": "I/O for next layer/group can be fully hidden only when its read+transfer time <= compute time of current layer/group and sufficient staging memory exists."
+}

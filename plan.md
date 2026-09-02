@@ -1,87 +1,93 @@
-# local2api Implementation Plan
+# local2api roadmap
 
 ## Product objective
 
-Build a small, observable OpenAI-compatible inference gateway for a 32 GB laptop. Prefer local inference for tasks that fit the local model's capabilities; use an authorized external backend for harder workloads; do not silently degrade tasks that require stronger reasoning.
+Build a small, observable OpenAI-compatible inference gateway that can use a constrained local tier without assuming local inference is always the best backend. Local execution and routing evolve as independent tracks. Their only contract is:
 
-## v0.0.1 — Reliable Gateway Foundation
+`Track A -> Local Capability Profile -> Track B`
 
-- [x] FastAPI application/package structure.
-- [x] `POST /v1/chat/completions` pass-through.
-- [x] `stream=false` support.
-- [x] `stream=true` SSE pass-through.
-- [x] `GET /v1/models`.
-- [x] `GET /health`.
-- [x] Local and external HTTP backend adapters.
-- [x] Deterministic rules router with explicit route reason.
-- [x] Explicit local/cloud model override.
-- [x] Capability-aware safe fallback.
-- [x] Preserve upstream HTTP status/body for non-transport failures.
-- [x] Unit/integration tests using mocked backends.
-- [x] QA report generated only from tests actually executed.
+Track B remains useful even if Track A never produces a large-model local engine.
 
-### v0.0.1 acceptance criteria
+## Track A — Local Engine
 
-1. Short/local-safe tasks route local.
-2. Architecture/repository tasks route external.
-3. Unsafe cloud failures return a clear error instead of silent local downgrade.
-4. Safe degradable cloud failures can fall back local.
-5. SSE streaming passes through correctly.
-6. Route backend/reason are observable in headers.
-7. Test suite passes in a clean Python environment.
+### A0 — 7B Baseline — COMPLETE
 
-## v0.0.2 — Context Ownership
+- Hardware/runtime feasibility: **PASS** on Intel Core Ultra 7 258V / 32 GB / Arc 140V.
+- Production coding/repository quality: **FAIL**.
+- Qwen2.5-Coder 7B Q4_K_M is no longer a production coding target.
+- Keep 7B as a baseline/control model, runtime benchmark, and utility model for narrow/easily verified tasks.
 
-- [ ] Add `conversation_id` and canonical gateway-owned conversation state.
-- [ ] Add context builder and backend-independent message reconstruction.
-- [ ] Add token estimation and per-backend context limits.
-- [ ] Add capability registry (`tools`, context window, structured output, vision, coding tier).
-- [ ] Ensure backend switching does not depend on hidden server-side session memory.
-- [ ] Add routing-decision trace endpoint/log schema.
+Conclusion: **7B chạy được nhưng không đủ chất lượng cho coding/repository production. Tối ưu tiếp 7B không còn là mục tiêu chính.**
 
-## v0.0.3 — Reliability
+### A1 — Adaptive Local Engine
 
-- [ ] Circuit breaker per backend.
-- [ ] Retry/backoff for safe transport failures and 429 responses.
-- [ ] Health/latency rolling metrics.
-- [ ] Backend availability score.
-- [ ] Configurable fallback policies by task class.
+#### A1.0 — Feasibility Study — COMPLETE
 
-## v0.0.4 — Smart Routing
+Goal: prove or reject whether 32 GB RAM + Intel Arc 140V + NVMe can run models beyond normal resident capacity with useful throughput.
 
-- [ ] Replace keyword-only rules with a tested task classifier/complexity score.
-- [ ] Use context size, task class, backend capability, latency and availability in scoring.
-- [ ] Add quality-feedback telemetry without storing source code by default.
+Verdict: **GO_EXISTING_RUNTIME_ONLY**.
 
-## v0.1.0 — Adaptive Local/Cloud Router
+The measured storage lower bound makes generic dense per-token weight streaming too slow for a useful interactive tier, while 14B and potentially constrained 32B configurations remain plausible with existing llama.cpp/Ollama mmap/offload mechanisms. No adaptive engine prototype is justified by current evidence.
 
-- [ ] Candidate local model selected from real target-laptop benchmarks.
-- [ ] Optional official free/low-cost cloud tier adapters.
-- [ ] Optional third-party adapters only where operation complies with upstream terms.
-- [ ] End-to-end VS Code coding workflow benchmark.
+#### A1.1 — Prototype — CLOSED
+
+A1.1 opens only for `GO_ADAPTIVE_RESIDENCY`. Current A1.0 does not satisfy that gate.
+
+If future sparse-model evidence reopens it, prototype scope may include expert residency/cache, layer-group scheduling, prefetch, weight streaming, KV/context budgeting and telemetry while retaining llama.cpp compute kernels.
+
+### A2 — Large-model Feasibility — NEXT TRACK-A GATE
+
+Candidate ladder:
+
+- 14B first;
+- 32B only if 14B demonstrates useful quality/performance;
+- dense vs MoE when a specific candidate offers a credible capability benefit.
+
+Use existing runtimes first: Ollama/llama.cpp with mmap, partial offload, quantized KV where supported, and measured Vulkan/SYCL configurations. Determine max practical model, context, usable throughput and Local Capability Profile. Do not infer production usefulness merely from successful model loading.
+
+### A3 — Production Qualification
+
+- sustained stability;
+- coding/repository quality;
+- latency/TTFT;
+- memory/swap pressure;
+- thermal/power;
+- production Local Capability Profile.
+
+## Track B — Smart Router
+
+### B0 — Reliable Router — COMPLETE BASELINE
+
+Existing v0.0.1 provides OpenAI-compatible API, SSE streaming, backend abstraction, safe fallback and routing observability.
+
+### B1 — Context Ownership
+
+- `conversation_id` and canonical gateway-owned context;
+- backend-independent reconstruction;
+- token/context budgeting;
+- backend capability registry;
+- routing decision trace.
+
+### B2 — Capability Router
+
+Route on task class, context requirement, privacy, latency, backend capability and the Local Capability Profile produced by Track A.
+
+### B3 — Adaptive Routing
+
+- backend health;
+- rate limits/retry policy;
+- latency;
+- cost;
+- quality feedback;
+- explicit fallback policy by capability class.
 
 ## Non-goals
 
-- Bypassing CAPTCHA or anti-bot systems.
-- Circumventing provider rate limits.
-- Extracting browser credentials without explicit, compliant authorization.
-- Owning raw llama.cpp KV cache in the gateway before benchmarks prove a need.
+- CAPTCHA/anti-bot bypass or provider rate-limit circumvention.
+- Browser credential extraction.
+- Treating a local model as production-capable without measured quality evidence.
+- Rewriting llama.cpp's GGUF loader, kernels, tokenizer, sampler, server, graph scheduler or KV cache without proof that replacement is necessary.
 
-## Next action after v0.0.1
+## Current next action
 
-Run the **real-device qualification benchmark on the Intel Core Ultra 7 258V / 32 GB Windows laptop** in gated stages. First prove the 7B local tier on the target hardware, including runtime A/B, telemetry, and coding quality. Only after the 7B gate passes should a 14B candidate be downloaded and qualified. Record TTFT, prompt tokens/s, generation tokens/s, working set, commit memory, page faults and thermal/power behavior. Use those measurements to select the default local model and define v0.0.2 capability limits.
-
-### v0.0.1-HW1 progress
-
-- [x] Add a reproducible Ollama benchmark harness for TTFT and Ollama-reported prompt/generation throughput.
-- [x] Demonstrate Qwen2.5-Coder 7B Q4_K_M hardware/runtime feasibility on the target laptop with Arc 140V Vulkan.
-- [x] Run same-model Ollama vs llama-server A/B on Arc 140V Vulkan; sustained generation is approximately 9 tok/s on both paths.
-- [ ] Complete/pass the 7B production gate. Current result: **FAIL** on coding/repository quality; page-fault and thermal/power telemetry remain not proven.
-- [ ] Only after the 7B gate passes, download and benchmark the 14B candidate.
-- [ ] Record Ollama CPU/GPU processor allocation for each candidate. Arc 140V Vulkan / `100% GPU` is confirmed for Qwen2.5-Coder 7B; complete the same check for all candidates.
-- [x] Establish byte-identical pre-rendered ChatML fixtures with prompt hashes, token IDs and exact GGUF provenance for runtime A/B.
-- [x] Run clean 1K/4K/8K/16K context-scaling A/B for Ollama vs direct llama-server.
-- [x] Capture working set and system committed-memory telemetry for the corrected Ollama/Vulkan run.
-- [ ] Capture usable page-fault telemetry; current Windows harness returned no trustworthy counter values.
-- [ ] Capture thermal/power behavior with hardware telemetry.
-- [x] Run the 25-case coding/repository quality smoke suite. Result: **FAIL** for general local coding/repository use; keep 14B blocked under the current phase rule.
+Track A: A2 should test a 14B candidate with existing runtimes first; 32B remains gated by the 14B result. Track B can proceed independently with B1 Context Ownership.

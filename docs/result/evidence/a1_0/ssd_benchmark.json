@@ -1,0 +1,21 @@
+{
+  "schema": "local2api.a1.ssd_benchmark.v1",
+  "file": "C:\\Users\\minht\\.ollama\\models\\blobs\\sha256-60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+  "file_size_bytes": 4683074048,
+  "sequential_passes": 3,
+  "sequential_block_mib": 8,
+  "sequential_read_mib_s": [
+    2629.07,
+    2495.92,
+    2511.06
+  ],
+  "sequential_min_mib_s": 2495.92,
+  "sequential_median_mib_s": 2511.06,
+  "random_read": {
+    "samples": 2048,
+    "block_kib": 64,
+    "median_latency_ms": 0.0118,
+    "p95_latency_ms": 0.0221
+  },
+  "notes": "Read-only lightweight benchmark over an existing local GGUF. Buffered OS/cache effects may remain; minimum full-file pass is used for conservative I/O modeling."
+}

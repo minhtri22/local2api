@@ -1,0 +1,111 @@
+{
+  "schema": "local2api.a1.memory_model.v1",
+  "physical_ram_gib": 32.0,
+  "reserve_assumptions": {
+    "windows_11_gib": 6.0,
+    "vscode_gib": 2.5,
+    "local2api_and_tools_gib": 0.5,
+    "filesystem_cache_gib": 2.0
+  },
+  "practical_model_runtime_budget_gib": 21.0,
+  "formulae": {
+    "weights": "params * effective_bits_per_weight / 8",
+    "kv": "2(K+V) * layers * kv_heads * head_dim * tokens * bytes_per_element",
+    "q4_effective_bpw_basis": "HW1 7B Q4_K_M: 4.36 GiB / 7.62B params ~= 4.91 bits/weight"
+  },
+  "models": {
+    "14B_dense": {
+      "params_b": 14.0,
+      "layers": 48,
+      "kv_heads": 8,
+      "head_dim": 128,
+      "q4_effective_bpw": 4.91,
+      "q4_weight_gib": 8.002,
+      "q4_overhead_vs_ideal_4bit_pct": 22.75,
+      "kv_f16_gib": {
+        "4096": 0.75,
+        "8192": 1.5,
+        "16384": 3.0,
+        "32768": 6.0
+      },
+      "kv_q4_approx_gib": {
+        "4096": 0.188,
+        "8192": 0.375,
+        "16384": 0.75,
+        "32768": 1.5
+      },
+      "modeled_runtime_buffer_gib": 2.0,
+      "fits_practical_budget_weights_only": true
+    },
+    "32B_dense": {
+      "params_b": 32.0,
+      "layers": 64,
+      "kv_heads": 8,
+      "head_dim": 128,
+      "q4_effective_bpw": 4.91,
+      "q4_weight_gib": 18.291,
+      "q4_overhead_vs_ideal_4bit_pct": 22.75,
+      "kv_f16_gib": {
+        "4096": 1.0,
+        "8192": 2.0,
+        "16384": 4.0,
+        "32768": 8.0
+      },
+      "kv_q4_approx_gib": {
+        "4096": 0.25,
+        "8192": 0.5,
+        "16384": 1.0,
+        "32768": 2.0
+      },
+      "modeled_runtime_buffer_gib": 2.0,
+      "fits_practical_budget_weights_only": true
+    },
+    "70B_dense": {
+      "params_b": 70.0,
+      "layers": 80,
+      "kv_heads": 8,
+      "head_dim": 128,
+      "q4_effective_bpw": 4.91,
+      "q4_weight_gib": 40.012,
+      "q4_overhead_vs_ideal_4bit_pct": 22.75,
+      "kv_f16_gib": {
+        "4096": 1.25,
+        "8192": 2.5,
+        "16384": 5.0,
+        "32768": 10.0
+      },
+      "kv_q4_approx_gib": {
+        "4096": 0.312,
+        "8192": 0.625,
+        "16384": 1.25,
+        "32768": 2.5
+      },
+      "modeled_runtime_buffer_gib": 2.0,
+      "fits_practical_budget_weights_only": false
+    },
+    "46.7B_moe": {
+      "params_b": 46.7,
+      "active_params_b": 12.9,
+      "layers": 32,
+      "kv_heads": 8,
+      "head_dim": 128,
+      "q4_effective_bpw": 4.91,
+      "q4_weight_gib": 26.694,
+      "q4_overhead_vs_ideal_4bit_pct": 22.75,
+      "kv_f16_gib": {
+        "4096": 0.5,
+        "8192": 1.0,
+        "16384": 2.0,
+        "32768": 4.0
+      },
+      "kv_q4_approx_gib": {
+        "4096": 0.125,
+        "8192": 0.25,
+        "16384": 0.5,
+        "32768": 1.0
+      },
+      "modeled_runtime_buffer_gib": 2.0,
+      "fits_practical_budget_weights_only": false
+    }
+  }
+}
