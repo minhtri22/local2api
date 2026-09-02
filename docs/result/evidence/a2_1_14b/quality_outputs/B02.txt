@@ -1,0 +1,16 @@
+To add simple validation that ensures the `messages` is a non-empty list, you can use a conditional statement to check if the `messages` variable is a list and if it contains at least one element. Here's an example in Python:
+
+```python
+def validate_messages(messages):
+    if not isinstance(messages, list):
+        raise ValueError("messages must be a list")
+    if not messages:
+        raise ValueError("messages must be a non-empty list")
+    return True
+
+# Example usage
+try:
+    messages = ["Hello", "World"]
+    if validate_messages(messages):
+        print("Validation passed.")
+except ValueError as e:

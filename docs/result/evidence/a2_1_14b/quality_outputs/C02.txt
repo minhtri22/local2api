@@ -1,0 +1,6 @@
+An edge case for an empty messages array could be a scenario where a messaging application or system is designed to handle user interactions, but there are no messages to display or process. This could occur in several situations:
+
+1. **New User**: A user who has just signed up for the service and has not sent or received any messages yet.
+2. **Deleted Messages**: A user who has deleted all their messages, leaving the messages array empty.
+3. **System Reset**: The system has been reset or initialized, and no messages have been added yet.
+4. **Network Issues**: There was a temporary network issue that prevented messages from being

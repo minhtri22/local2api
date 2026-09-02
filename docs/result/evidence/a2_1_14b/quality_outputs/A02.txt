@@ -1,0 +1,3 @@
+- **Invalid Data Type**: The request contains data that does not match the expected data type as defined in the FastAPI endpoint's parameter or body schema. For example, if a numeric field is expected but a string is provided, this would cause a validation failure.
+
+- **Missing Required Fields**: The request is missing one or more fields that are marked as required in the endpoint's schema. FastAPI will validate the presence of these fields and fail if any are missing, ensuring that all necessary data is provided for the request to be processed.

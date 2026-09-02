@@ -1,0 +1,15 @@
+To implement a helper function that selects a local option when `task_class` is equal to 'short', you can define a function in Python. This function will check the value of `task_class` and return a local option if the condition is met. Here's a simple example:
+
+```python
+def select_local_option(task_class):
+    """
+    Selects a local option when task_class is 'short'.
+
+    Parameters:
+    task_class (str): The class of the task.
+
+    Returns:
+    str: The selected option, either 'local' or 'remote'.
+    """
+    if task_class == 'short':
+        return '

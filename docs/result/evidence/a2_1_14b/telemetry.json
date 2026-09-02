@@ -1,0 +1,28 @@
+{
+  "schema": "local2api.a2_1.telemetry.v1",
+  "created_at": "2026-09-02T20:32:51.746646+00:00",
+  "runtime": "Ollama 0.33.2 isolated on 127.0.0.1:11435, Vulkan enabled",
+  "arc_vulkan_verified": true,
+  "evidence": [
+    "Ollama server log reported library=Vulkan, name=Vulkan0, description=Intel(R) Arc(TM) 140V GPU (16GB), type=iGPU, total=18.0 GiB, available=17.3 GiB.",
+    "Short post-restart generation returned OK with load_duration_ns=8457223900.",
+    "During quality run, llama-server child process was observed at approximately 12.8 GB working set / 12.9 GB private bytes."
+  ],
+  "observed_peak_process": {
+    "process": "llama-server child under Ollama",
+    "working_set_bytes": 12796583936,
+    "private_bytes": 12896735232,
+    "note": "Peak sampled during 25-case quality run; not a high-frequency profiler."
+  },
+  "observed_system_commit": {
+    "committed_bytes_max_sample": 35203911680,
+    "available_mbytes_min_sample": 5814,
+    "note": "Sampled while quality run was active."
+  },
+  "not_proven": [
+    "page faults",
+    "thermal throttling",
+    "package power",
+    "GPU utilization percentage"
+  ]
+}

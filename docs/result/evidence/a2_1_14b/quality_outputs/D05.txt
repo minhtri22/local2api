@@ -1,0 +1,5 @@
+Backend switching should not depend on hidden server session memory for several reasons:
+
+1. **Scalability**: Relying on server session memory can limit the scalability of your application. If you have multiple servers, each server would need to maintain its own session data, which can lead to inconsistencies and difficulties in managing user sessions across different servers.
+
+2. **Redundancy and Reliability**: Server session memory is volatile and can be lost if the server goes down or is restarted. This can lead to loss of user sessions and a poor user experience. Using a centralized session management system, such as a database or a dedicated session store, can

@@ -1,0 +1,199 @@
+{
+  "schema": "local2api.a2_1.manual_quality.v1",
+  "created_at": "2026-09-02T20:32:51.740255+00:00",
+  "rubric": {
+    "0": "unusable/wrong",
+    "1": "mostly wrong or unsafe",
+    "2": "usable with caveats",
+    "3": "directly useful"
+  },
+  "score_distribution": {
+    "0": 0,
+    "1": 0,
+    "2": 9,
+    "3": 11
+  },
+  "average_score": 2.55,
+  "malformed_count": 0,
+  "hallucination_or_domain_drift_count": 1,
+  "repetition_count": 0,
+  "truncated_count": 2,
+  "cases": [
+    {
+      "id": "A01",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct and directly addresses upstream status preservation."
+    },
+    {
+      "id": "A02",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Clear FastAPI validation examples."
+    },
+    {
+      "id": "A03",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 2,
+      "flags": [
+        "minor_domain_drift"
+      ],
+      "note": "Useful deterministic testing answer but frames router as packet routing, not local2api routing."
+    },
+    {
+      "id": "A04",
+      "class": "LOCAL_SAFE",
+      "auto_pass": false,
+      "manual_score_0_3": 2,
+      "flags": [],
+      "note": "Finds empty-message issue but muddles exact intended validation semantics."
+    },
+    {
+      "id": "A05",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct degradable local fallback explanation."
+    },
+    {
+      "id": "B01",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct clamp helper pattern."
+    },
+    {
+      "id": "B02",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct non-empty list validation."
+    },
+    {
+      "id": "B03",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 2,
+      "flags": [
+        "truncated"
+      ],
+      "note": "Right early-return direction, truncated before full refactor."
+    },
+    {
+      "id": "B04",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 2,
+      "flags": [
+        "minor_noise"
+      ],
+      "note": "Valid FastAPI endpoint; extra installation/run advice not requested."
+    },
+    {
+      "id": "B05",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 2,
+      "flags": [
+        "truncated"
+      ],
+      "note": "Correct local/short selection but truncated at return value."
+    },
+    {
+      "id": "C01",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 2,
+      "flags": [
+        "minor_noise"
+      ],
+      "note": "Usable 503 assertion; external URL example is generic."
+    },
+    {
+      "id": "C02",
+      "class": "LOCAL_SAFE",
+      "auto_pass": true,
+      "manual_score_0_3": 2,
+      "flags": [
+        "generic"
+      ],
+      "note": "Names empty messages scenarios; more app-generic than API validation-specific."
+    },
+    {
+      "id": "C03",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct upstream 429 preservation test objective."
+    },
+    {
+      "id": "C04",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct SSE [DONE] termination behavior."
+    },
+    {
+      "id": "C05",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 2,
+      "flags": [
+        "generic"
+      ],
+      "note": "Correct area but broad, not a crisp missing test."
+    },
+    {
+      "id": "D01",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": false,
+      "manual_score_0_3": 2,
+      "flags": [
+        "generic"
+      ],
+      "note": "Reasonable stable interface-contract answer, but too broad for router/backend contract."
+    },
+    {
+      "id": "D02",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Exact requested call path."
+    },
+    {
+      "id": "D03",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct route-reason header summary."
+    },
+    {
+      "id": "D04",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": true,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct async/sync protocol mismatch explanation."
+    },
+    {
+      "id": "D05",
+      "class": "LOCAL_ACCEPTABLE",
+      "auto_pass": false,
+      "manual_score_0_3": 3,
+      "flags": [],
+      "note": "Correct backend-switching/session-memory risk explanation."
+    }
+  ]
+}

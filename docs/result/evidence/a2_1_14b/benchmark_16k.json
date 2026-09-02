@@ -1,0 +1,61 @@
+{
+  "created_at": "2026-09-02T19:21:43.555494+00:00",
+  "model": "local2api-qwen2.5-coder-14b:a2.1",
+  "gguf": "models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+  "gguf_sha256": "c1e659736d89ac1065fb495330fb824d94001974a4bfa78e7270e43476a8d940",
+  "generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "max_tokens": 64,
+    "context_size": 16384
+  },
+  "schema": "local2api.hw1.context_scale_runtime.v1",
+  "provider": "ollama",
+  "levels": {
+    "16k": {
+      "token_count": 14452,
+      "prompt_sha256": "c0b60e12b47adbac3eab67bb0378bf2082fa8bf3c1a8e2104c068f884d3a76ad",
+      "samples": [
+        {
+          "wall_ms": 23601.135,
+          "ttft_ms": 673.745,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 31582.0988153435,
+          "generation_tokens_per_s": 2.791631613151743,
+          "text": "1. **Risk**: The code has a high risk of duplication, which can lead to maintenance challenges and potential bugs if changes are not made consistently across all handlers.\n   - **Fix**: Use a loop or a function to generate these handlers dynamically.\n\n2. **Risk**: If the `router.route(request)` method fails",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 20868.615,
+          "ttft_ms": 421.964,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 47132.337114269496,
+          "generation_tokens_per_s": 3.1304414347967446,
+          "text": "1. **Risk**: The code has a high risk of duplication, which can lead to maintenance challenges and potential bugs if changes are not made consistently across all handlers.\n   - **Fix**: Use a loop or a function to generate these handlers dynamically.\n\n2. **Risk**: If the `router.route(request)` method fails",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 21050.223,
+          "ttft_ms": 495.736,
+          "prompt_tokens": 14452,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 46746.6262986971,
+          "generation_tokens_per_s": 3.1161440949824093,
+          "text": "1. **Risk**: The code has a high risk of duplication, which can lead to maintenance challenges and potential bugs if changes are not made consistently across all handlers.\n   - **Fix**: Use a loop or a function to generate these handlers dynamically.\n\n2. **Risk**: If the `router.route(request)` method fails",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 495.736,
+        "median_wall_ms": 21050.223,
+        "median_prompt_tokens_per_s": 46746.626,
+        "median_generation_tokens_per_s": 3.116
+      }
+    }
+  }
+}

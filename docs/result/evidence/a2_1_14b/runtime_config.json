@@ -1,0 +1,17 @@
+{
+  "primary_runtime": "Ollama 0.33.2 + Intel Arc 140V / Vulkan",
+  "ollama_host": "127.0.0.1:11435",
+  "required_env": {
+    "OLLAMA_IGPU_ENABLE": "1",
+    "OLLAMA_VULKAN": "1",
+    "OLLAMA_FLASH_ATTENTION": "true",
+    "OLLAMA_KV_CACHE_TYPE": "f16",
+    "OLLAMA_CONTEXT_LENGTH": "16384",
+    "OLLAMA_NUM_PARALLEL": "1"
+  },
+  "quality_generation": {"temperature": 0, "top_p": 1, "seed": 42, "num_predict": 128, "num_ctx": 16384},
+  "performance_generation": {"temperature": 0, "top_p": 1, "seed": 42, "num_predict": 64, "num_ctx": 16384},
+  "kv_baseline": "F16; no aggressive KV quantization before quality baseline",
+  "direct_llama_server": "secondary control only; early-stop on pathological TTFT",
+  "early_stop_16k": {"ttft_seconds": 300, "total_wall_seconds": 600, "other": ["Windows materially unusable", "unsafe sustained commit/pagefile pressure", "repeated runtime crashes"]}
+}

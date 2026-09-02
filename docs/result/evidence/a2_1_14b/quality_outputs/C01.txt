@@ -1,0 +1,11 @@
+Certainly! When writing a test using `pytest` to check for an HTTP 503 status code, you typically use a library like `requests` to make the HTTP request and then assert the status code. Here's an example of how you might write such a test:
+
+```python
+import pytest
+import requests
+
+def test_http_503():
+    url = "http://example.com"  # Replace with the actual URL you want to test
+    response = requests.get(url)
+    
+    assert response.status_code == 503, f"Expected HTTP 503, but got {response.status_code

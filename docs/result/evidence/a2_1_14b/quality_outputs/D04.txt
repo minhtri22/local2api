@@ -1,0 +1,7 @@
+The interface mismatch you've described occurs when there is a discrepancy between the method signature expected by a protocol or interface and the actual implementation provided. In this case, the protocol expects an asynchronous method `async chat()`, but the implementation defines a synchronous method `sync chat()`.
+
+Here's a breakdown of the issue:
+
+1. **Protocol Expectation**: The protocol specifies that the `chat()` method should be asynchronous. This means that the method should not block the execution of the program while it is running. Instead, it should return a promise or a similar construct that can be awaited or handled asynchronously.
+
+2. **Implementation Definition**: The implementation

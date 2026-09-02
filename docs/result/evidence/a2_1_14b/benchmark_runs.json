@@ -1,0 +1,149 @@
+{
+  "created_at": "2026-09-02T18:34:55.770646+00:00",
+  "model": "local2api-qwen2.5-coder-14b:a2.1",
+  "gguf": "models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+  "gguf_sha256": "c1e659736d89ac1065fb495330fb824d94001974a4bfa78e7270e43476a8d940",
+  "generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "max_tokens": 64,
+    "context_size": 16384
+  },
+  "schema": "local2api.hw1.context_scale_runtime.v1",
+  "provider": "ollama",
+  "levels": {
+    "1k": {
+      "token_count": 870,
+      "prompt_sha256": "b65e007d78603e3124e0e4a4379087cf6db78152a6d1280382c626a841d61512",
+      "samples": [
+        {
+          "wall_ms": 15462.239,
+          "ttft_ms": 282.592,
+          "prompt_tokens": 870,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 3645.765673649495,
+          "generation_tokens_per_s": 4.2162473751389635,
+          "text": "1. **Risk**: If the `router.route(request)` method fails or returns an unexpected result, the code will raise an AttributeError when trying to access `decision.backend.chat(request)`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None` before calling `chat",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 16600.678,
+          "ttft_ms": 285.997,
+          "prompt_tokens": 870,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 3299.516450175405,
+          "generation_tokens_per_s": 3.9489743156242403,
+          "text": "1. **Risk**: If the `router.route(request)` method fails or returns an unexpected result, the code will raise an AttributeError when trying to access `decision.backend.chat(request)`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None` before calling `chat",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 17935.711,
+          "ttft_ms": 1064.794,
+          "prompt_tokens": 870,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 5130.412732858819,
+          "generation_tokens_per_s": 3.7934744770591706,
+          "text": "1. **Risk**: If the `router.route(request)` method fails or returns an unexpected result, the code will raise an AttributeError when trying to access `decision.backend.chat(request)`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None` before calling `chat",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 285.997,
+        "median_wall_ms": 16600.678,
+        "median_prompt_tokens_per_s": 3645.766,
+        "median_generation_tokens_per_s": 3.949
+      }
+    },
+    "4k": {
+      "token_count": 3573,
+      "prompt_sha256": "6c2480d298135275496deb98e0658a596ac67660083e6b5e872667a47ce100a1",
+      "samples": [
+        {
+          "wall_ms": 19399.911,
+          "ttft_ms": 353.986,
+          "prompt_tokens": 3573,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 12182.107678512371,
+          "generation_tokens_per_s": 3.360057692190575,
+          "text": "1. **Risk**: The code does not handle cases where `router.route(request)` might return `None` or a decision without a `backend` attribute, which could lead to an `AttributeError`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None`",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 19934.98,
+          "ttft_ms": 488.645,
+          "prompt_tokens": 3573,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 12686.99378965795,
+          "generation_tokens_per_s": 3.2816946712303414,
+          "text": "1. **Risk**: The code does not handle cases where `router.route(request)` might return `None` or a decision without a `backend` attribute, which could lead to an `AttributeError`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None`",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 18477.628,
+          "ttft_ms": 477.937,
+          "prompt_tokens": 3573,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 12798.46977154033,
+          "generation_tokens_per_s": 3.5518087919254953,
+          "text": "1. **Risk**: The code does not handle cases where `router.route(request)` might return `None` or a decision without a `backend` attribute, which could lead to an `AttributeError`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None`",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 477.937,
+        "median_wall_ms": 19399.911,
+        "median_prompt_tokens_per_s": 12686.994,
+        "median_generation_tokens_per_s": 3.36
+      }
+    },
+    "8k": {
+      "token_count": 7192,
+      "prompt_sha256": "eef7fa21057ee2e72aaeca54c2b161e8cbb786a75bc5d18d928ce684793e808a",
+      "samples": [
+        {
+          "wall_ms": 23580.908,
+          "ttft_ms": 456.367,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 20817.895516858094,
+          "generation_tokens_per_s": 2.7961491084959156,
+          "text": "1. **Risk**: The code does not handle cases where `router.route(request)` might return `None` or a decision without a `backend` attribute, which could lead to an `AttributeError`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None`",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 24830.81,
+          "ttft_ms": 474.771,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 23219.099581914157,
+          "generation_tokens_per_s": 2.6724098982388065,
+          "text": "1. **Risk**: The code does not handle cases where `router.route(request)` might return `None` or a decision without a `backend` attribute, which could lead to an `AttributeError`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None`",
+          "raw_timings": {}
+        },
+        {
+          "wall_ms": 23737.227,
+          "ttft_ms": 535.02,
+          "prompt_tokens": 7192,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 25003.563494519174,
+          "generation_tokens_per_s": 2.7532819335748364,
+          "text": "1. **Risk**: The code does not handle cases where `router.route(request)` might return `None` or a decision without a `backend` attribute, which could lead to an `AttributeError`.\n   - **Fix**: Add a check to ensure `decision` and `decision.backend` are not `None`",
+          "raw_timings": {}
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "failures": 0,
+        "median_ttft_ms": 474.771,
+        "median_wall_ms": 23737.227,
+        "median_prompt_tokens_per_s": 23219.1,
+        "median_generation_tokens_per_s": 2.753
+      }
+    }
+  }
+}

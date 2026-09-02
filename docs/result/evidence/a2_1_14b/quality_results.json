@@ -1,0 +1,364 @@
+{
+  "schema": "local2api.hw1.quality.v1",
+  "created_at": "2026-09-02T17:41:00.961363+00:00",
+  "summary": {
+    "CLOUD_REQUIRED": {
+      "passed": 3,
+      "total": 5,
+      "pass_rate": 0.6
+    },
+    "LOCAL_ACCEPTABLE": {
+      "passed": 9,
+      "total": 11,
+      "pass_rate": 0.818
+    },
+    "LOCAL_SAFE": {
+      "passed": 8,
+      "total": 9,
+      "pass_rate": 0.889
+    }
+  },
+  "cases": [
+    {
+      "id": "A01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Explain why preserving upstream HTTP status matters.",
+      "criteria": {
+        "contains_all": [
+          "status"
+        ]
+      },
+      "latency_ms": 24354.215,
+      "pass": true,
+      "response": "Preserving the upstream HTTP status is crucial for several reasons, especially in the context of web applications and services that rely on HTTP for communication. Here are some key reasons why it matters:\n\n1. **Error Handling and Debugging**: The HTTP status code provides valuable information about the outcome of a request. By preserving the upstream status, downstream services can accurately understand what happened during the request. This is essential for proper error handling and debugging, allowing developers to diagnose issues more effectively.\n\n2. **Client Experience**: Clients, whether they are users interacting with a web application or other services consuming APIs, rely on HTTP status codes to understand the result of"
+    },
+    {
+      "id": "A02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Explain a FastAPI request validation failure in two bullets.",
+      "criteria": {
+        "contains_all": [
+          "validation"
+        ]
+      },
+      "latency_ms": 17153.097,
+      "pass": true,
+      "response": "- **Invalid Data Type**: The request contains data that does not match the expected data type as defined in the FastAPI endpoint's parameter or body schema. For example, if a numeric field is expected but a string is provided, this would cause a validation failure.\n\n- **Missing Required Fields**: The request is missing one or more fields that are marked as required in the endpoint's schema. FastAPI will validate the presence of these fields and fail if any are missing, ensuring that all necessary data is provided for the request to be processed."
+    },
+    {
+      "id": "A03",
+      "class": "LOCAL_SAFE",
+      "prompt": "What does a deterministic router buy us in testing?",
+      "criteria": {
+        "contains_all": [
+          "determin"
+        ]
+      },
+      "latency_ms": 19335.273,
+      "pass": true,
+      "response": "A deterministic router in testing scenarios provides several key benefits:\n\n1. **Predictability**: A deterministic router ensures that packets are routed in a predictable manner. This means that given the same input conditions, the router will always produce the same output. This predictability is crucial for testing because it allows developers and testers to reliably reproduce and debug issues.\n\n2. **Consistency**: By ensuring consistent routing behavior, deterministic routers help in creating stable test environments. This consistency is important for automated testing, where tests need to run reliably and produce consistent results.\n\n3. **Simplification of Test Cases**: With a deterministic router, test cases can be simpler"
+    },
+    {
+      "id": "A04",
+      "class": "LOCAL_SAFE",
+      "prompt": "Identify the bug: if not messages: return backend.chat(messages).",
+      "criteria": {
+        "contains_all": [
+          "empty",
+          "valid"
+        ]
+      },
+      "latency_ms": 19930.524,
+      "pass": false,
+      "response": "The bug in the code snippet you provided is related to the condition check and the function call. The condition `if not messages:` checks if the `messages` list is empty. If it is, the function `backend.chat(messages)` is called. However, this code does not handle the case where `messages` is not empty, which might be the intended behavior.\n\nHere are a few potential issues and improvements:\n\n1. **Handling Non-Empty Messages**: If the intention is to call `backend.chat(messages)` only when `messages` is not empty, you should add an `else` clause or modify the condition.\n\n2. **"
+    },
+    {
+      "id": "A05",
+      "class": "LOCAL_SAFE",
+      "prompt": "Summarize safe fallback: cloud failure may fall back local only for degradable tasks.",
+      "criteria": {
+        "contains_all": [
+          "degrad",
+          "fallback"
+        ]
+      },
+      "latency_ms": 15873.506,
+      "pass": true,
+      "response": "In the context of cloud computing, a \"safe fallback\" strategy involves ensuring that, in the event of a cloud failure, the system can revert to a local mode of operation. This fallback is particularly useful for tasks that can be performed in a degraded manner, meaning that while the full functionality may not be available, the core operations can still proceed, albeit with reduced performance or capabilities. This approach helps maintain some level of service continuity and user experience even when the cloud infrastructure is unavailable or experiencing issues."
+    },
+    {
+      "id": "B01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Write a Python helper that clamps n to 1..100.",
+      "criteria": {
+        "contains_all": [
+          "def ",
+          "min(",
+          "max("
+        ]
+      },
+      "latency_ms": 20916.627,
+      "pass": true,
+      "response": "Certainly! Below is a Python helper function that clamps a given number `n` to the range 1 to 100:\n\n```python\ndef clamp_to_1_100(n):\n    \"\"\"\n    Clamps the given number n to the range 1 to 100.\n\n    Parameters:\n    n (int or float): The number to be clamped.\n\n    Returns:\n    int: The clamped number.\n    \"\"\"\n    return max(1, min(n, 100))\n\n# Example usage:\nprint(clamp_to_1_100(0))    # Output: "
+    },
+    {
+      "id": "B02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Add simple validation that messages is a non-empty list.",
+      "criteria": {
+        "contains_all": [
+          "list",
+          "messages"
+        ]
+      },
+      "latency_ms": 22269.762,
+      "pass": true,
+      "response": "To add simple validation that ensures the `messages` is a non-empty list, you can use a conditional statement to check if the `messages` variable is a list and if it contains at least one element. Here's an example in Python:\n\n```python\ndef validate_messages(messages):\n    if not isinstance(messages, list):\n        raise ValueError(\"messages must be a list\")\n    if not messages:\n        raise ValueError(\"messages must be a non-empty list\")\n    return True\n\n# Example usage\ntry:\n    messages = [\"Hello\", \"World\"]\n    if validate_messages(messages):\n        print(\"Validation passed.\")\nexcept ValueError as e:\n"
+    },
+    {
+      "id": "B03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Refactor a function with nested ifs using early returns; explain the change.",
+      "criteria": {
+        "contains_all": [
+          "return"
+        ]
+      },
+      "latency_ms": 22748.9,
+      "pass": true,
+      "response": "Certainly! Let's start with an example of a function that uses nested `if` statements. Suppose we have a function that checks if a given number is positive, even, and greater than 10. If all conditions are met, it returns a specific message; otherwise, it returns a different message.\n\nHere's the original function with nested `if` statements:\n\n```python\ndef check_number(num):\n    if num > 0:\n        if num % 2 == 0:\n            if num > 10:\n                return \"The number is positive, even, and greater than 10.\"\n            else:\n               "
+    },
+    {
+      "id": "B04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Show a small FastAPI endpoint returning {'ok': True}.",
+      "criteria": {
+        "contains_all": [
+          "FastAPI",
+          "ok"
+        ]
+      },
+      "latency_ms": 20997.184,
+      "pass": true,
+      "response": "Certainly! Below is a simple example of a FastAPI endpoint that returns `{'ok': True}`.\n\nFirst, make sure you have FastAPI installed. You can install it using pip:\n\n```sh\npip install fastapi\n```\n\nThen, you can create a Python file (e.g., `main.py`) with the following content:\n\n```python\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\nasync def read_root():\n    return {\"ok\": True}\n```\n\nTo run this FastAPI application, you can use `uvicorn`, which is a ASGI server. Install it using pip:\n\n```"
+    },
+    {
+      "id": "B05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Implement a helper selecting local when task_class == 'short'.",
+      "criteria": {
+        "contains_all": [
+          "local",
+          "short"
+        ]
+      },
+      "latency_ms": 20276.597,
+      "pass": true,
+      "response": "To implement a helper function that selects a local option when `task_class` is equal to 'short', you can define a function in Python. This function will check the value of `task_class` and return a local option if the condition is met. Here's a simple example:\n\n```python\ndef select_local_option(task_class):\n    \"\"\"\n    Selects a local option when task_class is 'short'.\n\n    Parameters:\n    task_class (str): The class of the task.\n\n    Returns:\n    str: The selected option, either 'local' or 'remote'.\n    \"\"\"\n    if task_class == 'short':\n        return '"
+    },
+    {
+      "id": "C01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Write one pytest assertion for HTTP 503.",
+      "criteria": {
+        "contains_all": [
+          "pytest",
+          "503"
+        ]
+      },
+      "latency_ms": 20262.751,
+      "pass": true,
+      "response": "Certainly! When writing a test using `pytest` to check for an HTTP 503 status code, you typically use a library like `requests` to make the HTTP request and then assert the status code. Here's an example of how you might write such a test:\n\n```python\nimport pytest\nimport requests\n\ndef test_http_503():\n    url = \"http://example.com\"  # Replace with the actual URL you want to test\n    response = requests.get(url)\n    \n    assert response.status_code == 503, f\"Expected HTTP 503, but got {response.status_code"
+    },
+    {
+      "id": "C02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Name an edge case for an empty messages array.",
+      "criteria": {
+        "contains_all": [
+          "empty"
+        ]
+      },
+      "latency_ms": 20434.031,
+      "pass": true,
+      "response": "An edge case for an empty messages array could be a scenario where a messaging application or system is designed to handle user interactions, but there are no messages to display or process. This could occur in several situations:\n\n1. **New User**: A user who has just signed up for the service and has not sent or received any messages yet.\n2. **Deleted Messages**: A user who has deleted all their messages, leaving the messages array empty.\n3. **System Reset**: The system has been reset or initialized, and no messages have been added yet.\n4. **Network Issues**: There was a temporary network issue that prevented messages from being"
+    },
+    {
+      "id": "C03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Write a pytest test idea for preserving an upstream 429.",
+      "criteria": {
+        "contains_all": [
+          "429"
+        ]
+      },
+      "latency_ms": 20616.849,
+      "pass": true,
+      "response": "When testing a system that interacts with an upstream service, it's important to ensure that your system can handle and preserve the `429 Too Many Requests` status code. This status code indicates that the client has sent too many requests in a given amount of time, and the server is asking the client to slow down.\n\nHere's a pytest test idea to ensure that your system correctly handles and preserves the `429` status code from an upstream service:\n\n### Test Idea: Preserve Upstream 429 Status Code\n\n#### Objective:\nTo verify that when the upstream service returns a `429 Too Many Requests` status"
+    },
+    {
+      "id": "C04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "What test proves SSE terminates with [DONE]?",
+      "criteria": {
+        "contains_all": [
+          "DONE"
+        ]
+      },
+      "latency_ms": 20653.805,
+      "pass": true,
+      "response": "In the context of Server-Sent Events (SSE), the termination of the event stream is typically indicated by the server sending a message with the data field set to \"[DONE]\". This is a convention that can be implemented by the server to signal the end of the SSE stream to the client.\n\nHowever, it's important to note that SSE does not have a built-in mechanism to automatically detect when the server has finished sending events. The server must explicitly send a message with the data field set to \"[DONE]\" or close the connection to indicate the end of the stream.\n\nOn the client side, you can handle the \"[DONE]\" message"
+    },
+    {
+      "id": "C05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Identify a missing test for explicit model override.",
+      "criteria": {
+        "contains_all": [
+          "override"
+        ]
+      },
+      "latency_ms": 20463.927,
+      "pass": true,
+      "response": "To identify a missing test for explicit model override, we need to consider the context in which model overrides are used. Typically, this involves scenarios where a default model or configuration is overridden by a specific model or configuration for a particular use case or environment. Here are some potential areas where a test might be missing:\n\n1. **Configuration Management**: Ensure that there is a test to verify that the explicit model override correctly updates the configuration settings. This includes checking that the override does not interfere with other configuration settings.\n\n2. **Performance Testing**: If the model override affects performance, there should be a test to measure and compare the performance before and after"
+    },
+    {
+      "id": "D01",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Across router.py and http.py, what interface contract should remain stable? Answer generally.",
+      "criteria": {
+        "contains_all": [
+          "backend"
+        ]
+      },
+      "latency_ms": 20839.949,
+      "pass": false,
+      "response": "When considering the stability of an interface contract across files like `router.py` and `http.py`, it's important to focus on the public-facing APIs that other parts of the system or external systems might rely on. Here are some general guidelines to ensure stability:\n\n1. **Public Methods and Functions**: Ensure that any public methods or functions that are part of the interface remain consistent in terms of their names, parameters, and return types. Changes to these can break other parts of the system that depend on them.\n\n2. **Data Structures**: If your interface involves data structures (like classes or data classes), ensure that their public attributes and methods"
+    },
+    {
+      "id": "D02",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Trace: API handler -> router -> backend -> upstream. Return the call path only.",
+      "criteria": {
+        "contains_all": [
+          "router",
+          "backend"
+        ]
+      },
+      "latency_ms": 2669.178,
+      "pass": true,
+      "response": "API handler -> router -> backend -> upstream"
+    },
+    {
+      "id": "D03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Summarize a diff that adds a route-reason response header.",
+      "criteria": {
+        "contains_all": [
+          "header",
+          "route"
+        ]
+      },
+      "latency_ms": 15766.73,
+      "pass": true,
+      "response": "The diff adds functionality to include a \"route-reason\" response header in HTTP responses. This header provides information about the reason for a particular routing decision made by the server. It can be useful for debugging and monitoring purposes, allowing developers to understand why a request was routed to a specific backend or service. The changes likely involve modifying the server's response handling logic to append this header with the appropriate reason before sending the response to the client."
+    },
+    {
+      "id": "D04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Spot an interface mismatch: protocol expects async chat(), implementation defines sync chat().",
+      "criteria": {
+        "contains_all": [
+          "async",
+          "sync"
+        ]
+      },
+      "latency_ms": 20530.052,
+      "pass": true,
+      "response": "The interface mismatch you've described occurs when there is a discrepancy between the method signature expected by a protocol or interface and the actual implementation provided. In this case, the protocol expects an asynchronous method `async chat()`, but the implementation defines a synchronous method `sync chat()`.\n\nHere's a breakdown of the issue:\n\n1. **Protocol Expectation**: The protocol specifies that the `chat()` method should be asynchronous. This means that the method should not block the execution of the program while it is running. Instead, it should return a promise or a similar construct that can be awaited or handled asynchronously.\n\n2. **Implementation Definition**: The implementation"
+    },
+    {
+      "id": "D05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Why should backend switching not depend on hidden server session memory?",
+      "criteria": {
+        "contains_all": [
+          "state",
+          "context"
+        ]
+      },
+      "latency_ms": 20810.683,
+      "pass": false,
+      "response": "Backend switching should not depend on hidden server session memory for several reasons:\n\n1. **Scalability**: Relying on server session memory can limit the scalability of your application. If you have multiple servers, each server would need to maintain its own session data, which can lead to inconsistencies and difficulties in managing user sessions across different servers.\n\n2. **Redundancy and Reliability**: Server session memory is volatile and can be lost if the server goes down or is restarted. This can lead to loss of user sessions and a poor user experience. Using a centralized session management system, such as a database or a dedicated session store, can"
+    },
+    {
+      "id": "E01",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Redesign the entire gateway architecture for multi-region HA with zero downtime.",
+      "criteria": {
+        "contains_all": [
+          "architecture"
+        ]
+      },
+      "latency_ms": 20750.51,
+      "pass": true,
+      "response": "Designing a multi-region High Availability (HA) gateway architecture with zero downtime involves several key components and strategies to ensure that the system remains operational and responsive even in the event of failures. Below is a high-level overview of how you might approach this:\n\n### 1. **Architecture Overview**\n\n- **Regions**: Deploy the gateway in multiple geographically distributed regions to ensure low latency and high availability.\n- **Load Balancers**: Use load balancers to distribute incoming traffic across multiple instances of the gateway.\n- **Auto Scaling**: Implement auto-scaling to handle varying loads and ensure that the system can scale up or down based on demand.\n-"
+    },
+    {
+      "id": "E02",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Perform a complex ten-file refactor with ambiguous requirements.",
+      "criteria": {
+        "contains_all": [
+          "clarif",
+          "require"
+        ]
+      },
+      "latency_ms": 20736.84,
+      "pass": false,
+      "response": "Refactoring a complex set of ten files with ambiguous requirements can be challenging, but I can guide you through a structured approach to ensure that the process is as effective as possible. Here\u2019s a step-by-step plan to help you refactor these files:\n\n### Step 1: Understand the Current Codebase\n1. **Review the Files**: Start by thoroughly reviewing each of the ten files. Understand their purpose, functionality, and how they interact with each other.\n2. **Identify Dependencies**: Map out the dependencies between the files. This will help you understand the impact of changes on other parts of the system.\n\n### Step 2: Define"
+    },
+    {
+      "id": "E03",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Debug an intermittent distributed race without logs or reproduction.",
+      "criteria": {
+        "contains_all": [
+          "log",
+          "repro"
+        ]
+      },
+      "latency_ms": 20370.622,
+      "pass": true,
+      "response": "Debugging an intermittent distributed race condition without logs or a way to reproduce the issue can be challenging, but there are several strategies you can employ to identify and resolve the problem:\n\n1. **Code Review and Analysis**:\n   - Review the codebase for any potential race conditions. Look for shared resources that are accessed by multiple threads or processes without proper synchronization.\n   - Ensure that all shared resources are properly locked or synchronized using mechanisms like mutexes, semaphores, or locks.\n\n2. **Static Analysis Tools**:\n   - Use static analysis tools to scan the code for potential concurrency issues. Tools like SonarQube, Cover"
+    },
+    {
+      "id": "E04",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Reason over a 200k-token repository and propose a migration plan.",
+      "criteria": {
+        "contains_all": [
+          "context",
+          "repository"
+        ]
+      },
+      "latency_ms": 21391.424,
+      "pass": false,
+      "response": "Migrating a 200k-token repository involves several steps to ensure a smooth transition, maintain data integrity, and leverage the benefits of the new system. Below is a comprehensive migration plan:\n\n### 1. **Assessment and Planning**\n   - **Repository Analysis**: Understand the current structure, dependencies, and functionalities of the 200k-token repository.\n   - **Target System Selection**: Choose the target system that best fits the needs of the repository. This could be a new version of the existing system, a different platform, or a completely new system.\n   - **Resource Allocation**: Allocate resources, including personnel,"
+    },
+    {
+      "id": "E05",
+      "class": "CLOUD_REQUIRED",
+      "prompt": "Choose a security-critical auth redesign from incomplete evidence.",
+      "criteria": {
+        "contains_all": [
+          "security",
+          "evidence"
+        ]
+      },
+      "latency_ms": 20373.299,
+      "pass": true,
+      "response": "When redesigning an authentication system, especially one that is security-critical, it's crucial to consider all potential vulnerabilities and ensure that the new design addresses them effectively. However, since you mentioned that the evidence is incomplete, I'll provide a general approach to redesigning a security-critical authentication system based on common best practices. This approach can be adapted to fit the specific needs of your system once more information is available.\n\n### 1. **Understand the Current System**\n   - **Identify Components**: List all components of the current authentication system, including user interfaces, databases, servers, and any third-party services.\n   - **"
+    }
+  ]
+}

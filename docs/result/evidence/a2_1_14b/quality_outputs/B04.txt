@@ -1,0 +1,23 @@
+Certainly! Below is a simple example of a FastAPI endpoint that returns `{'ok': True}`.
+
+First, make sure you have FastAPI installed. You can install it using pip:
+
+```sh
+pip install fastapi
+```
+
+Then, you can create a Python file (e.g., `main.py`) with the following content:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def read_root():
+    return {"ok": True}
+```
+
+To run this FastAPI application, you can use `uvicorn`, which is a ASGI server. Install it using pip:
+
+```

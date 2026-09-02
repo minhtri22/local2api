@@ -35,7 +35,7 @@ A1.1 opens only for `GO_ADAPTIVE_RESIDENCY`. Current A1.0 does not satisfy that 
 
 If future sparse-model evidence reopens it, prototype scope may include expert residency/cache, layer-group scheduling, prefetch, weight streaming, KV/context budgeting and telemetry while retaining llama.cpp compute kernels.
 
-### A2 — Large-model Feasibility — NEXT TRACK-A GATE
+### A2 — Large-model Feasibility
 
 #### A2.S0 — Sparse/MoE Early Feasibility — COMPLETE
 
@@ -47,9 +47,19 @@ Kimi K3 remains a reference architecture only. Its included low-memory measureme
 
 Decision order after A2.S0:
 
-1. **A2.1 dense 14B remains NEXT** as the cheapest dense quality/control experiment.
-2. **A2.S1 sparse qualification**: Qwen3-Coder-30B-A3B-Instruct Q4_K_M using the same quality/context methodology as A0/A2.1.
+1. **A2.1 dense 14B is COMPLETE** as the dense quality/control experiment.
+2. **A2.S1 sparse qualification is UNBLOCKED**: Qwen3-Coder-30B-A3B-Instruct Q4_K_M using the same quality/context methodology as A0/A2.1.
 3. **A2.2 dense 32B remains BLOCKED** until 14B + sparse results justify spending the tighter memory/compute budget on dense 32B.
+
+#### A2.1 — Dense 14B Control — COMPLETE
+
+Verdict: **`A2_14B_SCALING_PROMISING`**.
+
+Qwen2.5-Coder 14B Q4_K_M on Ollama/Vulkan produced a strong quality uplift over the 7B control: intended-local quality improved from 3/20 to 17/20, with LOCAL_SAFE 8/9 and LOCAL_ACCEPTABLE 9/11. This proves dense scaling is useful for local coding/control quality on the target machine.
+
+The model is not a production default yet. It is materially slower than 7B, with measured Ollama generation around 2.75-3.95 tok/s across the reused 1K/4K/8K/16K fixtures, and sampled llama-server child memory around 12.8 GB working set during quality evaluation.
+
+Conclusion: keep 14B as a selective quality-sensitive local tier candidate and use it to inform Track B capability routing. Proceed to A2.S1 sparse qualification before any dense 32B attempt.
 
 Candidate ladder:
 
@@ -104,4 +114,4 @@ Route on task class, context requirement, privacy, latency, backend capability a
 
 ## Current next action
 
-Track A: A2.1 should test a 14B candidate with existing runtimes as the dense control, then A2.S1 should qualify Qwen3-Coder-30B-A3B before any dense 32B run. A2.2 remains blocked. Track B can proceed independently with B1 Context Ownership.
+Track A: A2.S1 should qualify Qwen3-Coder-30B-A3B using the same quality/context methodology as A0/A2.1. A2.2 dense 32B remains blocked. Track B can proceed independently with B1 Context Ownership, using the A2.1 14B result as a selective quality-tier capability signal.

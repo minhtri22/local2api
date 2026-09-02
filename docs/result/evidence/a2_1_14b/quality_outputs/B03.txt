@@ -1,0 +1,12 @@
+Certainly! Let's start with an example of a function that uses nested `if` statements. Suppose we have a function that checks if a given number is positive, even, and greater than 10. If all conditions are met, it returns a specific message; otherwise, it returns a different message.
+
+Here's the original function with nested `if` statements:
+
+```python
+def check_number(num):
+    if num > 0:
+        if num % 2 == 0:
+            if num > 10:
+                return "The number is positive, even, and greater than 10."
+            else:
+               

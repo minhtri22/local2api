@@ -1,0 +1,18 @@
+{
+  "gate_version": "a2.1.quality_uplift.v1",
+  "declared_before_14b_totals": true,
+  "primary_criterion": "quality uplift over unchanged 7B control",
+  "classes": ["QUALITY_STRONG_UPLIFT", "QUALITY_WEAK_UPLIFT", "QUALITY_NO_MATERIAL_UPLIFT"],
+  "decision_dimensions": [
+    "LOCAL_SAFE uplift",
+    "LOCAL_ACCEPTABLE uplift",
+    "intended-local total uplift",
+    "manual 0-3 score distribution",
+    "malformed/repetition reduction",
+    "hallucination behavior"
+  ],
+  "strong_uplift_rule": "clear improvement across both intended-local classes, materially higher total usable coverage, manual scores predominantly 2-3 rather than 0-1, and substantial reduction in malformed/repetitive/wrong-code behavior",
+  "weak_uplift_rule": "measurable improvement but not broad/reliable enough across intended-local classes or manual rubric",
+  "no_material_uplift_rule": "small/inconsistent improvement or resource cost overwhelms useful quality gain",
+  "a2_1_verdict_order": "quality gate is decided before performance gate"
+}

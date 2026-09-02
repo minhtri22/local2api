@@ -1,0 +1,5 @@
+In the context of Server-Sent Events (SSE), the termination of the event stream is typically indicated by the server sending a message with the data field set to "[DONE]". This is a convention that can be implemented by the server to signal the end of the SSE stream to the client.
+
+However, it's important to note that SSE does not have a built-in mechanism to automatically detect when the server has finished sending events. The server must explicitly send a message with the data field set to "[DONE]" or close the connection to indicate the end of the stream.
+
+On the client side, you can handle the "[DONE]" message

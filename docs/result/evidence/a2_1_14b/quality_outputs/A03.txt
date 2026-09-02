@@ -1,0 +1,7 @@
+A deterministic router in testing scenarios provides several key benefits:
+
+1. **Predictability**: A deterministic router ensures that packets are routed in a predictable manner. This means that given the same input conditions, the router will always produce the same output. This predictability is crucial for testing because it allows developers and testers to reliably reproduce and debug issues.
+
+2. **Consistency**: By ensuring consistent routing behavior, deterministic routers help in creating stable test environments. This consistency is important for automated testing, where tests need to run reliably and produce consistent results.
+
+3. **Simplification of Test Cases**: With a deterministic router, test cases can be simpler

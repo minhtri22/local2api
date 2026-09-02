@@ -1,0 +1,5 @@
+Preserving the upstream HTTP status is crucial for several reasons, especially in the context of web applications and services that rely on HTTP for communication. Here are some key reasons why it matters:
+
+1. **Error Handling and Debugging**: The HTTP status code provides valuable information about the outcome of a request. By preserving the upstream status, downstream services can accurately understand what happened during the request. This is essential for proper error handling and debugging, allowing developers to diagnose issues more effectively.
+
+2. **Client Experience**: Clients, whether they are users interacting with a web application or other services consuming APIs, rely on HTTP status codes to understand the result of

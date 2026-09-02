@@ -1,0 +1,8 @@
+When testing a system that interacts with an upstream service, it's important to ensure that your system can handle and preserve the `429 Too Many Requests` status code. This status code indicates that the client has sent too many requests in a given amount of time, and the server is asking the client to slow down.
+
+Here's a pytest test idea to ensure that your system correctly handles and preserves the `429` status code from an upstream service:
+
+### Test Idea: Preserve Upstream 429 Status Code
+
+#### Objective:
+To verify that when the upstream service returns a `429 Too Many Requests` status

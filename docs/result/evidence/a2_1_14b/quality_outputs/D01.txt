@@ -1,0 +1,5 @@
+When considering the stability of an interface contract across files like `router.py` and `http.py`, it's important to focus on the public-facing APIs that other parts of the system or external systems might rely on. Here are some general guidelines to ensure stability:
+
+1. **Public Methods and Functions**: Ensure that any public methods or functions that are part of the interface remain consistent in terms of their names, parameters, and return types. Changes to these can break other parts of the system that depend on them.
+
+2. **Data Structures**: If your interface involves data structures (like classes or data classes), ensure that their public attributes and methods

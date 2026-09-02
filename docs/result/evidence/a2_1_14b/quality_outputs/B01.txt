@@ -1,0 +1,17 @@
+Certainly! Below is a Python helper function that clamps a given number `n` to the range 1 to 100:
+
+```python
+def clamp_to_1_100(n):
+    """
+    Clamps the given number n to the range 1 to 100.
+
+    Parameters:
+    n (int or float): The number to be clamped.
+
+    Returns:
+    int: The clamped number.
+    """
+    return max(1, min(n, 100))
+
+# Example usage:
+print(clamp_to_1_100(0))    # Output: 
