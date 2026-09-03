@@ -1,0 +1,71 @@
+{
+  "schema": "local2api.h3_p0_l_lite.v1",
+  "source_holdout": "H3.P0-S 12-task adversarial indirect-module holdout; selector does not consume required labels",
+  "predeclared_gates": {
+    "median_reduction_ratio": 0.30,
+    "hard_constraint_retention": 1.0,
+    "mean_required_evidence_recall": 0.95,
+    "deterministic": true
+  },
+  "pipelines": {
+    "HYBRID_BASELINE": {
+      "tasks": 12,
+      "median_reduction_ratio": 0.5590456055572335,
+      "mean_evidence_recall": 0.9166666666666666,
+      "min_evidence_recall": 0.75,
+      "constraint_retention": 1.0,
+      "full_evidence_tasks": 8,
+      "median_selected_blocks": 20.0,
+      "deterministic_replay": true,
+      "all_gates": false
+    },
+    "STRUCTURAL_HYBRID": {
+      "tasks": 12,
+      "median_reduction_ratio": 0.4608879913014289,
+      "mean_evidence_recall": 1.0,
+      "min_evidence_recall": 1.0,
+      "constraint_retention": 1.0,
+      "full_evidence_tasks": 12,
+      "median_selected_blocks": 23.0,
+      "deterministic_replay": true,
+      "all_gates": true
+    },
+    "STRUCTURAL_HYBRID_TIGHT": {
+      "tasks": 12,
+      "median_reduction_ratio": 0.5668982697724652,
+      "mean_evidence_recall": 1.0,
+      "min_evidence_recall": 1.0,
+      "constraint_retention": 1.0,
+      "full_evidence_tasks": 12,
+      "median_selected_blocks": 20.0,
+      "deterministic_replay": true,
+      "all_gates": true
+    }
+  },
+  "recovered_cases": {
+    "H02": ["HE02-C"],
+    "H03": ["HE03-C"],
+    "H08": ["HE08-C"],
+    "H09": ["HE09-C"]
+  },
+  "validation_v2": {
+    "tasks": 18,
+    "design": "post-freeze two-hop structural validation; synthetic and not blinded",
+    "median_reduction_ratio": 0.5611795774647887,
+    "mean_evidence_recall": 1.0,
+    "min_evidence_recall": 1.0,
+    "constraint_retention": 1.0,
+    "full_evidence_tasks": 18,
+    "all_gates": true
+  },
+  "verdict": "H3_STRUCTURAL_SELECTOR_FIDELITY_GATE_PASS",
+  "algorithm_guardrail": "Exact user constraints/errors/tests remain lossless; selector does not inspect required_ids or Block.required.",
+  "limitations": [
+    "synthetic labeled repository contexts, not real repositories",
+    "original frozen holdout is not blinded to the researcher",
+    "no downstream cloud task-success A/B",
+    "no small-model semantic selector",
+    "no hardware/Arc/latency economics",
+    "regex structural extraction is Python/YAML-like and not a production parser"
+  ]
+}
