@@ -1,0 +1,27 @@
+{
+  "schema": "local2api.a3.qa_validation.v1",
+  "date": "2026-09-04",
+  "project_venv": ".venv\\Scripts\\python.exe",
+  "pytest": {
+    "result": "PASS",
+    "tests_passed": 15
+  },
+  "compileall": {
+    "result": "PASS",
+    "paths": ["src", "tests", "scripts"]
+  },
+  "json_validation": {
+    "result": "PASS",
+    "scope": [
+      "docs/result/evidence/a3_14b",
+      "docs/result/evidence/capability_ceiling_v1"
+    ],
+    "json_files_expected_after_this_artifact": 14
+  },
+  "report_reference_check": "PASS",
+  "git_diff_check": "PASS before staging; no whitespace errors in authored source/report files",
+  "notes": [
+    "A3 closure reused completed benchmark evidence and did not rerun the expensive sustained/context/output/CC01-CC11 matrices.",
+    "Thermal, package power, GPU utilization percentage and practical VS Code/browser responsiveness remain NOT PROVEN."
+  ]
+}

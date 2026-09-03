@@ -1,0 +1,25 @@
+{
+  "probes": [
+    {
+      "name": "wrong_port",
+      "result": "URLError(TimeoutError('timed out'))",
+      "false_success": false
+    },
+    {
+      "name": "model_not_loaded",
+      "method": "Ollama keep_alive lifecycle covered by cold/reload run; missing model name intentionally not used because it would not test local2api adapter semantics."
+    },
+    {
+      "name": "malformed_upstream_response",
+      "method": "Covered by deterministic gateway software tests; real Ollama does not expose a safe malformed-response injection point."
+    },
+    {
+      "name": "connection_reset",
+      "method": "No destructive network fault injector used; adapter exception normalization covered by software tests."
+    },
+    {
+      "name": "restart_during_request",
+      "method": "Lifecycle restart covered outside active generation to avoid corrupting unrelated local workloads."
+    }
+  ]
+}

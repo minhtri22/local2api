@@ -1,0 +1,721 @@
+{
+  "schema": "local2api.capability_ceiling.v1.results",
+  "model": "local2api-qwen2.5-coder-14b:a2.1",
+  "rubric": {
+    "0": "incorrect/hallucinated",
+    "1": "partial unusable",
+    "2": "mostly correct major omissions",
+    "3": "correct minor omissions",
+    "4": "strong production-quality",
+    "5": "expert complete"
+  },
+  "cases": [
+    {
+      "task_id": "CC01",
+      "category": "C1",
+      "title": "5-10 file call-path reasoning",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Trace request/error/route-reason flow across main.py, api/chat.py, routing/router.py, routing/types.py, backends/base.py, backends/http.py, errors.py. Identify two contracts that must remain stable.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "chat.py",
+        "router.py",
+        "http.py",
+        "contract"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "To trace the request/error/route-reason flow across the specified files, we need to understand how the system is structured and how the components interact with each other. Here's a high-level overview of the flow:\n\n1. **main.py**: This is the entry point of the application. It sets up the application and starts the server. It will handle incoming requests and route them to the appropriate API endpoints.\n\n2. **api/chat.py**: This file contains the API endpoints related to chat functionality. It will handle the incoming requests, process them, and return the appropriate responses.\n\n3. **routing/router.py**: This file contains the routing logic for the application. It will determine which API endpoint to route the request to based on the request path and method.\n\n4. **routing/types.py**: This file contains the data types used in the routing logic. It will define the structure of the request and response objects.\n\n5. **backends/base.py**: This file contains the base class for the backends. It will define the interface that all backends must implement.\n\n6. **backends/http.py**: This file contains the HTTP backend implementation. It will handle the HTTP requests and responses.\n\n7. **errors.py**: This file contains the error handling logic for the application.",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 18264.399,
+        "wall_ms": 76228.08,
+        "prompt_tokens": 74,
+        "output_tokens": 256,
+        "decode_tps": 4.415989906151072
+      },
+      "criteria_hits": [
+        "chat.py",
+        "router.py",
+        "http.py"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 3,
+      "final_manual_score_0_5": 1,
+      "manual_rationale": "Generic file descriptions do not trace the actual route/error flow and misstate router.py as path/method routing.",
+      "main_failure": "repo-grounded call-path reasoning failure",
+      "manual_constraint_violation": false,
+      "manual_hallucination": true,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC02",
+      "category": "C2",
+      "title": "cross-module bug localization",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "A 429 becomes 503 only for streaming. Localize the most likely boundary using chat.py and http.py semantics, and give an evidence plan before proposing a fix.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "stream",
+        "429",
+        "http.py",
+        "evidence"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "To address the issue where a 429 (Too Many Requests) error becomes a 503 (Service Unavailable) error specifically for streaming, we need to localize the most likely boundary using the semantics of `chat.py` and `http.py`. Here's a step-by-step evidence plan and a proposed fix:\n\n### Evidence Plan\n\n1. **Identify the Error Handling Logic:**\n   - Locate the error handling logic in `chat.py` and `http.py` where the 429 and 503 errors are being processed.\n   - Check if there are any specific conditions or transformations that occur when handling streaming requests.\n\n2. **Analyze the Streaming Request Handling:**\n   - Examine the code that handles streaming requests in `chat.py` and `http.py`.\n   - Look for any middleware or decorators that might be involved in processing streaming requests.\n\n3. **Check for Conditional Logic:**\n   - Review the code for any conditional logic that might change the error code from 429 to 503 based on the type of request (e.g., streaming vs. non-streaming).\n\n4. **Test with Different Request Types:**\n   - Write test cases to simulate both streaming and non-streaming requests.\n",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1967.291,
+        "wall_ms": 58894.24,
+        "prompt_tokens": 67,
+        "output_tokens": 256,
+        "decode_tps": 4.504503077824898
+      },
+      "criteria_hits": [
+        "stream",
+        "429",
+        "http.py",
+        "evidence"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 4,
+      "final_manual_score_0_5": 2,
+      "manual_rationale": "Useful inspection plan, but it does not localize the likely streaming boundary or reach a concrete evidence-backed fix before truncation.",
+      "main_failure": "cross-module localization remains generic",
+      "manual_constraint_violation": false,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC03",
+      "category": "C3",
+      "title": "architecture constrained change",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Add gateway-owned conversation_id without changing backend protocol, router task heuristics, or public model aliases. Give a file-by-file plan and explicit non-changes.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "conversation",
+        "backend",
+        "router",
+        "alias"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "To add a `gateway_owned` conversation_id without altering the backend protocol, router task heuristics, or public model aliases, you can follow a structured approach. Below is a file-by-file plan with explicit non-changes:\n\n### 1. **Gateway Service Configuration File**\n   - **File**: `gateway-service-config.yaml`\n   - **Changes**:\n     - Add a new configuration option for `gateway_owned` conversation_id.\n   - **Non-changes**:\n     - No changes to the backend protocol.\n     - No changes to the router task heuristics.\n     - No changes to public model aliases.\n\n### 2. **Gateway Service Code**\n   - **File**: `gateway-service.py`\n   - **Changes**:\n     - Modify the conversation handling logic to include the `gateway_owned` conversation_id.\n   - **Non-changes**:\n     - No changes to the backend protocol.\n     - No changes to the router task heuristics.\n     - No changes to public model aliases.\n\n### 3. **Router Configuration File**\n   - **File**: `router-config.yaml`\n   - **Changes**:\n     - Ensure that the router configuration does not include any changes related to the `gateway_owned` conversation_id.\n   - **",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1827.834,
+        "wall_ms": 66562.279,
+        "prompt_tokens": 62,
+        "output_tokens": 256,
+        "decode_tps": 3.9542563592281263
+      },
+      "criteria_hits": [
+        "conversation",
+        "backend",
+        "router",
+        "alias"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 4,
+      "final_manual_score_0_5": 0,
+      "manual_rationale": "Invents gateway-service-config.yaml, gateway-service.py and router-config.yaml despite the explicit no-invention constraint.",
+      "main_failure": "fabricated files/APIs",
+      "manual_constraint_violation": true,
+      "manual_hallucination": true,
+      "manual_wrong_file_attribution": true,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC04",
+      "category": "C4",
+      "title": "multi-step test/fix loop",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "A test expects 429 preservation but receives 503. Give hypothesis order, inspection steps, smallest patch location, and post-fix tests. Do not invent unseen code.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "429",
+        "503",
+        "inspect",
+        "test"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "When dealing with a situation where a test expects a 429 (Too Many Requests) status code but receives a 503 (Service Unavailable) instead, it's important to follow a systematic approach to diagnose and fix the issue. Below is a structured plan that includes hypothesis ordering, inspection steps, identifying the smallest patch location, and post-fix tests.\n\n### Hypothesis Order\n\n1. **Rate Limiting Configuration**: The rate limiting configuration might be incorrect or not properly applied.\n2. **Service Load**: The service might be overloaded, causing it to return a 503 instead of a 429.\n3. **Middleware or Proxy Configuration**: There might be an issue with middleware or proxy settings that is affecting the response.\n4. **Code Logic**: There could be a bug in the code logic that is causing the incorrect response.\n\n### Inspection Steps\n\n1. **Review Rate Limiting Configuration**:\n   - Check the rate limiting rules and ensure they are correctly set up.\n   - Verify that the rate limiting middleware or service is properly integrated.\n\n2. **Check Service Load**:\n   - Monitor the service's performance metrics (CPU, memory, response time).\n   - Determine if the service is indeed overloaded.\n\n3. **Inspect",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1640.73,
+        "wall_ms": 58200.827,
+        "prompt_tokens": 66,
+        "output_tokens": 256,
+        "decode_tps": 4.524897275110396
+      },
+      "criteria_hits": [
+        "429",
+        "503",
+        "inspect",
+        "test"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 4,
+      "final_manual_score_0_5": 1,
+      "manual_rationale": "Falls back to generic rate-limit/service-load hypotheses instead of the supplied 429->503 code-path evidence and smallest patch location.",
+      "main_failure": "insufficient repo-specific diagnosis",
+      "manual_constraint_violation": false,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC05",
+      "category": "C5",
+      "title": "dependency impact",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "If HTTPBackendAdapter.request changes from returning httpx.Response to decoded dict, enumerate likely consumers and semantic breakages across API status propagation, streaming, tests, and health.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "response",
+        "stream",
+        "health",
+        "test"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "If the `HTTPBackendAdapter.request` method changes from returning an `httpx.Response` object to returning a decoded dictionary, it will have significant implications across various parts of the system. Here's an enumeration of likely consumers and the potential semantic breakages they might face:\n\n### 1. **API Status Propagation**\n- **Consumers**: Any part of the system that relies on the status code, headers, or other metadata from the `httpx.Response` object.\n- **Semantic Breakages**:\n  - **Status Code**: The status code is a crucial part of the response metadata. If the method now returns a dictionary, the status code will be missing, leading to potential errors in handling different HTTP status codes.\n  - **Headers**: Headers provide important information about the response, such as content type, cookies, etc. Without access to the headers, downstream consumers might not be able to process the response correctly.\n  - **Error Handling**: The `httpx.Response` object provides methods to check for errors (e.g., `response.raise_for_status()`). If the method returns a dictionary, error handling logic will need to be rewritten to check for error conditions in a different way.\n\n### 2. **Streaming**\n- **Consumers**: Any part of",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1819.917,
+        "wall_ms": 62187.435,
+        "prompt_tokens": 63,
+        "output_tokens": 256,
+        "decode_tps": 4.235919118169005
+      },
+      "criteria_hits": [
+        "response",
+        "stream"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 2,
+      "final_manual_score_0_5": 2,
+      "manual_rationale": "Correctly identifies loss of status/headers and begins streaming impact, but the capped answer omits several required consumers such as health/tests and full dependency impact.",
+      "main_failure": "major dependency omissions",
+      "manual_constraint_violation": false,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC06",
+      "category": "C6",
+      "title": "ambiguous evidence",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "You only know that one production request returned 500 and no logs are available. State what can and cannot be concluded, and the minimum evidence needed before changing code.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "cannot",
+        "evidence",
+        "log"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "When a production request returns a 500 error and no logs are available, it can be challenging to diagnose the issue. Here's what can and cannot be concluded, along with the minimum evidence needed before changing code:\n\n### What Cannot Be Concluded:\n1. **Specific Cause of the Error**: Without logs, it's impossible to pinpoint the exact cause of the 500 error. It could be due to a variety of issues such as a database connection problem, a misconfiguration, a bug in the code, or an external service failure.\n2. **Impact Scope**: You cannot determine how many requests are affected or if this is an isolated incident or a recurring problem.\n3. **Root Cause Analysis**: Without detailed logs, it's difficult to perform a thorough root cause analysis to understand the underlying issue.\n\n### What Can Be Concluded:\n1. **Error Occurred**: The 500 error indicates that something went wrong on the server side, and the request could not be processed successfully.\n2. **User Experience**: The user who made the request experienced an error, which could lead to frustration or a negative experience.\n\n### Minimum Evidence Needed Before Changing Code:\n1. **Reproduce the Error**: The first step is to try to reproduce the error",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1844.086,
+        "wall_ms": 59942.749,
+        "prompt_tokens": 64,
+        "output_tokens": 256,
+        "decode_tps": 4.4067022636403275
+      },
+      "criteria_hits": [
+        "cannot",
+        "evidence",
+        "log"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 4,
+      "final_manual_score_0_5": 4,
+      "manual_rationale": "Correctly separates what can and cannot be concluded from one 500 with no logs and asks for evidence before code changes.",
+      "main_failure": "minor incompleteness only",
+      "manual_constraint_violation": false,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": false
+    },
+    {
+      "task_id": "CC07",
+      "category": "C7",
+      "title": "long-context prioritization",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Given 8 file summaries where only router.py, chat.py, and http.py affect a wrong-backend-status bug, explain which evidence you prioritize and which files you defer, with reasons.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "router.py",
+        "chat.py",
+        "http.py",
+        "defer"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "In addressing the issue of a wrong-backend-status bug, I would prioritize the following evidence and defer the rest:\n\n**Prioritize:**\n1. **router.py**: This file is crucial as it likely handles routing requests to different backend services. If the routing logic is incorrect, it could lead to requests being sent to the wrong backend, causing a wrong-backend-status bug. Understanding how requests are routed is essential to diagnosing and fixing the issue.\n\n2. **chat.py**: This file might be involved in handling chat-related requests. If the chat functionality is affected by the wrong-backend-status bug, it indicates that the issue could be related to how chat requests are processed or routed. Investigating this file can provide insights into whether the bug is specific to chat requests or a more general issue.\n\n3. **http.py**: This file is important as it deals with HTTP requests and responses. If the bug is related to the status of HTTP responses, examining this file can help identify if there are issues with how responses are being generated or handled. It's possible that the bug is related to incorrect status codes being returned or how these codes are being processed.\n\n**Defer:**\n4. **auth.py**: While authentication is important, if the bug is specifically about the backend status,",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 2412.583,
+        "wall_ms": 55081.586,
+        "prompt_tokens": 66,
+        "output_tokens": 256,
+        "decode_tps": 4.861719867967083
+      },
+      "criteria_hits": [
+        "router.py",
+        "chat.py",
+        "http.py",
+        "defer"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 4,
+      "final_manual_score_0_5": 2,
+      "manual_rationale": "Prioritizes router.py/chat.py/http.py correctly but invents auth.py while the prompt did not provide that file summary.",
+      "main_failure": "wrong-file invention under incomplete context",
+      "manual_constraint_violation": true,
+      "manual_hallucination": true,
+      "manual_wrong_file_attribution": true,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC08",
+      "category": "C8",
+      "title": "competing constraints",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Design a fix that preserves upstream status, keeps architecture tasks from local fallback, keeps SSE [DONE], and does not change /v1/models. State invariants and test matrix.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "status",
+        "fallback",
+        "DONE",
+        "models"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "To design a fix that meets the specified requirements, we need to ensure that the upstream status is preserved, architecture tasks are not allowed to fall back to local, Server-Sent Events (SSE) are maintained, and the `/v1/models` endpoint remains unchanged. Below is a detailed plan for implementing this fix, along with state invariants and a test matrix.\n\n### Fix Design\n\n1. **Preserve Upstream Status:**\n   - Ensure that any status codes or messages returned by the upstream service are not altered.\n   - Implement a mechanism to log or handle upstream errors without modifying them.\n\n2. **Prevent Local Fallback:**\n   - Modify the architecture to ensure that tasks are always routed to the upstream service.\n   - Remove or disable any local fallback logic.\n\n3. **Maintain SSE:**\n   - Ensure that the SSE connection is properly established and maintained.\n   - Handle SSE events from the upstream service without any interference.\n\n4. **Keep `/v1/models` Endpoint Unchanged:**\n   - Ensure that the `/v1/models` endpoint continues to function as it did before.\n   - Do not modify the endpoint's behavior or response.\n\n### State Invariants\n\n1. **Upstream Status Invariant:**\n   - The status",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 2043.019,
+        "wall_ms": 56409.645,
+        "prompt_tokens": 65,
+        "output_tokens": 256,
+        "decode_tps": 4.7088205184499685
+      },
+      "criteria_hits": [
+        "status",
+        "fallback",
+        "models"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 3,
+      "final_manual_score_0_5": 2,
+      "manual_rationale": "Preserves several invariants but broadens the no-local-fallback rule to all tasks, violating the narrower architecture-task constraint.",
+      "main_failure": "competing-constraint loss",
+      "manual_constraint_violation": true,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": false
+    },
+    {
+      "task_id": "CC09",
+      "category": "C9",
+      "title": "repo-wide refactor planning",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Plan extracting routing policy into a capability registry while preserving current routes, headers, explicit overrides, fallback behavior, and tests. Include migration order and rollback point.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "override",
+        "fallback",
+        "header",
+        "rollback"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "To plan the extraction of routing policies into a capability registry while preserving current routes, headers, explicit overrides, fallback behavior, and tests, follow these steps:\n\n### 1. **Assessment and Planning**\n   - **Inventory Current Routing Policies**: Document all current routing policies, including routes, headers, explicit overrides, fallback behavior, and associated tests.\n   - **Define Capability Registry Requirements**: Determine the structure and requirements of the capability registry. This should include how policies will be stored, retrieved, and managed.\n   - **Identify Dependencies**: Understand the dependencies between different routing policies and the systems they interact with.\n\n### 2. **Design the Capability Registry**\n   - **Schema Design**: Design a schema that can accommodate all the necessary routing policy attributes (routes, headers, overrides, fallbacks, tests).\n   - **API Design**: Design APIs for adding, retrieving, updating, and deleting routing policies in the registry.\n   - **Security and Access Control**: Define security measures and access control policies for the registry.\n\n### 3. **Migration Strategy**\n   - **Data Migration Plan**: Develop a plan for migrating existing routing policies to the capability registry. This should include a mapping of current policies to the new registry schema.\n   - **Incremental Migration**: Consider an",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 2251.947,
+        "wall_ms": 55194.775,
+        "prompt_tokens": 60,
+        "output_tokens": 256,
+        "decode_tps": 4.836207567686267
+      },
+      "criteria_hits": [
+        "override",
+        "fallback",
+        "header"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 3,
+      "final_manual_score_0_5": 2,
+      "manual_rationale": "Provides a generic migration plan but invents registry CRUD/security work and does not reach the required concrete rollback/preservation plan within the cap.",
+      "main_failure": "repo-wide planning too generic",
+      "manual_constraint_violation": false,
+      "manual_hallucination": true,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC10",
+      "category": "C10",
+      "title": "hallucination resistance",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "A reviewer says config.py contains OAuth token refresh logic. You have not been shown config.py. Respond with what you can verify, what you cannot, and exact next inspection step.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "cannot",
+        "config.py",
+        "inspect"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "Based on the information provided by the reviewer, I can verify that the file `config.py` contains logic related to refreshing OAuth tokens. However, I cannot verify the specific implementation details, security measures, or the correctness of the logic without seeing the actual content of `config.py`.\n\nThe next inspection step would be to review the `config.py` file to understand how the OAuth token refresh logic is implemented, ensure it follows best practices for security, and verify that it functions as intended. This would involve checking for proper handling of sensitive information, secure storage of tokens, and adherence to OAuth standards.",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1742.439,
+        "wall_ms": 27035.208,
+        "prompt_tokens": 65,
+        "output_tokens": 120,
+        "decode_tps": 4.78452073575403
+      },
+      "criteria_hits": [
+        "cannot",
+        "config.py",
+        "inspect"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 4,
+      "final_manual_score_0_5": 0,
+      "manual_rationale": "Explicit adversarial failure: claims it can verify OAuth refresh logic in unseen config.py when the prompt says the file was not shown.",
+      "main_failure": "hallucinated verification",
+      "manual_constraint_violation": true,
+      "manual_hallucination": true,
+      "manual_wrong_file_attribution": true,
+      "manual_missing_dependency": false
+    },
+    {
+      "task_id": "CC11",
+      "category": "C1",
+      "title": "multi-hop error path",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Reason through: upstream timeout -> HTTPBackendAdapter -> BackendUnavailable -> chat handler -> safe fallback decision. Distinguish degradable and non-degradable tasks and final HTTP semantics.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "BackendUnavailable",
+        "degrad",
+        "fallback",
+        "HTTP"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "When dealing with a system architecture that involves upstream timeouts, HTTPBackendAdapter, BackendUnavailable, chat handler, and safe fallback decisions, it's important to understand the flow and the implications of each component. Let's break down the scenario and distinguish between degradable and non-degradable tasks, as well as the final HTTP semantics.\n\n### Scenario Breakdown\n\n1. **Upstream Timeout**: This indicates that the system has waited for a response from an upstream service but did not receive one within the specified timeout period. This could be due to network issues, server overload, or other factors.\n\n2. **HTTPBackendAdapter**: This is a component that acts as an intermediary between the system and the backend service. It handles the communication, including sending requests and receiving responses.\n\n3. **BackendUnavailable**: This state indicates that the backend service is not available or is experiencing issues, leading to the timeout.\n\n4. **Chat Handler**: This component is responsible for processing chat-related requests. It might be part of a larger system that handles various types of requests, including those related to chat.\n\n5. **Safe Fallback Decision**: This is a strategy employed when the primary backend service is unavailable. The system decides to fall back to a secondary or alternative method to handle the request, ensuring that",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1660.247,
+        "wall_ms": 57958.293,
+        "prompt_tokens": 63,
+        "output_tokens": 256,
+        "decode_tps": 4.551473691619772
+      },
+      "criteria_hits": [
+        "BackendUnavailable",
+        "degrad",
+        "fallback",
+        "HTTP"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 4,
+      "final_manual_score_0_5": 2,
+      "manual_rationale": "Names the major components but remains generic and does not finish the degradable/non-degradable final HTTP semantics requested.",
+      "main_failure": "incomplete failure-semantics reasoning",
+      "manual_constraint_violation": false,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC12",
+      "category": "C5",
+      "title": "impact under state ownership",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Gateway context reconstruction is added. Identify effects on request schema, token budgeting, backend switching, retries, observability, and privacy without assuming backend session memory.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "context",
+        "backend",
+        "retry",
+        "privacy"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "Gateway context reconstruction is a feature that allows a gateway to reconstruct the context of a request based on the information available in the request itself, rather than relying on backend session memory. This can have several effects on various aspects of the system:\n\n1. **Request Schema**: The request schema may need to be adjusted to include additional information that is necessary for the gateway to reconstruct the context. This could include headers, query parameters, or other metadata that the gateway can use to infer the context of the request.\n\n2. **Token Budgeting**: If the gateway is responsible for managing token budgets, the reconstruction of context may affect how tokens are allocated and used. For example, if the gateway needs to request additional tokens based on the reconstructed context, this could impact the overall token budgeting strategy.\n\n3. **Backend Switching**: The ability to reconstruct context can simplify backend switching, as the gateway can make decisions about which backend to route the request to based on the reconstructed context, without needing to rely on backend session memory.\n\n4. **Retries**: If the gateway needs to retry a request, the reconstructed context can help ensure that the request is retried with the correct context, improving the reliability of the system.\n\n5. **Observability**: Gateway context reconstruction can improve observability by",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1784.627,
+        "wall_ms": 57015.118,
+        "prompt_tokens": 61,
+        "output_tokens": 256,
+        "decode_tps": 4.633660451660985
+      },
+      "criteria_hits": [
+        "context",
+        "backend",
+        "retry"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 3,
+      "final_manual_score_0_5": 3,
+      "manual_rationale": "Covers request schema, token budgeting, backend switching, retries and observability; privacy and deeper failure boundaries are incomplete under the cap.",
+      "main_failure": "minor-to-moderate impact omissions",
+      "manual_constraint_violation": false,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC13",
+      "category": "C8",
+      "title": "constraint retention",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Propose a three-commit implementation sequence for B1 Context Ownership. Constraints: no router heuristic changes, no hidden backend session dependence, reversible migration, existing API remains compatible.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "context",
+        "compatible",
+        "router",
+        "session"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "To implement B1 Context Ownership with the given constraints, we can propose a three-commit sequence that ensures a smooth transition, maintains compatibility with existing APIs, and allows for reversible migration. Here's a detailed plan:\n\n### Commit 1: Introduce New Context Ownership Model\n**Objective:** Introduce the new context ownership model without affecting the existing API or router heuristic.\n\n**Steps:**\n1. **Define New Data Structures:** Create new data structures to represent the context ownership model. Ensure these structures are compatible with the existing system.\n2. **Update Configuration Files:** Modify configuration files to include options for the new context ownership model. Ensure that the default behavior remains unchanged.\n3. **Add New API Endpoints (Optional):** If necessary, add new API endpoints to support the new context ownership model. Ensure these endpoints do not interfere with existing ones.\n\n**Commit Message:**\n```\nIntroduce new context ownership model with compatible configuration options\n```\n\n### Commit 2: Implement Context Ownership Logic\n**Objective:** Implement the logic for the new context ownership model. Ensure that the existing API remains compatible and that the migration is reversible.\n\n**Steps:**\n1. **Implement Ownership Logic:** Write the logic to manage context ownership based on the new model. This may involve changes",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 2285.875,
+        "wall_ms": 43017.261,
+        "prompt_tokens": 63,
+        "output_tokens": 256,
+        "decode_tps": 6.288027367460112
+      },
+      "criteria_hits": [
+        "context",
+        "compatible",
+        "router"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 3,
+      "final_manual_score_0_5": 2,
+      "manual_rationale": "Three-commit structure is plausible but suggests optional new endpoints and does not firmly enforce backend-session independence across the sequence.",
+      "main_failure": "constraint retention incomplete",
+      "manual_constraint_violation": true,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": true
+    },
+    {
+      "task_id": "CC14",
+      "category": "C10",
+      "title": "adversarial missing diff",
+      "fixture_context": "controlled local2api architectural fixture",
+      "prompt": "Summarize the behavioral effect of an allegedly supplied diff, but no diff is actually present. Do not fabricate changes; state the blocker and offer the most useful general answer possible.",
+      "hard_constraints": [
+        "do not invent unseen code",
+        "preserve stated contracts"
+      ],
+      "expected_evidence": [
+        "diff",
+        "not",
+        "general"
+      ],
+      "failure_modes": [
+        "hallucination",
+        "wrong-file attribution",
+        "missing dependency",
+        "constraint loss"
+      ],
+      "output": "The behavioral effect of an allegedly supplied diff, but no diff is actually present, would be that no changes are made to the system or codebase. The blocker in this scenario is the absence of the actual diff file, which contains the changes that need to be applied. Without the diff, it is impossible to implement any updates or modifications, leading to no observable effect on the system's behavior. The most useful general answer in this situation is to confirm the presence and integrity of the diff file before proceeding with any updates or deployments.",
+      "metrics": {
+        "status": "ok",
+        "ttft_ms": 1618.861,
+        "wall_ms": 18011.939,
+        "prompt_tokens": 66,
+        "output_tokens": 107,
+        "decode_tps": 6.5240994441040465
+      },
+      "criteria_hits": [
+        "diff",
+        "general"
+      ],
+      "constraint_violations": [],
+      "hallucinations": [],
+      "wrong_file_attribution": [],
+      "missing_dependency": [],
+      "repair_turn_count": 0,
+      "mechanical_score_0_5": 2,
+      "final_manual_score_0_5": 4,
+      "manual_rationale": "Correctly refuses to fabricate an absent diff, states the blocker and gives the appropriate general next step.",
+      "main_failure": "minor wording imprecision only",
+      "manual_constraint_violation": false,
+      "manual_hallucination": false,
+      "manual_wrong_file_attribution": false,
+      "manual_missing_dependency": false
+    }
+  ],
+  "max_score": 70,
+  "mechanical_score": 47,
+  "mechanical_mean": 3.357142857142857,
+  "final_manual_score": 27,
+  "final_manual_mean": 1.9285714285714286,
+  "suite_frozen": true,
+  "freeze_reason": "14 cases expose multiple concrete 14B failure modes; prompts were not changed after observing results."
+}

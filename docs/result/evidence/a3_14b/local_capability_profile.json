@@ -1,0 +1,59 @@
+{
+  "schema": "local2api.local_capability_profile.v1",
+  "model_tier": "local-standard",
+  "model": "Qwen2.5-Coder-14B-Instruct Q4_K_M",
+  "production_status": "14B_PRODUCTION_READY_WITH_LIMITS",
+  "quality_baseline": {
+    "local_safe": "8/9",
+    "local_acceptable": "9/11",
+    "total": "17/20"
+  },
+  "recommended_context_tokens": 4096,
+  "soft_context_ceiling": 8192,
+  "hard_context_ceiling": 12288,
+  "recommended_max_output_tokens": 256,
+  "hard_output_ceiling": 512,
+  "recommended_max_concurrency": 1,
+  "expected_ttft_range_ms": [
+    17000,
+    60000
+  ],
+  "soft_ceiling_ttft_ms_observed": 141975,
+  "expected_decode_tps_range": [
+    4.6,
+    5.3
+  ],
+  "minimum_free_ram_gib_before_load": 8,
+  "recommended_free_ram_gib_before_load": 10,
+  "ram_contract_note": "Conservative pre-load contract inferred from successful loaded runs with roughly 5.5-8.5 GiB available RAM; exact pre-load failure threshold is NOT PROVEN.",
+  "runtime": "Ollama 0.33.2",
+  "accelerator": "Intel Arc 140V / Vulkan",
+  "arc_vulkan_verified": true,
+  "supported_task_classes": [
+    "short code explanation and review",
+    "small bounded edits",
+    "unit-test generation",
+    "bounded bug localization",
+    "2-3 file reasoning with supplied context",
+    "diff summary and structured extraction",
+    "short repository questions"
+  ],
+  "cloud_preferred_task_classes": [
+    "repository-wide or architecture-wide refactors",
+    "ambiguous multi-module debugging",
+    "long-horizon agentic repair loops",
+    "contexts above 8K tokens",
+    "tasks requiring strong multi-turn constraint retention without gateway reconstruction",
+    "security-critical decisions from incomplete evidence"
+  ],
+  "known_limitations": [
+    "multi-turn consistency gate passed only 2/5 sessions",
+    "realistic context TTFT rises from about 35 s at 2K to 142 s at 8K and 390 s at 12K",
+    "concurrency 2 technically completes but serializes/starves one request and increases group latency",
+    "manual Ceiling Suite exposes hallucinated files/evidence and weak repo-grounded multi-file reasoning",
+    "thermal, package power and practical editor/browser responsiveness are NOT PROVEN"
+  ],
+  "context_ownership_required": true,
+  "fallback_policy": "Use local only inside this capability envelope. Non-degradable or cloud-preferred tasks must not silently fall back to 14B when their required capability is unavailable.",
+  "dense_32b_status": "BLOCKED"
+}

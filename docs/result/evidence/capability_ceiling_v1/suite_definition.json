@@ -1,0 +1,173 @@
+{
+  "schema": "local2api.capability_ceiling.v1",
+  "frozen": true,
+  "cases": [
+    {
+      "task_id": "CC01",
+      "category": "C1",
+      "title": "5-10 file call-path reasoning",
+      "prompt": "Trace request/error/route-reason flow across main.py, api/chat.py, routing/router.py, routing/types.py, backends/base.py, backends/http.py, errors.py. Identify two contracts that must remain stable.",
+      "expected_evidence": [
+        "chat.py",
+        "router.py",
+        "http.py",
+        "contract"
+      ]
+    },
+    {
+      "task_id": "CC02",
+      "category": "C2",
+      "title": "cross-module bug localization",
+      "prompt": "A 429 becomes 503 only for streaming. Localize the most likely boundary using chat.py and http.py semantics, and give an evidence plan before proposing a fix.",
+      "expected_evidence": [
+        "stream",
+        "429",
+        "http.py",
+        "evidence"
+      ]
+    },
+    {
+      "task_id": "CC03",
+      "category": "C3",
+      "title": "architecture constrained change",
+      "prompt": "Add gateway-owned conversation_id without changing backend protocol, router task heuristics, or public model aliases. Give a file-by-file plan and explicit non-changes.",
+      "expected_evidence": [
+        "conversation",
+        "backend",
+        "router",
+        "alias"
+      ]
+    },
+    {
+      "task_id": "CC04",
+      "category": "C4",
+      "title": "multi-step test/fix loop",
+      "prompt": "A test expects 429 preservation but receives 503. Give hypothesis order, inspection steps, smallest patch location, and post-fix tests. Do not invent unseen code.",
+      "expected_evidence": [
+        "429",
+        "503",
+        "inspect",
+        "test"
+      ]
+    },
+    {
+      "task_id": "CC05",
+      "category": "C5",
+      "title": "dependency impact",
+      "prompt": "If HTTPBackendAdapter.request changes from returning httpx.Response to decoded dict, enumerate likely consumers and semantic breakages across API status propagation, streaming, tests, and health.",
+      "expected_evidence": [
+        "response",
+        "stream",
+        "health",
+        "test"
+      ]
+    },
+    {
+      "task_id": "CC06",
+      "category": "C6",
+      "title": "ambiguous evidence",
+      "prompt": "You only know that one production request returned 500 and no logs are available. State what can and cannot be concluded, and the minimum evidence needed before changing code.",
+      "expected_evidence": [
+        "cannot",
+        "evidence",
+        "log"
+      ]
+    },
+    {
+      "task_id": "CC07",
+      "category": "C7",
+      "title": "long-context prioritization",
+      "prompt": "Given 8 file summaries where only router.py, chat.py, and http.py affect a wrong-backend-status bug, explain which evidence you prioritize and which files you defer, with reasons.",
+      "expected_evidence": [
+        "router.py",
+        "chat.py",
+        "http.py",
+        "defer"
+      ]
+    },
+    {
+      "task_id": "CC08",
+      "category": "C8",
+      "title": "competing constraints",
+      "prompt": "Design a fix that preserves upstream status, keeps architecture tasks from local fallback, keeps SSE [DONE], and does not change /v1/models. State invariants and test matrix.",
+      "expected_evidence": [
+        "status",
+        "fallback",
+        "DONE",
+        "models"
+      ]
+    },
+    {
+      "task_id": "CC09",
+      "category": "C9",
+      "title": "repo-wide refactor planning",
+      "prompt": "Plan extracting routing policy into a capability registry while preserving current routes, headers, explicit overrides, fallback behavior, and tests. Include migration order and rollback point.",
+      "expected_evidence": [
+        "override",
+        "fallback",
+        "header",
+        "rollback"
+      ]
+    },
+    {
+      "task_id": "CC10",
+      "category": "C10",
+      "title": "hallucination resistance",
+      "prompt": "A reviewer says config.py contains OAuth token refresh logic. You have not been shown config.py. Respond with what you can verify, what you cannot, and exact next inspection step.",
+      "expected_evidence": [
+        "cannot",
+        "config.py",
+        "inspect"
+      ]
+    },
+    {
+      "task_id": "CC11",
+      "category": "C1",
+      "title": "multi-hop error path",
+      "prompt": "Reason through: upstream timeout -> HTTPBackendAdapter -> BackendUnavailable -> chat handler -> safe fallback decision. Distinguish degradable and non-degradable tasks and final HTTP semantics.",
+      "expected_evidence": [
+        "BackendUnavailable",
+        "degrad",
+        "fallback",
+        "HTTP"
+      ]
+    },
+    {
+      "task_id": "CC12",
+      "category": "C5",
+      "title": "impact under state ownership",
+      "prompt": "Gateway context reconstruction is added. Identify effects on request schema, token budgeting, backend switching, retries, observability, and privacy without assuming backend session memory.",
+      "expected_evidence": [
+        "context",
+        "backend",
+        "retry",
+        "privacy"
+      ]
+    },
+    {
+      "task_id": "CC13",
+      "category": "C8",
+      "title": "constraint retention",
+      "prompt": "Propose a three-commit implementation sequence for B1 Context Ownership. Constraints: no router heuristic changes, no hidden backend session dependence, reversible migration, existing API remains compatible.",
+      "expected_evidence": [
+        "context",
+        "compatible",
+        "router",
+        "session"
+      ]
+    },
+    {
+      "task_id": "CC14",
+      "category": "C10",
+      "title": "adversarial missing diff",
+      "prompt": "Summarize the behavioral effect of an allegedly supplied diff, but no diff is actually present. Do not fabricate changes; state the blocker and offer the most useful general answer possible.",
+      "expected_evidence": [
+        "diff",
+        "not",
+        "general"
+      ]
+    }
+  ],
+  "frozen_at": "2026-09-03T19:05:18.147712+00:00",
+  "freeze_rule": "Future candidates must use these exact prompts, fixtures and rubric; no candidate-specific tuning."
+}

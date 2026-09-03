@@ -79,14 +79,32 @@ Candidate ladder result:
 
 Use existing runtimes first: Ollama/llama.cpp with mmap, partial offload, quantized KV where supported, and measured Vulkan/SYCL configurations. Determine max practical model, context, usable throughput and Local Capability Profile. Do not infer production usefulness merely from successful model loading.
 
-### A3 — Production Qualification
+### A3 — 14B Production Qualification — COMPLETE
 
-- sustained stability;
-- coding/repository quality;
-- latency/TTFT;
-- memory/swap pressure;
-- thermal/power;
-- production Local Capability Profile.
+Verdict: **`14B_PRODUCTION_READY_WITH_LIMITS`**.
+
+Qwen2.5-Coder-14B-Instruct Q4_K_M is now a bounded `local-standard` production tier. A3 recorded 32/32 sustained request success and 5/5 controlled repository workflows, but only 2/5 multi-turn consistency. Realistic repository context TTFT rises from ~35 s at 2K to ~60 s at 4K, ~142 s at 8K and ~390 s at 12K.
+
+Production contract: recommended context <=4K, soft ceiling 8K, hard ceiling 12K; recommended max output 256 tokens, hard output ceiling 512; max concurrency 1; conservative pre-load RAM reserve 8 GiB minimum / 10 GiB recommended. Track B/B1 **must own and reconstruct canonical context**.
+
+Capability Ceiling Suite v1 is frozen separately with 14 cases and a manually audited 14B baseline of 27/70 (1.93/5). It preserves a measurable research path beyond 14B instead of defining 14B as the architectural maximum.
+
+See `docs/result/result_a3_14b_production.md` and `docs/result/evidence/a3_14b/local_capability_profile.json`.
+
+### A4 — Beyond-14B Frontier — DEFERRED / REOPEN-CONDITION DRIVEN
+
+A4 is a research frontier, not active implementation work. Reopen large-model qualification when at least one condition is supported by evidence:
+
+1. materially better sparse/MoE Arc/Vulkan support;
+2. a candidate has materially lower active parameters/token;
+3. better context-state architecture or lower KV/context cost;
+4. materially improved quantization/runtime support;
+5. a larger candidate plausibly solves a frozen Capability Ceiling Suite gap;
+6. additional host memory/headroom becomes available.
+
+Frontier candidate: **Qwen3.8-27B — WATCH / NOT YET QUALIFIED**. It is a newer dense candidate that may provide coding/agentic uplift, but requires post-A3 comparison against the frozen ceiling suite and a proven Arc 140V memory/runtime envelope before qualification. No A3 model download or benchmark was performed.
+
+Dense A2.2 32B remains **BLOCKED** until a specific frozen capability gap and a viable runtime/resource path justify reopening it.
 
 ## Track B — Smart Router
 
@@ -124,4 +142,4 @@ Route on task class, context requirement, privacy, latency, backend capability a
 
 ## Current next action
 
-Track A: the bounded A2.S1 run and audit are complete with `SPARSE_INCONCLUSIVE`; A2.2 dense 32B remains blocked. The selected local quality-tier candidate remains A2.1 14B. A follow-up sparse test requires sufficient RAM headroom, a matching Vulkan build/DLL, explicit Arc device/offload evidence, and cache-controlled measurements before any larger matrix. Alternatively, qualify the 14B candidate for production under A3. Track B remains independent and unchanged by A2.S1.
+Track A: A3 is complete with `14B_PRODUCTION_READY_WITH_LIMITS`; A4 is deferred and reopen-condition driven. Dense A2.2 32B remains blocked. Track B may now consume `docs/result/evidence/a3_14b/local_capability_profile.json`, beginning with B1 gateway-owned Context Ownership before capability routing.

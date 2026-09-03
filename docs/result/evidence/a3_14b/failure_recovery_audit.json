@@ -1,0 +1,31 @@
+{
+  "schema": "local2api.a3.failure_recovery_audit.v1",
+  "runtime_unavailable": {
+    "status": "PASS",
+    "evidence": "Existing gateway fake-backend tests return 503 and prohibit unsafe fallback for non-degradable tasks."
+  },
+  "wrong_backend_port": {
+    "status": "PASS",
+    "evidence": "A3 wrong-port probe timed out and produced no false success."
+  },
+  "request_timeout": {
+    "status": "PARTIAL",
+    "evidence": "Timeout path observed through wrong-port probe and adapter normalization; no dedicated live slow-upstream injector."
+  },
+  "model_not_loaded": {
+    "status": "PARTIAL",
+    "evidence": "Cold unload/reload lifecycle succeeded; an invalid/missing model identifier was not injected."
+  },
+  "malformed_upstream_response": {
+    "status": "NOT TESTED",
+    "evidence": "No safe malformed-response injection point was exercised against live Ollama."
+  },
+  "connection_reset": {
+    "status": "NOT TESTED",
+    "evidence": "No destructive live connection-reset injector was used; only generic transport-error handling is covered by software tests."
+  },
+  "restart_behavior": {
+    "status": "PARTIAL",
+    "evidence": "Unload/reload recovery succeeded outside an active generation; restart-during-request was not executed."
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "version": {
+    "version": "0.33.2"
+  },
+  "initial_ps": {
+    "models": []
+  },
+  "artifact": {
+    "path": "D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+    "bytes": 8988110272,
+    "sha256": "c1e659736d89ac1065fb495330fb824d94001974a4bfa78e7270e43476a8d940"
+  },
+  "started_at": "2026-09-03T17:39:29.459652+00:00",
+  "lifecycle": {
+    "cold": {
+      "status": "ok",
+      "error": null,
+      "prompt": "Reply exactly: COLD_OK",
+      "output": "COLD_OK",
+      "ttft_ms": 24567.527,
+      "wall_ms": 24574.294,
+      "prompt_tokens": 35,
+      "output_tokens": 4,
+      "prompt_tps": 39.8105472926553,
+      "decode_tps": 6.0205602131278315,
+      "load_ms": 22455.1099,
+      "done_reason": "stop",
+      "num_ctx": 4096,
+      "max_tokens": 16,
+      "telemetry_after": {
+        "utc": "2026-09-03T17:39:56.137426+00:00",
+        "committed_bytes": 35862839296,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 5775753216,
+        "physical_total_bytes": 33916248064
+      }
+    },
+    "warm": {
+      "status": "ok",
+      "error": null,
+      "prompt": "Reply exactly: WARM_OK",
+      "output": "WARM_OK",
+      "ttft_ms": 6139.587,
+      "wall_ms": 6664.406,
+      "prompt_tokens": 35,
+      "output_tokens": 4,
+      "prompt_tps": 6.044458198944879,
+      "decode_tps": 8.838958593898466,
+      "load_ms": 333.9253,
+      "done_reason": "stop",
+      "num_ctx": 4096,
+      "max_tokens": 16,
+      "telemetry_after": {
+        "utc": "2026-09-03T17:40:02.802295+00:00",
+        "committed_bytes": 35713101824,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 5887291392,
+        "physical_total_bytes": 33916248064
+      }
+    },
+    "post_idle": {
+      "status": "ok",
+      "error": null,
+      "prompt": "Reply exactly: IDLE_OK",
+      "output": "IDLE_OK",
+      "ttft_ms": 351.398,
+      "wall_ms": 833.215,
+      "prompt_tokens": 35,
+      "output_tokens": 4,
+      "prompt_tps": 164.3393090236367,
+      "decode_tps": 7.938208981289641,
+      "load_ms": 17.7304,
+      "done_reason": "stop",
+      "num_ctx": 4096,
+      "max_tokens": 16,
+      "telemetry_after": {
+        "utc": "2026-09-03T17:40:06.636408+00:00",
+        "committed_bytes": 35868229632,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 5770489856,
+        "physical_total_bytes": 33916248064
+      }
+    },
+    "reload": {
+      "status": "ok",
+      "error": null,
+      "prompt": "Reply exactly: RELOAD_OK",
+      "output": "RELOAD_OK",
+      "ttft_ms": 14722.484,
+      "wall_ms": 15310.298,
+      "prompt_tokens": 35,
+      "output_tokens": 4,
+      "prompt_tps": 31.768651602274634,
+      "decode_tps": 5.699621402648329,
+      "load_ms": 13472.685,
+      "done_reason": "stop",
+      "num_ctx": 4096,
+      "max_tokens": 16,
+      "telemetry_after": {
+        "utc": "2026-09-03T17:40:24.190660+00:00",
+        "committed_bytes": 35950678016,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 5678694400,
+        "physical_total_bytes": 33916248064
+      }
+    },
+    "ps_after_load": {
+      "models": [
+        {
+          "name": "local2api-qwen2.5-coder-14b:a2.1",
+          "model": "local2api-qwen2.5-coder-14b:a2.1",
+          "size": 9459613039,
+          "digest": "31c6da3e7b005a4d7a2fcb18ac94ba3b9e9afd2ab82eaca583542f94e696cffc",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen2",
+            "families": [
+              "qwen2"
+            ],
+            "parameter_size": "14.8B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-04T01:10:24.1879798+07:00",
+          "size_vram": 9459613039,
+          "context_length": 4096
+        }
+      ]
+    }
+  }
+}

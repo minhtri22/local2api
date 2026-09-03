@@ -1,0 +1,113 @@
+{
+  "runs": [
+    {
+      "concurrency": 1,
+      "wall_group_ms": 23116.866,
+      "before": {
+        "utc": "2026-09-03T18:43:28.822169+00:00",
+        "committed_bytes": 38396182528,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 6993596416,
+        "physical_total_bytes": 33916248064
+      },
+      "after": {
+        "utc": "2026-09-03T18:43:51.938230+00:00",
+        "committed_bytes": 37966245888,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 7432404992,
+        "physical_total_bytes": 33916248064
+      },
+      "requests": [
+        {
+          "status": "ok",
+          "error": null,
+          "prompt": "Explain in six bullets how a gateway should handle an unavailable local inference backend without false success.",
+          "output": "1. **Detect Unavailability**: The gateway should have mechanisms to detect when the local inference backend is unavailable. This could involve monitoring the backend's health status, checking response times, or using heartbeat signals.\n\n2. **Failover Strategy**: Implement a failover strategy that directs requests to a secondary inference backend or a cached response if the primary backend is unavailable. This ensures that the system can continue to serve requests without interruption.\n\n3. **Error Handling**: The gateway should handle errors",
+          "ttft_ms": 3362.803,
+          "wall_ms": 22970.438,
+          "prompt_tokens": 48,
+          "output_tokens": 96,
+          "prompt_tps": 51.15640110455196,
+          "decode_tps": 4.896412566826468,
+          "load_ms": 13.9854,
+          "done_reason": "length",
+          "num_ctx": 8192,
+          "max_tokens": 96,
+          "telemetry_after": {
+            "utc": "2026-09-03T18:43:51.934077+00:00",
+            "committed_bytes": 37966262272,
+            "commit_limit_bytes": 50559246336,
+            "available_physical_bytes": 7432429568,
+            "physical_total_bytes": 33916248064
+          }
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "wall_group_ms": 40790.798,
+      "before": {
+        "utc": "2026-09-03T18:43:51.938753+00:00",
+        "committed_bytes": 37966245888,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 7432404992,
+        "physical_total_bytes": 33916248064
+      },
+      "after": {
+        "utc": "2026-09-03T18:44:32.728021+00:00",
+        "committed_bytes": 37915717632,
+        "commit_limit_bytes": 50559246336,
+        "available_physical_bytes": 7433035776,
+        "physical_total_bytes": 33916248064
+      },
+      "requests": [
+        {
+          "status": "ok",
+          "error": null,
+          "prompt": "Explain in six bullets how a gateway should handle an unavailable local inference backend without false success.",
+          "output": "1. **Detect Unavailability**: The gateway should have mechanisms to detect when the local inference backend is unavailable. This could involve monitoring the backend's health status, checking response times, or using heartbeat signals.\n\n2. **Failover Strategy**: Implement a failover strategy that directs requests to a secondary inference backend or a cached result if the primary backend is unavailable. This ensures that the system can continue to serve requests without interruption.\n\n3. **Error Handling**: The gateway should handle errors",
+          "ttft_ms": 732.437,
+          "wall_ms": 21050.986,
+          "prompt_tokens": 48,
+          "output_tokens": 96,
+          "prompt_tps": 346.1979531046023,
+          "decode_tps": 4.72669487092061,
+          "load_ms": 204.6081,
+          "done_reason": "length",
+          "num_ctx": 8192,
+          "max_tokens": 96,
+          "telemetry_after": {
+            "utc": "2026-09-03T18:44:12.990593+00:00",
+            "committed_bytes": 37790564352,
+            "commit_limit_bytes": 50559246336,
+            "available_physical_bytes": 7582142464,
+            "physical_total_bytes": 33916248064
+          }
+        },
+        {
+          "status": "ok",
+          "error": null,
+          "prompt": "Explain in six bullets how a gateway should handle an unavailable local inference backend without false success.",
+          "output": "1. **Detect Unavailability**: The gateway should have mechanisms to detect when the local inference backend is unavailable. This could involve monitoring the backend's health status, checking response times, or using heartbeat signals.\n\n2. **Failover Strategy**: Implement a failover strategy that directs requests to a secondary inference backend or a cached result if the primary backend is unavailable. This ensures that the system can continue to serve requests without interruption.\n\n3. **Error Handling**: The gateway should handle errors",
+          "ttft_ms": 21683.683,
+          "wall_ms": 40728.673,
+          "prompt_tokens": 48,
+          "output_tokens": 96,
+          "prompt_tps": 291.50977772379446,
+          "decode_tps": 5.03767683754379,
+          "load_ms": 276.1275,
+          "done_reason": "length",
+          "num_ctx": 8192,
+          "max_tokens": 96,
+          "telemetry_after": {
+            "utc": "2026-09-03T18:44:32.677650+00:00",
+            "committed_bytes": 37915766784,
+            "commit_limit_bytes": 50559246336,
+            "available_physical_bytes": 7432781824,
+            "physical_total_bytes": 33916248064
+          }
+        }
+      ]
+    }
+  ]
+}
