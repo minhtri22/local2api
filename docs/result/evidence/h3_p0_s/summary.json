@@ -1,0 +1,27 @@
+{
+  "schema": "local2api.h3_p0_s.summary.v1",
+  "pilot": {
+    "RAW": {"tasks": 30, "median_reduction_ratio": 0.0, "mean_evidence_recall": 1.0, "min_evidence_recall": 1.0, "constraint_retention": 1.0, "full_evidence_tasks": 30},
+    "RULES": {"tasks": 30, "median_reduction_ratio": 0.7678440029433407, "mean_evidence_recall": 1.0, "min_evidence_recall": 1.0, "constraint_retention": 1.0, "full_evidence_tasks": 30},
+    "RETRIEVAL": {"tasks": 30, "median_reduction_ratio": 0.5836129022888347, "mean_evidence_recall": 0.875, "min_evidence_recall": 0.5, "constraint_retention": 1.0, "full_evidence_tasks": 20},
+    "HYBRID": {"tasks": 30, "median_reduction_ratio": 0.5757910228108903, "mean_evidence_recall": 1.0, "min_evidence_recall": 1.0, "constraint_retention": 1.0, "full_evidence_tasks": 30, "deterministic_replay": true}
+  },
+  "holdout": {
+    "RAW": {"tasks": 12, "median_reduction_ratio": 0.0, "mean_evidence_recall": 1.0, "min_evidence_recall": 1.0, "constraint_retention": 1.0, "full_evidence_tasks": 12},
+    "RULES": {"tasks": 12, "median_reduction_ratio": 0.7060422960725076, "mean_evidence_recall": 0.5, "min_evidence_recall": 0.5, "constraint_retention": 1.0, "full_evidence_tasks": 0},
+    "RETRIEVAL": {"tasks": 12, "median_reduction_ratio": 0.57878846394389, "mean_evidence_recall": 0.6666666666666666, "min_evidence_recall": 0.25, "constraint_retention": 1.0, "full_evidence_tasks": 4},
+    "HYBRID": {"tasks": 12, "median_reduction_ratio": 0.5590456055572335, "mean_evidence_recall": 0.9166666666666666, "min_evidence_recall": 0.75, "constraint_retention": 1.0, "full_evidence_tasks": 8}
+  },
+  "gates": {
+    "material_reduction_median": 0.30,
+    "hard_constraint_retention": 1.0,
+    "mean_required_evidence_recall": 0.95
+  },
+  "verdict": "H3_CONTEXT_COMPILER_PROMISING_BUT_FIDELITY_GATE_NOT_MET",
+  "not_executed": [
+    "small-local-LLM compression arm",
+    "downstream cloud task-success arm",
+    "hardware latency/Arc measurements"
+  ],
+  "next": "H3.P0-L semantic-selector/small-model proof; then downstream cloud A/B; hardware economics later"
+}
