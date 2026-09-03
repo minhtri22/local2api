@@ -8,6 +8,8 @@ Build a small, observable OpenAI-compatible inference gateway that can use a con
 
 Track B remains useful even if Track A never produces a large-model local engine.
 
+The current product hypothesis is intentionally broader than a generic router: local2api may evolve into a **local-first AI execution gateway** that owns session/context state, plans context and execution, verifies results where possible, and escalates safely. This broader architecture is **research-only until separately proven**; see [Architecture Challenge and Router Landscape](docs/research/architecture_challenge_and_router_landscape.md).
+
 ## Track A — Local Engine
 
 ### A0 — 7B Baseline — COMPLETE
@@ -88,6 +90,12 @@ Use existing runtimes first: Ollama/llama.cpp with mmap, partial offload, quanti
 - thermal/power;
 - production Local Capability Profile.
 
+A3 productionizes the best proven current local candidate; it does **not** define 14B as an architectural maximum.
+
+### A4 — Beyond-14B Frontier — REOPEN-CONDITION DRIVEN
+
+Research frontier only. Reopen large-model qualification when a specific measured capability gap plus runtime/hardware evidence justifies it, for example materially better sparse/MoE Arc support, lower active-parameter models, better context architecture, improved quantization/runtime, or additional hardware headroom. Dense 32B remains blocked unless a concrete ceiling gap justifies testing it.
+
 ## Track B — Smart Router
 
 ### B0 — Reliable Router — COMPLETE BASELINE
@@ -102,9 +110,13 @@ Existing v0.0.1 provides OpenAI-compatible API, SSE streaming, backend abstracti
 - backend capability registry;
 - routing decision trace.
 
+B1 is now explicitly subject to Architecture Challenge proof H1 before a broad implementation rewrite.
+
 ### B2 — Capability Router
 
 Route on task class, context requirement, privacy, latency, backend capability and the Local Capability Profile produced by Track A.
+
+B2 should evolve from prompt heuristics toward an empirical capability contract only if H4 proves material predictive value.
 
 ### B3 — Adaptive Routing
 
@@ -115,13 +127,93 @@ Route on task class, context requirement, privacy, latency, backend capability a
 - quality feedback;
 - explicit fallback policy by capability class.
 
+Do not introduce learned routing until enough outcome-labelled traffic exists to beat deterministic capability baselines.
+
+## Track H — Architecture Challenge — RESEARCH ONLY
+
+This track is intentionally proof-before-build and can proceed independently from active A3 work. Full hypotheses, external landscape and proof definitions are in [docs/research/architecture_challenge_and_router_landscape.md](docs/research/architecture_challenge_and_router_landscape.md).
+
+### H0 — Current Architecture Baseline
+
+Document state ownership, route inputs, backend contracts, fallback semantics and observability. No implementation change.
+
+### H1 — Context Ownership Proof
+
+Prove or reject cross-backend context degradation using controlled multi-turn migration tests.
+
+### H2 — Verification + Escalation Proof
+
+Compare raw local inference with `local -> mechanical verifier -> accept/retry/escalate` on frozen tasks.
+
+### H3 — Context Planner Proof
+
+Compare raw/truncated, retrieval-only, symbol/dependency/retrieval and summary/retrieval context strategies on repo tasks with large raw source context.
+
+### H4 — Capability Routing Proof
+
+Compare empirical capability-contract routing with the existing deterministic heuristic router on frozen replay traffic.
+
+### H5 — Resource-Aware Routing Proof
+
+Measure whether clean/normal/high-pressure host states materially change the best route and whether resource gating improves task completion/system usability.
+
+### H6 — Execution Planner Simulation
+
+Compare router-only behavior against a bounded plan with context selection, eligibility, verification, retry/escalation and explicit fail semantics.
+
+### Architecture promotion rule
+
+No H-track subsystem may move into Track B implementation merely because it is architecturally attractive. Each must have:
+
+1. a measured failure mode;
+2. a frozen baseline;
+3. a predeclared proof metric/gate;
+4. evidence that the proposed mechanism materially improves the relevant outcome.
+
+## Competitive positioning guardrail
+
+The 2026 market/repository survey shows that the following are already commodity or table-stakes: OpenAI-compatible gateway surfaces, Ollama/local support, multi-provider adapters, retries, static conditional routing, fallback chains, basic privacy rules, latency/cost metrics and prompt-complexity classification.
+
+Therefore local2api should not position itself primarily as another generic LLM router. The research differentiation to prove is:
+
+- hardware/runtime-specific Local Capability Profiles;
+- host-resource-aware local/cloud decisions;
+- gateway-owned session/repository context across backend switches;
+- coding/repository Context Planning;
+- verification-aware accept/retry/escalate semantics;
+- task-specific bounded execution plans;
+- evidence-driven architecture promotion.
+
+Candidate product thesis, pending H-track proof:
+
+> local2api is a local-first AI execution gateway that decides where to run a task, what context to send, whether the host can afford local execution, how to verify the result, and when to escalate without losing session/repository state.
+
+## Evaluation policy
+
+Measure architecture experiments on final useful task outcomes, not routing-classifier accuracy alone. At minimum record:
+
+- final task correctness/usefulness;
+- wall time / TTFT;
+- cloud calls and monetary cost;
+- local resource/system impact;
+- external data exposure;
+- human repair turns;
+- fallback/escalation count;
+- verifier false-positive/false-negative behavior where applicable.
+
+Maintain a frozen production suite, a harder capability-ceiling suite, and a late/hidden holdout when practical. Do not tune against the final holdout.
+
 ## Non-goals
 
 - CAPTCHA/anti-bot bypass or provider rate-limit circumvention.
 - Browser credential extraction.
 - Treating a local model as production-capable without measured quality evidence.
 - Rewriting llama.cpp's GGUF loader, kernels, tokenizer, sampler, server, graph scheduler or KV cache without proof that replacement is necessary.
+- Rebuilding a broad provider/billing enterprise gateway merely to match OpenRouter/LiteLLM/Portkey/Cloudflare/Vercel feature breadth.
+- Introducing learned routing before deterministic capability baselines and labelled outcome data justify it.
 
 ## Current next action
 
-Track A: the bounded A2.S1 run and audit are complete with `SPARSE_INCONCLUSIVE`; A2.2 dense 32B remains blocked. The selected local quality-tier candidate remains A2.1 14B. A follow-up sparse test requires sufficient RAM headroom, a matching Vulkan build/DLL, explicit Arc device/offload evidence, and cache-controlled measurements before any larger matrix. Alternatively, qualify the 14B candidate for production under A3. Track B remains independent and unchanged by A2.S1.
+**Active implementation line:** Track A may continue with A3 production qualification of the Qwen2.5-Coder 14B candidate. A2.2 dense 32B remains blocked; A4 is reopen-condition driven.
+
+**Architecture research line:** H0 -> H1 -> H2 -> H3 -> H4 -> H5 -> H6 may be investigated independently. Results do not modify production architecture until their individual proof gates pass. Track B remains independently useful and should consume only proven capability/context/execution contracts.
