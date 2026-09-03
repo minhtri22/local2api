@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local2api.h3_d0.context_ir.v1",
+  "type": "object",
+  "required": ["task", "hard_constraints", "evidence", "omitted", "stats", "provenance"],
+  "properties": {
+    "task": {"type": "string"},
+    "hard_constraints": {"type": "array", "items": {"type": "string"}},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "content", "reason"],
+        "properties": {
+          "id": {"type": "string"},
+          "path": {"type": "string"},
+          "content": {"type": "string"},
+          "reason": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "omitted": {"type": "array"},
+    "stats": {"type": "object"},
+    "provenance": {"type": "object"}
+  }
+}
