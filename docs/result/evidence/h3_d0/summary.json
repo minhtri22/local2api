@@ -1,0 +1,32 @@
+{
+  "schema": "local2api.h3_d0.skill_first_ab.v1",
+  "task_count": 24,
+  "skill_tokens_proxy": 228,
+  "pipelines": {
+    "RAW": {"median_cloud_tokens_proxy": 1706.0},
+    "SKILL_ONLY": {
+      "median_cloud_token_delta_vs_raw": 0.13364595545134828,
+      "note": "raw context must reach cloud before a cloud-only skill can select it"
+    },
+    "SKILL_PLUS_LOCAL_TOOL": {
+      "median_cloud_input_reduction_vs_raw": 0.4361078546307151,
+      "mean_evidence_recall": 1.0,
+      "min_evidence_recall": 1.0,
+      "hard_constraint_retention": 1.0
+    }
+  },
+  "gates": {
+    "reduction_ge_30pct": true,
+    "evidence_recall_ge_95pct": true,
+    "hard_constraints_100pct": true,
+    "deterministic_replay": true
+  },
+  "full_evidence_tasks": 24,
+  "limitations": [
+    "lexical token proxy, not provider billing tokenizer",
+    "synthetic fixtures",
+    "no downstream cloud model called",
+    "no real agent runtime integration",
+    "does not measure prompt-cache behavior or wall-clock latency"
+  ]
+}
