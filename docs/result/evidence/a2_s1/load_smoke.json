@@ -1,0 +1,23 @@
+{
+  "schema": "local2api.a2_s1.load_smoke.v1",
+  "created_at": "2026-09-03T01:47:18.490392+00:00",
+  "request": {
+    "model": "local2api-qwen3-coder-30b-a3b:a2.s1",
+    "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nSay OK.<|im_end|>\n<|im_start|>assistant\n",
+    "raw": true,
+    "stream": false,
+    "options": {
+      "temperature": 0,
+      "top_p": 1,
+      "seed": 42,
+      "num_predict": 4,
+      "num_ctx": 16384
+    },
+    "keep_alive": "30m"
+  },
+  "error": "<HTTPError 500: 'Internal Server Error'>",
+  "response": {},
+  "wall_ms": 26829.056,
+  "memory_before_raw": "[\n    {\n        \"Path\":  \"\\\\\\\\desktop-4psd0g2\\\\memory\\\\committed bytes\",\n        \"CookedValue\":  24822104064\n    },\n    {\n        \"Path\":  \"\\\\\\\\desktop-4psd0g2\\\\memory\\\\available mbytes\",\n        \"CookedValue\":  18932\n    }\n]\n",
+  "process_and_memory_after_raw": "[\n    {\n        \"Id\":  34600,\n        \"ProcessName\":  \"ollama\",\n        \"CPU\":  56.703125,\n        \"WorkingSet64\":  93335552,\n        \"PrivateMemorySize64\":  115187712,\n        \"StartTime\":  \"\\/Date(1788383244326)\\/\"\n    },\n    {\n        \"Id\":  36092,\n        \"ProcessName\":  \"ollama\",\n        \"CPU\":  2.34375,\n        \"WorkingSet64\":  20254720,\n        \"PrivateMemorySize64\":  62554112,\n        \"StartTime\":  \"\\/Date(1788369131914)\\/\"\n    },\n    {\n        \"Id\":  35444,\n        \"ProcessName\":  \"ollama app\",\n        \"CPU\":  0.828125,\n        \"WorkingSet64\":  71811072,\n        \"PrivateMemorySize64\":  53407744,\n        \"StartTime\":  \"\\/Date(1788369130821)\\/\"\n    }\n]\n[\n    {\n        \"Path\":  \"\\\\\\\\desktop-4psd0g2\\\\memory\\\\committed bytes\",\n        \"CookedValue\":  24954159104\n    },\n    {\n        \"Path\":  \"\\\\\\\\desktop-4psd0g2\\\\memory\\\\available mbytes\",\n        \"CookedValue\":  19140\n    }\n]\n"
+}

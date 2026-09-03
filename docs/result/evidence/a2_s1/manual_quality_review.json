@@ -1,0 +1,52 @@
+{
+  "schema": "local2api.a2_s1.manual_quality.v1",
+  "source": "quality_results_128.json",
+  "control": "A2.1 Qwen2.5-Coder 14B manual_quality_review.json",
+  "rubric": {
+    "0": "unusable/wrong",
+    "1": "mostly wrong or incomplete",
+    "2": "usable with caveats",
+    "3": "directly useful"
+  },
+  "score_distribution": {
+    "0": 0,
+    "1": 1,
+    "2": 5,
+    "3": 14
+  },
+  "average_score": 2.65,
+  "control_14b_average_score": 2.55,
+  "average_score_delta_vs_14b": 0.10,
+  "malformed_count": 0,
+  "hallucination_or_domain_drift_count": 0,
+  "repetition_count": 0,
+  "generation_cap_reached_count": 16,
+  "notes": [
+    "Generation-cap reach is recorded separately from usability. Many answers hit 128 tokens after already delivering the requested core answer.",
+    "D03 is a mechanical false positive: it contains the required words but asks the user to provide a diff instead of performing the requested summary.",
+    "A04 is a real improvement over the 14B control: Qwen3 correctly identifies that empty/falsy messages are sent to backend.chat without validation.",
+    "D01 and D05 remain mechanical failures, but D05 is manually useful and explains the hidden-session-memory risk correctly."
+  ],
+  "cases": [
+    {"id":"A01","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct upstream-status preservation explanation; requested core is complete before truncation."},
+    {"id":"A02","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Provides the requested two FastAPI validation bullets with correct examples."},
+    {"id":"A03","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correctly explains deterministic routing as reproducible software behavior without the 14B packet-routing drift."},
+    {"id":"A04","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correctly identifies that empty/falsy messages are forwarded instead of rejected/validated."},
+    {"id":"A05","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":[],"note":"Correct selective fallback semantics for degradable tasks."},
+    {"id":"B01","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct clamp helper is complete; only extra examples are truncated."},
+    {"id":"B02","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct non-empty-list validation helper is complete; only extra examples are truncated."},
+    {"id":"B03","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached"],"note":"States the correct early-return refactor direction but truncates during the before example before showing the full after version."},
+    {"id":"B04","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":[],"note":"Small valid FastAPI endpoint returning the requested payload."},
+    {"id":"B05","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Primary helper is complete and correct; truncation occurs only in an optional alternative implementation."},
+    {"id":"C01","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached","minor_noise"],"note":"Contains a correct 503 assertion but adds unnecessary live-request examples."},
+    {"id":"C02","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached","generic"],"note":"Names a plausible empty-array access edge case but uses generic null/undefined-behavior language rather than the local Python/API context."},
+    {"id":"C03","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct upstream-429 preservation test setup and objective."},
+    {"id":"C04","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correctly describes consuming the SSE stream and verifying the terminal [DONE] marker."},
+    {"id":"C05","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached","generic"],"note":"Correct explicit-override validation area but broader than a crisp local2api missing test."},
+    {"id":"D01","class":"LOCAL_ACCEPTABLE","auto_pass":false,"manual_score_0_3":2,"flags":["generation_cap_reached","generic"],"note":"Reasonable HTTP/router contract discussion but too broad and never reaches the backend contract required by the mechanical criterion."},
+    {"id":"D02","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":[],"note":"Exact requested call path."},
+    {"id":"D03","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":1,"flags":["mechanical_false_positive"],"note":"Asks for the missing diff instead of summarizing the stated route-reason-header change; materially worse than the 14B answer despite keyword pass."},
+    {"id":"D04","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct async/sync protocol mismatch explanation."},
+    {"id":"D05","class":"LOCAL_ACCEPTABLE","auto_pass":false,"manual_score_0_3":3,"flags":["generation_cap_reached","mechanical_false_negative"],"note":"Correctly explains why hidden server session memory breaks backend switching, scaling and recovery even though it misses the literal state/context keywords."}
+  ]
+}

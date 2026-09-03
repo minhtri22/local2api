@@ -1,0 +1,118 @@
+{
+  "schema": "local2api.a2_s1.challenge_ab.v1",
+  "created_at": "2026-09-03T02:16:27.453826+00:00",
+  "note": "CHALLENGE_ONLY; not counted in canonical score. Criteria were declared before outputs in this script body.",
+  "cases": [
+    {
+      "task_id": "CH01",
+      "prompt": "Given a FastAPI proxy that sometimes returns 200 with an upstream error body, propose the smallest code-level invariant to prevent this bug. Answer in 4 bullets.",
+      "criteria": [
+        "status",
+        "upstream",
+        "test"
+      ]
+    },
+    {
+      "task_id": "CH02",
+      "prompt": "Design a minimal context ownership record for a local/cloud LLM router. Include fields and one failure mode it prevents.",
+      "criteria": [
+        "context",
+        "backend",
+        "failure"
+      ]
+    },
+    {
+      "task_id": "CH03",
+      "prompt": "A streaming endpoint emits chunks but never sends [DONE]. Explain one likely bug and one pytest-style assertion to catch it.",
+      "criteria": [
+        "DONE",
+        "pytest",
+        "stream"
+      ]
+    }
+  ],
+  "runs": {
+    "14b_control": {
+      "CH01": {
+        "status": "error",
+        "error": "<HTTPError 500: 'Internal Server Error'>",
+        "mechanical_pass": false
+      },
+      "CH02": {
+        "status": "error",
+        "error": "<HTTPError 500: 'Internal Server Error'>",
+        "mechanical_pass": false
+      },
+      "CH03": {
+        "status": "error",
+        "error": "<HTTPError 500: 'Internal Server Error'>",
+        "mechanical_pass": false
+      }
+    },
+    "qwen3_sparse": {
+      "CH01": {
+        "status": "ok",
+        "wall_ms": 19433.166,
+        "output": "• **Check upstream response status codes before returning 200**: Validate that the upstream response status code is in the expected range (typically 2xx) before proxying it back to the client, ensuring that error responses from upstream are not incorrectly wrapped in 200 OK.\n\n• **Fail fast on upstream errors**: Immediately raise an exception or return an appropriate error status code (like 502 Bad Gateway) when detecting upstream errors, rather than blindly forwarding the",
+        "prompt_tokens": 64,
+        "output_tokens": 96,
+        "prompt_tokens_per_s": 11.292451014141502,
+        "generation_tokens_per_s": 7.012966458236383,
+        "raw_timings": {
+          "cache_n": 0,
+          "prompt_n": 64,
+          "prompt_ms": 5667.503,
+          "prompt_per_token_ms": 88.554734375,
+          "prompt_per_second": 11.292451014141502,
+          "predicted_n": 96,
+          "predicted_ms": 13546.336,
+          "predicted_per_token_ms": 142.5930105263158,
+          "predicted_per_second": 7.012966458236383
+        },
+        "mechanical_pass": false
+      },
+      "CH02": {
+        "status": "ok",
+        "wall_ms": 16393.112,
+        "output": "## Minimal Context Ownership Record\n\n### Fields:\n- **request_id**: Unique identifier for the request\n- **owner_id**: Identifier of the owning service/process\n- **created_at**: Timestamp of record creation\n- **ttl**: Time-to-live for the context\n- **context_type**: Type of context (e.g., \"conversation\", \"session\", \"batch\")\n- **status**: Current status (active, expired, released)\n\n### Failure Mode Prevented:\n**Context Leakage",
+        "prompt_tokens": 52,
+        "output_tokens": 96,
+        "prompt_tokens_per_s": 16.577171194997263,
+        "generation_tokens_per_s": 7.199193265980712,
+        "raw_timings": {
+          "cache_n": 0,
+          "prompt_n": 52,
+          "prompt_ms": 3136.844,
+          "prompt_per_token_ms": 60.32392307692308,
+          "prompt_per_second": 16.577171194997263,
+          "predicted_n": 96,
+          "predicted_ms": 13195.923,
+          "predicted_per_token_ms": 138.90445263157895,
+          "predicted_per_second": 7.199193265980712
+        },
+        "mechanical_pass": false
+      },
+      "CH03": {
+        "status": "ok",
+        "wall_ms": 19927.931,
+        "output": "**Likely Bug:**  \nThe streaming endpoint fails to close the response stream or explicitly send a final `[DONE]` marker after all data chunks have been sent. This could happen if the server logic forgets to flush or close the stream, or if the logic that sends `[DONE]` is placed incorrectly (e.g., inside a conditional that never executes).\n\n**Pytest-style Assertion:**  \n```python\ndef test_streaming_endpoint_sends_done_marker():\n    response =",
+        "prompt_tokens": 53,
+        "output_tokens": 96,
+        "prompt_tokens_per_s": 13.587276976384802,
+        "generation_tokens_per_s": 5.981121816689571,
+        "raw_timings": {
+          "cache_n": 0,
+          "prompt_n": 53,
+          "prompt_ms": 3900.708,
+          "prompt_per_token_ms": 73.5982641509434,
+          "prompt_per_second": 13.587276976384802,
+          "predicted_n": 96,
+          "predicted_ms": 15883.308,
+          "predicted_per_token_ms": 167.19271578947368,
+          "predicted_per_second": 5.981121816689571
+        },
+        "mechanical_pass": true
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "local2api.a2_s1.runtime_config.v1",
+  "primary_runtime": "Ollama 0.33.2 + Intel Arc 140V / Vulkan",
+  "ollama_host": "127.0.0.1:11436",
+  "candidate_model_file_expected": "D:\\WORK\\RESEARCH\\local2api\\models\\qwen3-coder-30b-a3b-instruct-q4_k_m.gguf",
+  "candidate_ollama_model": "local2api-qwen3-coder-30b-a3b:a2.s1",
+  "required_env": {
+    "OLLAMA_IGPU_ENABLE": "1",
+    "OLLAMA_VULKAN": "1",
+    "OLLAMA_FLASH_ATTENTION": "true",
+    "OLLAMA_KV_CACHE_TYPE": "f16",
+    "OLLAMA_CONTEXT_LENGTH": "16384",
+    "OLLAMA_NUM_PARALLEL": "1",
+    "OLLAMA_MAX_LOADED_MODELS": "1"
+  },
+  "quality_generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "num_predict": 128,
+    "num_ctx": 16384
+  },
+  "performance_generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "num_predict": 64,
+    "num_ctx": 16384
+  },
+  "primary_baseline": "A2.1 14B dense control, not 7B",
+  "early_stop": {
+    "ttft_seconds": 300,
+    "total_wall_seconds": 600,
+    "other": [
+      "Windows materially unusable",
+      "unsafe sustained commit/pagefile pressure",
+      "repeated runtime crashes"
+    ]
+  },
+  "dense_32b_policy": "BLOCKED; do not benchmark in A2.S1"
+}

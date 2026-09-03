@@ -1,0 +1,23 @@
+[
+  {
+    "Id": 32208,
+    "ProcessName": "ollama",
+    "WorkingSet64": 58720256,
+    "PrivateMemorySize64": 81522688,
+    "CPU": 0.421875
+  },
+  {
+    "Id": 36092,
+    "ProcessName": "ollama",
+    "WorkingSet64": 20205568,
+    "PrivateMemorySize64": 62492672,
+    "CPU": 2.34375
+  },
+  {
+    "Id": 35444,
+    "ProcessName": "ollama app",
+    "WorkingSet64": 71794688,
+    "PrivateMemorySize64": 53374976,
+    "CPU": 0.828125
+  }
+]

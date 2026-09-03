@@ -1,0 +1,21 @@
+{
+  "started_at": "2026-09-03T08:56:35.334644",
+  "request": {
+    "model": "local2api-qwen3-coder-30b-a3b:a2.s1",
+    "prompt": "Return exactly: local2api qwen3 smoke pass",
+    "stream": false,
+    "options": {
+      "num_ctx": 4096,
+      "num_gpu": 32,
+      "num_batch": 32,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 40,
+      "num_predict": 16
+    }
+  },
+  "status": "http_error",
+  "http_status": 500,
+  "error_body": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 169149056\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}",
+  "wall_ms": 17624.105800001416
+}

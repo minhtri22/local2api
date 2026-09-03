@@ -1,0 +1,22 @@
+{
+  "schema": "local2api.a2_s1.quality_gate_predeclared.v1",
+  "created_for": "A2.S1 Qwen3-Coder-30B-A3B-Instruct sparse qualification",
+  "primary_control": "A2.1 Qwen2.5-Coder 14B dense control",
+  "primary_criterion": "incremental quality and capability uplift over 14B dense control",
+  "canonical_suite_policy": "reuse the same 20 intended-local cases unchanged; do not alter prompts or criteria",
+  "challenge_suite_policy": "up to five predeclared CHALLENGE_ONLY cases run on both 14B and Qwen3; not counted in canonical 20-case score",
+  "quality_verdict_options": [
+    "INCREMENTAL_QUALITY_MAJOR",
+    "INCREMENTAL_QUALITY_MODERATE",
+    "INCREMENTAL_QUALITY_SMALL",
+    "INCREMENTAL_QUALITY_NONE"
+  ],
+  "final_verdict_options": [
+    "SPARSE_PREMIUM_TIER_JUSTIFIED",
+    "SPARSE_SPECIALIST_TIER_ONLY",
+    "SPARSE_NOT_JUSTIFIED_OVER_14B",
+    "SPARSE_INCONCLUSIVE"
+  ],
+  "decision_rule": "Qwen3 does not win because it is larger, newer, sparse, or has more total parameters. It must show enough incremental capability over the 14B 17/20 baseline to justify RAM, latency and operational complexity.",
+  "dense_32b_policy": "MUST_REMAIN_BLOCKED"
+}

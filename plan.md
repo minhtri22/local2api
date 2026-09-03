@@ -48,8 +48,8 @@ Kimi K3 remains a reference architecture only. Its included low-memory measureme
 Decision order after A2.S0:
 
 1. **A2.1 dense 14B is COMPLETE** as the dense quality/control experiment.
-2. **A2.S1 sparse qualification is UNBLOCKED**: Qwen3-Coder-30B-A3B-Instruct Q4_K_M using the same quality/context methodology as A0/A2.1.
-3. **A2.2 dense 32B remains BLOCKED** until 14B + sparse results justify spending the tighter memory/compute budget on dense 32B.
+2. **A2.S1 sparse qualification is COMPLETE**: Qwen3-Coder-30B-A3B-Instruct Q4_K_M produced only a small quality uplift over 14B and is not justified as a new local tier on this hardware.
+3. **A2.2 dense 32B remains BLOCKED**: A2.S1 did not provide enough incremental value to justify spending an even tighter memory/active-compute budget on dense 32B.
 
 #### A2.1 — Dense 14B Control — COMPLETE
 
@@ -59,13 +59,23 @@ Qwen2.5-Coder 14B Q4_K_M on Ollama/Vulkan produced a strong quality uplift over 
 
 The model is not a production default yet. It is materially slower than 7B, with measured Ollama generation around 2.75-3.95 tok/s across the reused 1K/4K/8K/16K fixtures, and sampled llama-server child memory around 12.8 GB working set during quality evaluation.
 
-Conclusion: keep 14B as a selective quality-sensitive local tier candidate and use it to inform Track B capability routing. Proceed to A2.S1 sparse qualification before any dense 32B attempt.
+Conclusion: keep 14B as a selective quality-sensitive local tier candidate and use it to inform Track B capability routing. This result originally unblocked A2.S1; the sparse qualification below has now completed and does not displace 14B.
 
-Candidate ladder:
+#### A2.S1 — Sparse 30B-A3B Qualification — COMPLETE
 
-- 14B first;
-- sparse Qwen3-Coder-30B-A3B qualification before dense 32B;
-- 32B only if the 14B/sparse comparison demonstrates that dense 32B is still worth the additional active-compute and memory pressure.
+Verdict: **`SPARSE_NOT_JUSTIFIED_OVER_14B`**.
+
+Qwen3-Coder-30B-A3B-Instruct Q4_K_M scored 18/20 on the same intended-local canonical suite versus 17/20 for the 14B control. Manual quality moved only from 2.55 to 2.65 on the 0–3 rubric, so the quality verdict is **`INCREMENTAL_QUALITY_SMALL`**.
+
+The working direct llama-server profile required 4K context, 32 GPU layers, batch 32, ubatch 16 and q4_0 KV. Its 4K fixture reached about 333 seconds TTFT and crossed the predeclared 300-second early-stop threshold. The tested Ollama/Vulkan path continued to fail startup allocations even after q4 KV, partial offload and smaller batch settings.
+
+Conclusion: keep Qwen2.5-Coder 14B as the selective local quality-tier candidate. Do not create a Qwen3 sparse premium/specialist tier from current evidence. Dense 32B remains blocked.
+
+Candidate ladder result:
+
+- 14B: selected as the current selective local quality-tier candidate;
+- sparse Qwen3-Coder-30B-A3B: tested and rejected as an additional production tier on this hardware;
+- dense 32B: remains blocked because the 14B/sparse comparison does not justify the additional active-compute and memory pressure.
 
 Use existing runtimes first: Ollama/llama.cpp with mmap, partial offload, quantized KV where supported, and measured Vulkan/SYCL configurations. Determine max practical model, context, usable throughput and Local Capability Profile. Do not infer production usefulness merely from successful model loading.
 
@@ -114,4 +124,4 @@ Route on task class, context requirement, privacy, latency, backend capability a
 
 ## Current next action
 
-Track A: A2.S1 should qualify Qwen3-Coder-30B-A3B using the same quality/context methodology as A0/A2.1. A2.2 dense 32B remains blocked. Track B can proceed independently with B1 Context Ownership, using the A2.1 14B result as a selective quality-tier capability signal.
+Track A: A2.S1 is complete with `SPARSE_NOT_JUSTIFIED_OVER_14B`; A2.2 dense 32B remains blocked. The selected local quality-tier candidate remains the A2.1 14B profile. If Track A resumes, the next meaningful step is A3 production qualification of that 14B profile. Track B should now proceed with B1 Context Ownership using the measured 14B capability profile.

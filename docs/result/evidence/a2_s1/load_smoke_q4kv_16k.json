@@ -1,0 +1,19 @@
+{
+  "started_at": "2026-09-03T08:49:46.113158",
+  "request": {
+    "model": "local2api-qwen3-coder-30b-a3b:a2.s1",
+    "prompt": "Return exactly: local2api qwen3 smoke pass",
+    "stream": false,
+    "options": {
+      "num_ctx": 16384,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 40,
+      "num_predict": 16
+    }
+  },
+  "status": "http_error",
+  "http_status": 500,
+  "error_body": "{\"error\":\"llama-server reported out-of-memory during startup: alloc_tensor_range: failed to allocate Vulkan0 buffer of size 452984832\\nllama_init_from_model: failed to initialize the context: failed to allocate buffer for kv cache\"}",
+  "wall_ms": 18082.367599999998
+}

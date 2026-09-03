@@ -1,0 +1,77 @@
+{
+  "schema": "local2api.a2_s1.compare_14b_qwen3.v1",
+  "primary_control": "A2.1 Qwen2.5-Coder 14B Q4_K_M",
+  "candidate": "Qwen3-Coder-30B-A3B-Instruct Q4_K_M",
+  "quality": {
+    "14b_control": {
+      "LOCAL_SAFE": "8/9",
+      "LOCAL_ACCEPTABLE": "9/11",
+      "INTENDED_LOCAL": "17/20",
+      "manual_average_0_3": 2.55
+    },
+    "qwen3_sparse": {
+      "LOCAL_SAFE": "9/9",
+      "LOCAL_ACCEPTABLE": "9/11",
+      "INTENDED_LOCAL": "18/20",
+      "manual_average_0_3": 2.65
+    },
+    "delta": {
+      "LOCAL_SAFE": "+1",
+      "LOCAL_ACCEPTABLE": "+0",
+      "INTENDED_LOCAL": "+1",
+      "manual_average_0_3": 0.10
+    },
+    "recovered_vs_14b": ["A04"],
+    "shared_mechanical_failures": ["D01", "D05"],
+    "material_manual_regression_vs_14b": ["D03"],
+    "quality_verdict": "INCREMENTAL_QUALITY_SMALL"
+  },
+  "runtime": {
+    "14b_control": "Ollama 0.33.2 + Vulkan",
+    "qwen3_primary_attempt": "Ollama 0.33.2 + Vulkan",
+    "qwen3_working_fallback": "direct llama-server 0.3.0-dev build 10726 commit 85c55223c + Vulkan",
+    "qwen3_direct_config": "ctx=4096, ngl=32, batch=32, ubatch=16, q4_0 KV, flash attention on",
+    "ollama_qwen3_result": "startup OOM persisted at 4K after q4 KV, partial offload and batch reduction",
+    "direct_qwen3_result": "usable for short quality cases but long-context prompt ingestion crossed the predeclared early-stop threshold"
+  },
+  "performance": {
+    "1k": {
+      "14b_ttft_ms": 285.997,
+      "qwen3_ttft_ms": 50254.759,
+      "qwen3_ttft_multiple_vs_14b": 175.72,
+      "14b_wall_ms": 16600.678,
+      "qwen3_wall_ms": 60525.719,
+      "qwen3_wall_multiple_vs_14b": 3.65,
+      "14b_generation_tokens_per_s": 3.949,
+      "qwen3_generation_tokens_per_s": 6.136
+    },
+    "4k": {
+      "14b_ttft_ms": 477.937,
+      "qwen3_ttft_ms": 333053.14,
+      "qwen3_ttft_multiple_vs_14b": 696.86,
+      "14b_wall_ms": 19399.911,
+      "qwen3_wall_ms": 349820.414,
+      "qwen3_wall_multiple_vs_14b": 18.03,
+      "14b_generation_tokens_per_s": 3.36,
+      "qwen3_generation_tokens_per_s": 3.758,
+      "early_stop": "TRIGGERED: TTFT exceeded predeclared 300 seconds"
+    },
+    "8k": "NOT RUN after 4K early-stop trigger",
+    "16k": "NOT RUN after 4K early-stop trigger; Ollama 16K q4 KV startup already failed OOM"
+  },
+  "resource": {
+    "14b_gguf_bytes": 8988110272,
+    "qwen3_gguf_bytes": 18556688704,
+    "qwen3_file_size_multiple_vs_14b": 2.065,
+    "qwen3_direct_smoke_working_set_bytes": 18504175616,
+    "qwen3_direct_smoke_private_bytes": 14432628736,
+    "qwen3_direct_smoke_free_physical_memory_kib": 572256,
+    "note": "14B and Qwen3 resource samples were collected in different runs; do not treat them as a synchronized profiler comparison."
+  },
+  "challenge_suite": {
+    "status": "NON_DECISION_GRADE",
+    "reason": "The 14B control endpoint returned HTTP 500 for all three challenge calls; Qwen3 outputs were preserved but are excluded from the incremental-quality decision."
+  },
+  "final_verdict": "SPARSE_NOT_JUSTIFIED_OVER_14B",
+  "dense_32b_policy": "REMAINS_BLOCKED"
+}
