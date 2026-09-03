@@ -1,0 +1,61 @@
+{
+  "schema": "local2api.a2_s1.audited_comparison.v1",
+  "canonical_14b_historical": {
+    "LOCAL_SAFE": {
+      "passed": 8,
+      "total": 9
+    },
+    "LOCAL_ACCEPTABLE": {
+      "passed": 9,
+      "total": 11
+    },
+    "INTENDED_LOCAL": {
+      "passed": 17,
+      "total": 20
+    }
+  },
+  "canonical_14b_matched_cpu": {
+    "LOCAL_SAFE": {
+      "passed": 8,
+      "total": 9
+    },
+    "LOCAL_ACCEPTABLE": {
+      "passed": 9,
+      "total": 11
+    },
+    "INTENDED_LOCAL": {
+      "passed": 17,
+      "total": 20
+    }
+  },
+  "canonical_qwen3_cpu": {
+    "LOCAL_SAFE": {
+      "passed": 9,
+      "total": 9
+    },
+    "LOCAL_ACCEPTABLE": {
+      "passed": 9,
+      "total": 11
+    },
+    "INTENDED_LOCAL": {
+      "passed": 18,
+      "total": 20
+    }
+  },
+  "manual_qwen3_mean": 2,
+  "manual_matched_14b_mean": 1.85,
+  "failure_recovery": "1/3 historical failures; A04 only",
+  "quality_verdict": "INCREMENTAL_QUALITY_SMALL",
+  "quality_scope": "Small validation-wording improvement; generic short challenges do not establish a new capability tier.",
+  "final_verdict": "SPARSE_INCONCLUSIVE",
+  "verdict_reason": "Qwen3 Vulkan startup failed repeatedly; successful direct observations were CPU-only. No valid successful Vulkan execution/performance/control comparison exists. Candidate is not promoted, but a general hardware-tier rejection is not established.",
+  "resource_penalty": {
+    "gguf_ratio_vs_14b": 2.064581779977521,
+    "extra_weight_bytes": 9568578432,
+    "qwen3_usability": "SYSTEM_PRESSURED"
+  },
+  "separate_tier_qualified": false,
+  "dense_32b": "BLOCKED",
+  "invalid_old_ttft_ratios": "WITHDRAWN: cache policy, backend and sampling differ",
+  "audit_corrections": "audit_corrections.md"
+}

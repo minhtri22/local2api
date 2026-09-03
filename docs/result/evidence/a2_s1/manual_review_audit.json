@@ -1,0 +1,69 @@
+{
+  "schema": "local2api.a2_s1.manual_audit.v1",
+  "status": "complete",
+  "rubric": {"0":"wrong/unusable","1":"substantial repair required","2":"mostly correct/minor repair","3":"production acceptable"},
+  "policy": "Judge only the delivered output. A completed core helper followed by truncated examples requires minor cleanup. An absent requested refactor or assertion requires substantial work. Keyword matching remains unchanged. Both models use this same rubric.",
+  "candidate_source": "quality_results_128.json",
+  "candidate": {
+    "A01":{"score":2,"note":"Correct status-preservation rationale; incomplete trailing explanation needs cleanup."},
+    "A02":{"score":2,"note":"Two relevant validation examples, but nullable types do not themselves make fields optional to supply; final sentence also cut."},
+    "A03":{"score":2,"note":"Correct deterministic testing benefits; incomplete final bullet."},
+    "A04":{"score":2,"note":"Identifies empty input forwarded without validation. More explicit validation framing than 14B; unfinished ending requires cleanup."},
+    "A05":{"score":3,"note":"Clearly restricts fallback to degradable tasks and completes the summary."},
+    "B01":{"score":2,"note":"Clamp function is correct; remove syntactically incomplete optional example."},
+    "B02":{"score":2,"note":"Correct list/nonempty validator; remove cut final example."},
+    "B03":{"score":1,"note":"Only a long nested before example is delivered. No early-return refactor is supplied."},
+    "B04":{"score":3,"note":"Complete minimal FastAPI endpoint with correct payload."},
+    "B05":{"score":2,"note":"First helper is correct; incomplete alternative expression needs removal."},
+    "C01":{"score":2,"note":"A correct 503 assertion is present; live URL/placeholder scaffolding and empty trailing fence need cleanup."},
+    "C02":{"score":2,"note":"Unchecked empty-array indexing is relevant; null-pointer/undefined-behavior terminology is imprecise for Python."},
+    "C03":{"score":1,"note":"Response starts a mock setup but stops inside a string before exercising the gateway or asserting preserved 429."},
+    "C04":{"score":1,"note":"Explains the DONE convention and collecting events but never supplies the terminal-event/EOF assertion that would prove termination."},
+    "C05":{"score":2,"note":"Identifies enforcement of an explicit override as a test scenario; steps are cut."},
+    "D01":{"score":2,"note":"Generic stable HTTP interface discussion, no backend contract; incomplete ending."},
+    "D02":{"score":3,"note":"Exact requested call path."},
+    "D03":{"score":2,"note":"Reasonable request for missing diff; does not supply the requested general summary. No invented diff details."},
+    "D04":{"score":2,"note":"Correct async versus sync mismatch; unfinished final sentence."},
+    "D05":{"score":2,"note":"Explains volatile-session and scaling risks; does not reach explicit gateway-owned reconstructible context and ends mid-explanation."}
+  },
+  "control": {
+    "A01":{"score":2,"note":"Correct preservation and error-handling rationale; final example is incomplete."},
+    "A02":{"score":2,"note":"Two requested bullets delivered; numeric strings may be coerced successfully, so the type-error example needs qualification."},
+    "A03":{"score":2,"note":"Correct deterministic-test benefits without domain drift; final debugging bullet is cut."},
+    "A04":{"score":2,"note":"Correctly identifies inverted empty-input branch; unfinished explanation and no explicit validation criterion."},
+    "A05":{"score":2,"note":"Useful fallback rationale but says automatic switch is particularly useful for degradable tasks, weakening the required only-for-degradable boundary."},
+    "B01":{"score":2,"note":"Correct clamp helper; incomplete optional example and overly narrow return annotation need cleanup."},
+    "B02":{"score":2,"note":"Correct type/nonempty validator; remove incomplete example error formatting."},
+    "B03":{"score":1,"note":"Nested before example is supplied, but output stops at the refactored-function heading without the requested early returns."},
+    "B04":{"score":2,"note":"Complete correct endpoint; incomplete trailing explanation needs cleanup."},
+    "B05":{"score":1,"note":"Helper ends inside an unterminated return string; requested implementation is not usable without completing it."},
+    "C01":{"score":2,"note":"Correct 503 assertion, with live external URL scaffolding and unclosed fence requiring cleanup."},
+    "C02":{"score":1,"note":"Conflates an empty array with an array containing an empty string; does not actually describe the requested empty-array edge case."},
+    "C03":{"score":2,"note":"Test idea includes upstream 429 mock, gateway request and returned-429 assertion; last sentence is cut but the core idea is delivered."},
+    "C04":{"score":1,"note":"Correctly distinguishes SSE protocol from an application DONE convention, but supplies no test proving terminal marker and termination."},
+    "C05":{"score":1,"note":"Generic advice to investigate use case and override mechanism; never identifies a concrete missing override test."},
+    "D01":{"score":2,"note":"Reasonable generic public API contract discussion; backend criterion absent and ending cut."},
+    "D02":{"score":3,"note":"Exact requested call path, no extra content."},
+    "D03":{"score":3,"note":"Complete general summary of route-reason header addition without inventing specific code changes."},
+    "D04":{"score":2,"note":"Identifies async/sync contract mismatch; promise terminology is generic and final blocking explanation is cut."},
+    "D05":{"score":2,"note":"Useful scalability and session-loss rationale; no context reconstruction criterion and final load-balancing explanation is cut."}
+  },
+  "challenge": {
+    "qwen3_sparse": {
+      "CH01":{"score":1,"note":"Flags upstream status before 200, but suggests generic 502 remapping and stops in the second bullet; no complete status-preservation invariant or test."},
+      "CH02":{"score":1,"note":"Ownership/TTL fields are relevant but omit reconstructible context and backend relationship; named failure mode is not explained before truncation."},
+      "CH03":{"score":1,"note":"Plausible missing-DONE bug explanation; test stops at response assignment, with no assertion delivered."}
+    },
+    "14b_control": {
+      "CH01":{"score":1,"note":"Four bullets delivered, but body-error heuristic and arbitrary 500 rewrite do not preserve upstream status or establish a reliable invariant."},
+      "CH02":{"score":1,"note":"Generic introduction reaches only context ID and an unfinished Owner field; no usable ownership record and failure explanation."},
+      "CH03":{"score":1,"note":"Plausible missing-DONE explanation and suggestion to check its presence, but no requested pytest-style assertion is delivered."}
+    }
+  },
+  "historical_14b_failure_review": {
+    "A04":{"score":2,"note":"Identifies inverted empty-input branch but focuses on missing nonempty handling; incomplete answer."},
+    "D01":{"score":2,"note":"Reasonable general interface stability discussion; backend contract not addressed."},
+    "D05":{"score":2,"note":"Useful session loss/scaling rationale; recommendation and final sentence cut before explicit context reconstruction."}
+  },
+  "historical_review_note":"The published 2.65 versus 2.55 means used a looser interpretation of completion and are superseded for incremental claims. Historical source artifacts remain unchanged. Failure recovery deltas above compare both archived outputs under the user's same rubric."
+}

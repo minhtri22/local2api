@@ -1,0 +1,7 @@
+One edge case for an empty messages array is **"null pointer dereference"** or **"accessing null data"** when the code assumes that the array has at least one element.
+
+For example, if you're iterating through a messages array and directly access `messages[0]` without checking if the array is empty, it could lead to a crash or undefined behavior.
+
+Another common edge case is **"incorrect message count"** - if your code relies on the array length to determine how many messages were processed, an empty array might cause incorrect logic flow or incorrect reporting of message processing status.
+
+These edge cases highlight the importance

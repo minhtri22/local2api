@@ -1,0 +1,21 @@
+```python
+def select_local_when_short(task_class):
+    """
+    Helper function that returns 'local' when task_class == 'short', otherwise returns None.
+    
+    Args:
+        task_class (str): The class of the task
+        
+    Returns:
+        str or None: Returns 'local' if task_class is 'short', otherwise None
+    """
+    if task_class == 'short':
+        return 'local'
+    return None
+
+# Alternative implementation using ternary operator
+def select_local_when_short_alt(task_class):
+    """
+    Alternative implementation using ternary operator.
+    """
+    return 'local' if task_class == '

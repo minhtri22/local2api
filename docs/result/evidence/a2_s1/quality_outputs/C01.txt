@@ -1,0 +1,22 @@
+Here's a pytest assertion for checking an HTTP 503 status code:
+
+```python
+import pytest
+import requests
+
+def test_api_returns_503():
+    response = requests.get("https://example.com/api")
+    assert response.status_code == 503
+```
+
+Or if you're using a mock or testing a specific function that returns a response:
+
+```python
+def test_function_returns_503():
+    response = my_function_that_returns_response()
+    assert response.status_code == 503
+```
+
+If you're using pytest with a testing framework like Flask's test client:
+
+```python

@@ -1,0 +1,10 @@
+Backend switching should not depend on hidden server session memory for several important reasons:
+
+## 1. **Scalability Issues**
+- **Single Point of Failure**: When backend switching relies on server-side session memory, all requests must be routed to the same server instance
+- **Load Balancing Problems**: Load balancers can't distribute traffic effectively across multiple servers
+- **Resource Limitations**: Server memory is finite and can become a bottleneck under high load
+
+## 2. **Session Persistence Challenges**
+- **Server Crashes**: If a server goes down, all session data is lost
+- **Memory Limits**: Server memory constraints prevent scaling

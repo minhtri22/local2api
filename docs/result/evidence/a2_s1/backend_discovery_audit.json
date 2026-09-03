@@ -1,0 +1,82 @@
+{
+  "utc": "2026-09-03T14:00:32.384622+00:00",
+  "checks": [
+    {
+      "command": [
+        "D:\\WORK\\RESEARCH\\CPuFriend\\bin\\llama-server.exe",
+        "--version"
+      ],
+      "exe_sha256": "f1002bcfcb1063f0720bca01a86ab5573a0394a955e4b588f79c7a09841e8c4f",
+      "GGML_BACKEND_PATH": null,
+      "stdout": "",
+      "stderr": "version: 0.3.0-dev (build 10726, commit 85c55223c)\nbuilt with Clang 20.1.8 for Windows x86_64\n",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "D:\\WORK\\RESEARCH\\CPuFriend\\bin\\llama-server.exe",
+        "--list-devices"
+      ],
+      "exe_sha256": "f1002bcfcb1063f0720bca01a86ab5573a0394a955e4b588f79c7a09841e8c4f",
+      "GGML_BACKEND_PATH": null,
+      "stdout": "Available devices:\n  (none)\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\minht\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+        "--list-devices"
+      ],
+      "exe_sha256": "56becb0dba32df23762231cecaedc1cc642a33364ec306bc4d10e8dbf49f9eb9",
+      "GGML_BACKEND_PATH": null,
+      "stdout": "Available devices:\n  (none)\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\minht\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+        "--list-devices"
+      ],
+      "exe_sha256": "56becb0dba32df23762231cecaedc1cc642a33364ec306bc4d10e8dbf49f9eb9",
+      "GGML_BACKEND_PATH": "C:\\Users\\minht\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\vulkan\\ggml-vulkan.dll",
+      "stdout": "Available devices:\n  Vulkan0: Intel(R) Arc(TM) 140V GPU (16GB) (18436 MiB, 17668 MiB free)\n",
+      "stderr": "",
+      "exit_code": 0
+    }
+  ],
+  "cpu_directory_dlls": [
+    "ggml-base.dll",
+    "ggml-cpu-alderlake.dll",
+    "ggml-cpu-cannonlake.dll",
+    "ggml-cpu-cascadelake.dll",
+    "ggml-cpu-cooperlake.dll",
+    "ggml-cpu-haswell.dll",
+    "ggml-cpu-icelake.dll",
+    "ggml-cpu-ivybridge.dll",
+    "ggml-cpu-piledriver.dll",
+    "ggml-cpu-sandybridge.dll",
+    "ggml-cpu-sapphirerapids.dll",
+    "ggml-cpu-skylakex.dll",
+    "ggml-cpu-sse42.dll",
+    "ggml-cpu-x64.dll",
+    "ggml-cpu-zen4.dll",
+    "ggml-rpc.dll",
+    "ggml.dll",
+    "libomp.dll",
+    "llama-batched-bench-impl.dll",
+    "llama-bench-impl.dll",
+    "llama-cli-impl.dll",
+    "llama-common.dll",
+    "llama-completion-impl.dll",
+    "llama-fit-params-impl.dll",
+    "llama-perplexity-impl.dll",
+    "llama-quantize-impl.dll",
+    "llama-server-impl.dll",
+    "llama.dll",
+    "mtmd.dll"
+  ],
+  "vulkan_dll_path": "C:\\Users\\minht\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\vulkan\\ggml-vulkan.dll",
+  "conclusion": "CPuFriend direct measurements are CPU-only under the captured environment. Explicit Ollama backend DLL discovery recognizes Arc, but this check performs no inference."
+}

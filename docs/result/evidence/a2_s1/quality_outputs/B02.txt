@@ -1,0 +1,24 @@
+```python
+def validate_messages(messages):
+    """Validate that messages is a non-empty list."""
+    if not isinstance(messages, list):
+        raise TypeError("messages must be a list")
+    
+    if len(messages) == 0:
+        raise ValueError("messages cannot be empty")
+    
+    return True
+
+# Example usage:
+try:
+    validate_messages([])  # Raises ValueError
+except ValueError as e:
+    print(f"Validation error: {e}")
+
+try:
+    validate_messages("not a list")  # Raises TypeError
+except TypeError as e:
+    print(f"Validation error: {e}")
+
+try:
+    validate_messages(["

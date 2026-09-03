@@ -1,0 +1,3 @@
+• **Data Type Mismatch**: A FastAPI request validation failure occurs when the data sent in a request doesn't match the expected data type defined in the Pydantic model or type hints. For example, if a field is defined as `int` but the client sends a string like "hello", FastAPI raises a `ValidationError` with details about the type mismatch.
+
+• **Missing Required Fields**: FastAPI validation fails when required fields (those without default values and not marked as optional with `Optional[]` or `None` allowed) are missing from the request body. The framework raises a `ValidationError` indicating which required fields were

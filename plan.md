@@ -48,8 +48,8 @@ Kimi K3 remains a reference architecture only. Its included low-memory measureme
 Decision order after A2.S0:
 
 1. **A2.1 dense 14B is COMPLETE** as the dense quality/control experiment.
-2. **A2.S1 sparse qualification is COMPLETE**: Qwen3-Coder-30B-A3B-Instruct Q4_K_M produced only a small quality uplift over 14B and is not justified as a new local tier on this hardware.
-3. **A2.2 dense 32B remains BLOCKED**: A2.S1 did not provide enough incremental value to justify spending an even tighter memory/active-compute budget on dense 32B.
+2. **A2.S1 bounded sparse qualification is COMPLETE** with `SPARSE_INCONCLUSIVE`: short-task quality uplift is small, and successful Qwen3 Vulkan inference remains unqualified. The evidence does not promote a separate tier or establish a general hardware-tier rejection.
+3. **A2.2 dense 32B remains BLOCKED**: no larger dense experiment is authorized or justified by this incomplete sparse runtime qualification.
 
 #### A2.1 — Dense 14B Control — COMPLETE
 
@@ -63,18 +63,18 @@ Conclusion: keep 14B as a selective quality-sensitive local tier candidate and u
 
 #### A2.S1 — Sparse 30B-A3B Qualification — COMPLETE
 
-Verdict: **`SPARSE_NOT_JUSTIFIED_OVER_14B`**.
+Verdict: **`SPARSE_INCONCLUSIVE`**. This audited verdict supersedes `a63a5ef`; see [the canonical report](docs/result/result_a2_s1_qwen3_coder.md).
 
-Qwen3-Coder-30B-A3B-Instruct Q4_K_M scored 18/20 on the same intended-local canonical suite versus 17/20 for the 14B control. Manual quality moved only from 2.55 to 2.65 on the 0–3 rubric, so the quality verdict is **`INCREMENTAL_QUALITY_SMALL`**.
+Qwen3-Coder-30B-A3B-Instruct Q4_K_M scored 18/20 versus 17/20 for both the frozen 14B control and a repaired same-runtime CPU control. Only A04 was recovered among the three historical failures. Audited manual scores are 2.00 versus 1.85/3; both models score 1/3 on the separate short challenges. Quality verdict: **`INCREMENTAL_QUALITY_SMALL`**. The earlier 2.65/2.55 means are withdrawn as comparative evidence because incomplete outputs were over-credited.
 
-The working direct llama-server profile required 4K context, 32 GPU layers, batch 32, ubatch 16 and q4_0 KV. Its 4K fixture reached about 333 seconds TTFT and crossed the predeclared 300-second early-stop threshold. The tested Ollama/Vulkan path continued to fail startup allocations even after q4 KV, partial offload and smaller batch settings.
+The successful CPuFriend direct profile requested 4K context, 32 GPU layers, batch 32, ubatch 16 and q4_0 KV, but device discovery shows no GPU backend in that installation: treat these as CPU observations, not verified Vulkan offload. Its 4K fixture reached about 333 seconds TTFT; the old harness failed to cancel at the 300-second gate, and larger direct contexts were omitted. Ollama/Vulkan attempts repeatedly failed allocations. Old cross-runtime TTFT ratios are invalid because cache policy and backend differed.
 
-Conclusion: keep Qwen2.5-Coder 14B as the selective local quality-tier candidate. Do not create a Qwen3 sparse premium/specialist tier from current evidence. Dense 32B remains blocked.
+Conclusion: keep Qwen2.5-Coder 14B as the selective local quality-tier candidate. Do not promote a Qwen3 premium/specialist tier from current evidence. Successful Arc inference and usable memory headroom remain real qualification blockers, not proof that the model can never be useful on this hardware. Dense 32B remains blocked.
 
 Candidate ladder result:
 
 - 14B: selected as the current selective local quality-tier candidate;
-- sparse Qwen3-Coder-30B-A3B: tested and rejected as an additional production tier on this hardware;
+- sparse Qwen3-Coder-30B-A3B: short CPU tasks tested; no additional production tier qualified, intended GPU path unresolved;
 - dense 32B: remains blocked because the 14B/sparse comparison does not justify the additional active-compute and memory pressure.
 
 Use existing runtimes first: Ollama/llama.cpp with mmap, partial offload, quantized KV where supported, and measured Vulkan/SYCL configurations. Determine max practical model, context, usable throughput and Local Capability Profile. Do not infer production usefulness merely from successful model loading.
@@ -124,4 +124,4 @@ Route on task class, context requirement, privacy, latency, backend capability a
 
 ## Current next action
 
-Track A: A2.S1 is complete with `SPARSE_NOT_JUSTIFIED_OVER_14B`; A2.2 dense 32B remains blocked. The selected local quality-tier candidate remains the A2.1 14B profile. If Track A resumes, the next meaningful step is A3 production qualification of that 14B profile. Track B should now proceed with B1 Context Ownership using the measured 14B capability profile.
+Track A: the bounded A2.S1 run and audit are complete with `SPARSE_INCONCLUSIVE`; A2.2 dense 32B remains blocked. The selected local quality-tier candidate remains A2.1 14B. A follow-up sparse test requires sufficient RAM headroom, a matching Vulkan build/DLL, explicit Arc device/offload evidence, and cache-controlled measurements before any larger matrix. Alternatively, qualify the 14B candidate for production under A3. Track B remains independent and unchanged by A2.S1.

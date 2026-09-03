@@ -1,0 +1,766 @@
+{
+  "schema": "local2api.a2_s1.quality.v1",
+  "created_at": "2026-09-03T02:08:14.350995+00:00",
+  "provider": "direct_llama_server",
+  "server_url": "http://127.0.0.1:11437",
+  "runtime_config": {
+    "ctx": 4096,
+    "ngl": 32,
+    "batch": 32,
+    "ubatch": 16,
+    "kv": "q4_0",
+    "flash_attn": "on",
+    "n_predict": 96
+  },
+  "summary": {
+    "LOCAL_ACCEPTABLE": {
+      "passed": 9,
+      "total": 11,
+      "pass_rate": 0.818
+    },
+    "LOCAL_SAFE": {
+      "passed": 9,
+      "total": 9,
+      "pass_rate": 1.0
+    },
+    "INTENDED_LOCAL": {
+      "passed": 18,
+      "total": 20,
+      "pass_rate": 0.9
+    }
+  },
+  "cases": [
+    {
+      "task_id": "A01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Explain why preserving upstream HTTP status matters.",
+      "criteria": {
+        "contains_all": [
+          "status"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 14434.049,
+      "prompt_tokens": 38,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 22.19670250460582,
+      "generation_tokens_per_s": 7.504698731374128,
+      "output": "Preserving upstream HTTP status codes is crucial for maintaining the integrity and reliability of web applications, especially in proxy, load balancing, or API gateway scenarios. Here's why it matters:\n\n### 1. **Accurate Error Handling**\nWhen a proxy or gateway forwards requests to upstream servers, preserving the HTTP status codes ensures that clients receive accurate information about the outcome of their requests. For example:\n- If an upstream server returns a `404 Not Found`, the client should know",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 38,
+        "prompt_ms": 1711.966,
+        "prompt_per_token_ms": 45.051736842105264,
+        "prompt_per_second": 22.19670250460582,
+        "predicted_n": 96,
+        "predicted_ms": 12658.736,
+        "predicted_per_token_ms": 133.24985263157896,
+        "predicted_per_second": 7.504698731374128
+      },
+      "error": null
+    },
+    {
+      "task_id": "A02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Explain a FastAPI request validation failure in two bullets.",
+      "criteria": {
+        "contains_all": [
+          "validation"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 14948.663,
+      "prompt_tokens": 41,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 25.84731925473983,
+      "generation_tokens_per_s": 7.111086625685349,
+      "output": "• **Data Type Mismatch**: A FastAPI request validation failure occurs when the data sent in a request doesn't match the expected data type defined in the Pydantic model or type hints. For example, if a field is defined as `int` but the client sends a string like \"hello\", FastAPI raises a `ValidationError` with details about the type mismatch.\n\n• **Missing Required Fields**: FastAPI validation fails when required fields (those without default values and not marked",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 41,
+        "prompt_ms": 1586.238,
+        "prompt_per_token_ms": 38.688731707317075,
+        "prompt_per_second": 25.84731925473983,
+        "predicted_n": 96,
+        "predicted_ms": 13359.421,
+        "predicted_per_token_ms": 140.6254842105263,
+        "predicted_per_second": 7.111086625685349
+      },
+      "error": null
+    },
+    {
+      "task_id": "A03",
+      "class": "LOCAL_SAFE",
+      "prompt": "What does a deterministic router buy us in testing?",
+      "criteria": {
+        "contains_all": [
+          "determin"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 17932.937,
+      "prompt_tokens": 39,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 24.582677532630353,
+      "generation_tokens_per_s": 5.812562955410484,
+      "output": "A deterministic router in testing provides several key benefits:\n\n## Predictable Behavior\n- **Consistent routing decisions** - The same input always produces the same output path\n- **Reproducible test results** - Tests can be run multiple times with identical outcomes\n- **Easier debugging** - When issues occur, you know exactly which path was taken\n\n## Simplified Test Design\n- **Deterministic test cases** - You can design tests with known expected behaviors\n- **",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 39,
+        "prompt_ms": 1586.483,
+        "prompt_per_token_ms": 40.67905128205128,
+        "prompt_per_second": 24.582677532630353,
+        "predicted_n": 96,
+        "predicted_ms": 16343.909,
+        "predicted_per_token_ms": 172.04114736842104,
+        "predicted_per_second": 5.812562955410484
+      },
+      "error": null
+    },
+    {
+      "task_id": "A04",
+      "class": "LOCAL_SAFE",
+      "prompt": "Identify the bug: if not messages: return backend.chat(messages).",
+      "criteria": {
+        "contains_all": [
+          "empty",
+          "valid"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 15515.428,
+      "prompt_tokens": 43,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 21.0649147189377,
+      "generation_tokens_per_s": 7.053254297287987,
+      "output": "Looking at this code snippet, I can identify a potential bug:\n\n**The bug:**\nThe condition `if not messages:` will evaluate to `True` when `messages` is an empty list `[]`, `None`, or any other falsy value. However, the code returns immediately without checking if `messages` is a valid list with content.\n\n**The issue:**\nIf `messages` is an empty list `[]`, the function returns `backend.chat(messages)` without",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 43,
+        "prompt_ms": 2041.309,
+        "prompt_per_token_ms": 47.472302325581396,
+        "prompt_per_second": 21.0649147189377,
+        "predicted_n": 96,
+        "predicted_ms": 13468.96,
+        "predicted_per_token_ms": 141.77852631578946,
+        "predicted_per_second": 7.053254297287987
+      },
+      "error": null
+    },
+    {
+      "task_id": "A05",
+      "class": "LOCAL_SAFE",
+      "prompt": "Summarize safe fallback: cloud failure may fall back local only for degradable tasks.",
+      "criteria": {
+        "contains_all": [
+          "degrad",
+          "fallback"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 14503.316,
+      "prompt_tokens": 47,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 23.087336939542617,
+      "generation_tokens_per_s": 7.624113546324314,
+      "output": "**Summary: Safe Fallback Strategy**\n\nWhen cloud services fail, the system should only fall back to local processing for **degradable tasks** - those that can continue operating in a reduced capacity rather than failing completely.\n\n**Key Points:**\n- **Selective fallback**: Not all tasks should fall back locally\n- **Degradable tasks only**: Only tasks that can function at reduced capability\n- **Cloud failure scenario**: Primary trigger for fallback mechanism\n- **Local processing**: Backup",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 47,
+        "prompt_ms": 2035.748,
+        "prompt_per_token_ms": 43.31378723404256,
+        "prompt_per_second": 23.087336939542617,
+        "predicted_n": 96,
+        "predicted_ms": 12460.465,
+        "predicted_per_token_ms": 131.1627894736842,
+        "predicted_per_second": 7.624113546324314
+      },
+      "error": null
+    },
+    {
+      "task_id": "B01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Write a Python helper that clamps n to 1..100.",
+      "criteria": {
+        "contains_all": [
+          "def ",
+          "min(",
+          "max("
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 13314.065,
+      "prompt_tokens": 45,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 25.57400862355571,
+      "generation_tokens_per_s": 8.226592573066865,
+      "output": "Here's a Python helper function that clamps a value to the range 1-100:\n\n```python\ndef clamp(n):\n    \"\"\"\n    Clamp a value to the range 1-100.\n    \n    Args:\n        n: The value to clamp (int or float)\n        \n    Returns:\n        The clamped value (int or float)\n    \"\"\"\n    return max(1, min(100, n))\n\n# Example usage:\nif __",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 45,
+        "prompt_ms": 1759.599,
+        "prompt_per_token_ms": 39.102199999999996,
+        "prompt_per_second": 25.57400862355571,
+        "predicted_n": 96,
+        "predicted_ms": 11547.916,
+        "predicted_per_token_ms": 121.55701052631578,
+        "predicted_per_second": 8.226592573066865
+      },
+      "error": null
+    },
+    {
+      "task_id": "B02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Add simple validation that messages is a non-empty list.",
+      "criteria": {
+        "contains_all": [
+          "list",
+          "messages"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 11860.768,
+      "prompt_tokens": 40,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 28.52033642588848,
+      "generation_tokens_per_s": 9.088240887747023,
+      "output": "```python\ndef validate_messages(messages):\n    \"\"\"Validate that messages is a non-empty list.\"\"\"\n    if not isinstance(messages, list):\n        raise TypeError(\"messages must be a list\")\n    \n    if len(messages) == 0:\n        raise ValueError(\"messages cannot be empty\")\n    \n    return True\n\n# Example usage:\ntry:\n    validate_messages([])  # Raises ValueError\nexcept ValueError as e:\n    print(f\"Validation error: {e}\")\n\ntry:\n    validate",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 40,
+        "prompt_ms": 1402.508,
+        "prompt_per_token_ms": 35.0627,
+        "prompt_per_second": 28.52033642588848,
+        "predicted_n": 96,
+        "predicted_ms": 10453.068,
+        "predicted_per_token_ms": 110.0322947368421,
+        "predicted_per_second": 9.088240887747023
+      },
+      "error": null
+    },
+    {
+      "task_id": "B03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Refactor a function with nested ifs using early returns; explain the change.",
+      "criteria": {
+        "contains_all": [
+          "return"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 11726.626,
+      "prompt_tokens": 44,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 28.949215838115986,
+      "generation_tokens_per_s": 9.312785994432522,
+      "output": "I'll show you how to refactor a function with nested if statements using early returns, which improves readability and reduces complexity.\n\n## Before: Nested Ifs\n\n```javascript\nfunction processUser(user, permissions, isActive) {\n    if (user) {\n        if (permissions) {\n            if (isActive) {\n                if (user.age >= 18) {\n                    if (permissions.canEdit) {\n                        if (permissions.canDelete) {\n                            return {\n                                status: '",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 44,
+        "prompt_ms": 1519.903,
+        "prompt_per_token_ms": 34.54325,
+        "prompt_per_second": 28.949215838115986,
+        "predicted_n": 96,
+        "predicted_ms": 10201.029,
+        "predicted_per_token_ms": 107.37925263157895,
+        "predicted_per_second": 9.312785994432522
+      },
+      "error": null
+    },
+    {
+      "task_id": "B04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Show a small FastAPI endpoint returning {'ok': True}.",
+      "criteria": {
+        "contains_all": [
+          "FastAPI",
+          "ok"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 11351.475,
+      "prompt_tokens": 41,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 29.806952726172973,
+      "generation_tokens_per_s": 9.529385766889355,
+      "output": "Here's a simple FastAPI endpoint that returns `{'ok': True}`:\n\n```python\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\ndef read_root():\n    return {\"ok\": True}\n```\n\nThis creates a GET endpoint at the root path (`/`) that returns the specified JSON response. To run it, save this code in a file (e.g., `main.py`) and execute it with `uvicorn main:app --reload",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 41,
+        "prompt_ms": 1375.518,
+        "prompt_per_token_ms": 33.54921951219512,
+        "prompt_per_second": 29.806952726172973,
+        "predicted_n": 96,
+        "predicted_ms": 9969.163,
+        "predicted_per_token_ms": 104.93855789473685,
+        "predicted_per_second": 9.529385766889355
+      },
+      "error": null
+    },
+    {
+      "task_id": "B05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Implement a helper selecting local when task_class == 'short'.",
+      "criteria": {
+        "contains_all": [
+          "local",
+          "short"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 11415.448,
+      "prompt_tokens": 41,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 29.404424146626237,
+      "generation_tokens_per_s": 9.484629209902431,
+      "output": "```python\ndef select_local_when_short(task_class):\n    \"\"\"\n    Helper function that returns 'local' when task_class == 'short', otherwise returns None.\n    \n    Args:\n        task_class (str): The class of the task\n        \n    Returns:\n        str or None: Returns 'local' if task_class is 'short', otherwise None\n    \"\"\"\n    if task_class == 'short':\n        return 'local'\n    return None\n\n# Alternative implementation using ternary operator",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 41,
+        "prompt_ms": 1394.348,
+        "prompt_per_token_ms": 34.00848780487805,
+        "prompt_per_second": 29.404424146626237,
+        "predicted_n": 96,
+        "predicted_ms": 10016.206,
+        "predicted_per_token_ms": 105.43374736842105,
+        "predicted_per_second": 9.484629209902431
+      },
+      "error": null
+    },
+    {
+      "task_id": "C01",
+      "class": "LOCAL_SAFE",
+      "prompt": "Write one pytest assertion for HTTP 503.",
+      "criteria": {
+        "contains_all": [
+          "pytest",
+          "503"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 11426.237,
+      "prompt_tokens": 40,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 29.325083209923612,
+      "generation_tokens_per_s": 9.44403652834036,
+      "output": "Here's a pytest assertion for checking an HTTP 503 status code:\n\n```python\nimport pytest\nimport requests\n\ndef test_api_returns_503():\n    response = requests.get(\"https://example.com/api\")\n    assert response.status_code == 503\n```\n\nOr if you're using a mock or testing a specific function that returns a response:\n\n```python\ndef test_function_returns_503():\n    response = my_function_that_returns_response",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 40,
+        "prompt_ms": 1364.02,
+        "prompt_per_token_ms": 34.1005,
+        "prompt_per_second": 29.325083209923612,
+        "predicted_n": 96,
+        "predicted_ms": 10059.258,
+        "predicted_per_token_ms": 105.88692631578947,
+        "predicted_per_second": 9.44403652834036
+      },
+      "error": null
+    },
+    {
+      "task_id": "C02",
+      "class": "LOCAL_SAFE",
+      "prompt": "Name an edge case for an empty messages array.",
+      "criteria": {
+        "contains_all": [
+          "empty"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 12059.337,
+      "prompt_tokens": 39,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 28.25982518037377,
+      "generation_tokens_per_s": 8.900476372233287,
+      "output": "One edge case for an empty messages array is **\"null pointer dereference\"** or **\"accessing null data\"** when the code assumes that the array has at least one element.\n\nFor example, if you're iterating through a messages array and directly access `messages[0]` without checking if the array is empty, it could lead to a crash or undefined behavior.\n\nAnother common edge case is **\"incorrect message count\"** - if your code relies on the",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 39,
+        "prompt_ms": 1380.051,
+        "prompt_per_token_ms": 35.38592307692308,
+        "prompt_per_second": 28.25982518037377,
+        "predicted_n": 96,
+        "predicted_ms": 10673.586,
+        "predicted_per_token_ms": 112.35353684210526,
+        "predicted_per_second": 8.900476372233287
+      },
+      "error": null
+    },
+    {
+      "task_id": "C03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Write a pytest test idea for preserving an upstream 429.",
+      "criteria": {
+        "contains_all": [
+          "429"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 13228.338,
+      "prompt_tokens": 43,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 27.958569301490904,
+      "generation_tokens_per_s": 8.136022651372201,
+      "output": "Here's a pytest test idea for preserving an upstream 429 status code:\n\n```python\nimport pytest\nimport requests\nfrom unittest.mock import Mock, patch\nfrom requests.exceptions import HTTPError\n\ndef test_preserve_upstream_429_status_code():\n    \"\"\"Test that upstream 429 status codes are preserved in the response\"\"\"\n    \n    # Mock the upstream request to return 429\n    mock_response = Mock()\n    mock_response.status_code",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 43,
+        "prompt_ms": 1537.99,
+        "prompt_per_token_ms": 35.76720930232558,
+        "prompt_per_second": 27.958569301490904,
+        "predicted_n": 96,
+        "predicted_ms": 11676.467,
+        "predicted_per_token_ms": 122.91017894736842,
+        "predicted_per_second": 8.136022651372201
+      },
+      "error": null
+    },
+    {
+      "task_id": "C04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "What test proves SSE terminates with [DONE]?",
+      "criteria": {
+        "contains_all": [
+          "DONE"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 13441.858,
+      "prompt_tokens": 38,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 24.122450637848377,
+      "generation_tokens_per_s": 8.020888081171387,
+      "output": "In Server-Sent Events (SSE), the `[DONE]` token is not a standard part of the SSE protocol itself. Instead, it's a convention used by some implementations (like certain LLM APIs) to signal the end of a stream of data.\n\nTo test whether an SSE stream terminates with `[DONE]`, you would typically:\n\n1. **Listen to the SSE stream**: Use a client (e.g., JavaScript `EventSource`, Python `requests`, or a",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 38,
+        "prompt_ms": 1575.296,
+        "prompt_per_token_ms": 41.45515789473684,
+        "prompt_per_second": 24.122450637848377,
+        "predicted_n": 96,
+        "predicted_ms": 11844.075,
+        "predicted_per_token_ms": 124.67447368421054,
+        "predicted_per_second": 8.020888081171387
+      },
+      "error": null
+    },
+    {
+      "task_id": "C05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Identify a missing test for explicit model override.",
+      "criteria": {
+        "contains_all": [
+          "override"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 13528.532,
+      "prompt_tokens": 39,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 24.245046550489377,
+      "generation_tokens_per_s": 7.979198313986997,
+      "output": "To identify a missing test for explicit model override, we need to consider the context in which model overrides are used. In many machine learning frameworks or APIs, model overrides allow users to explicitly specify a model to be used, rather than relying on default behavior or automatic selection. This is particularly relevant in scenarios where multiple models are available, and the user wants to enforce a specific one.\n\nHere’s a potential missing test case for explicit model override:\n\n### Test Case: Explicit Model Override Validation",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 39,
+        "prompt_ms": 1608.576,
+        "prompt_per_token_ms": 41.24553846153846,
+        "prompt_per_second": 24.245046550489377,
+        "predicted_n": 96,
+        "predicted_ms": 11905.958,
+        "predicted_per_token_ms": 125.32587368421053,
+        "predicted_per_second": 7.979198313986997
+      },
+      "error": null
+    },
+    {
+      "task_id": "D01",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Across router.py and http.py, what interface contract should remain stable? Answer generally.",
+      "criteria": {
+        "contains_all": [
+          "backend"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": false,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 13776.597,
+      "prompt_tokens": 46,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 22.344436575316784,
+      "generation_tokens_per_s": 8.124935160879275,
+      "output": "In the context of `router.py` and `http.py`, the **interface contract** that should remain stable across these modules typically refers to the **APIs and protocols** that define how components interact with each other, especially in an HTTP-based system. Here's a general breakdown of what should remain stable:\n\n### 1. **HTTP Request/Response Interface**\n   - The structure of HTTP requests and responses (e.g., headers, status codes, body formats) should remain",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 46,
+        "prompt_ms": 2058.678,
+        "prompt_per_token_ms": 44.753869565217386,
+        "prompt_per_second": 22.344436575316784,
+        "predicted_n": 96,
+        "predicted_ms": 11692.401,
+        "predicted_per_token_ms": 123.07790526315789,
+        "predicted_per_second": 8.124935160879275
+      },
+      "error": null
+    },
+    {
+      "task_id": "D02",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Trace: API handler -> router -> backend -> upstream. Return the call path only.",
+      "criteria": {
+        "contains_all": [
+          "router",
+          "backend"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 3008.417,
+      "prompt_tokens": 46,
+      "output_tokens": 9,
+      "prompt_tokens_per_s": 25.313167909946756,
+      "generation_tokens_per_s": 6.786274759299317,
+      "output": "API handler -> router -> backend -> upstream",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 46,
+        "prompt_ms": 1817.236,
+        "prompt_per_token_ms": 39.50513043478261,
+        "prompt_per_second": 25.313167909946756,
+        "predicted_n": 9,
+        "predicted_ms": 1178.85,
+        "predicted_per_token_ms": 147.35625,
+        "predicted_per_second": 6.786274759299317
+      },
+      "error": null
+    },
+    {
+      "task_id": "D03",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Summarize a diff that adds a route-reason response header.",
+      "criteria": {
+        "contains_all": [
+          "header",
+          "route"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 7486.363,
+      "prompt_tokens": 43,
+      "output_tokens": 50,
+      "prompt_tokens_per_s": 25.420156765515607,
+      "generation_tokens_per_s": 8.468798096075922,
+      "output": "I don't see a diff in your message. Could you please share the actual diff content you'd like me to summarize? Once you provide it, I'll be happy to summarize what changes were made to add the route-reason response header.",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 43,
+        "prompt_ms": 1691.571,
+        "prompt_per_token_ms": 39.33886046511628,
+        "prompt_per_second": 25.420156765515607,
+        "predicted_n": 50,
+        "predicted_ms": 5785.945,
+        "predicted_per_token_ms": 118.08051020408163,
+        "predicted_per_second": 8.468798096075922
+      },
+      "error": null
+    },
+    {
+      "task_id": "D04",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Spot an interface mismatch: protocol expects async chat(), implementation defines sync chat().",
+      "criteria": {
+        "contains_all": [
+          "async",
+          "sync"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": true,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 12908.475,
+      "prompt_tokens": 44,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 25.822687343596677,
+      "generation_tokens_per_s": 8.493875022017018,
+      "output": "The error message you're seeing:\n\n```\nSpot an interface mismatch: protocol expects async chat(), implementation defines sync chat().\n```\n\nindicates that there's a **mismatch between an asynchronous (async) method** expected by a protocol or interface, but the actual implementation provides a **synchronous (sync) method**.\n\n### Breakdown of the Issue\n\n- **Protocol/Interface expects**: `async chat()`\n  - This means the method is defined with `async def",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 44,
+        "prompt_ms": 1703.928,
+        "prompt_per_token_ms": 38.72563636363637,
+        "prompt_per_second": 25.822687343596677,
+        "predicted_n": 96,
+        "predicted_ms": 11184.53,
+        "predicted_per_token_ms": 117.73189473684211,
+        "predicted_per_second": 8.493875022017018
+      },
+      "error": null
+    },
+    {
+      "task_id": "D05",
+      "class": "LOCAL_ACCEPTABLE",
+      "prompt": "Why should backend switching not depend on hidden server session memory?",
+      "criteria": {
+        "contains_all": [
+          "state",
+          "context"
+        ]
+      },
+      "status": "ok",
+      "mechanical_pass": false,
+      "manual_score": null,
+      "malformed": false,
+      "hallucination": false,
+      "repetition": false,
+      "truncation": false,
+      "ttft_ms": null,
+      "wall_ms": 13045.678,
+      "prompt_tokens": 41,
+      "output_tokens": 96,
+      "prompt_tokens_per_s": 24.957329054470286,
+      "generation_tokens_per_s": 8.349017768819037,
+      "output": "Backend switching should not depend on hidden server session memory for several important reasons:\n\n## 1. **Scalability Issues**\n- **Single Point of Failure**: When backend switching relies on server-side session memory, all requests must be routed to the same server instance\n- **Load Balancing Problems**: Load balancers can't distribute traffic effectively across multiple servers\n- **Resource Limitations**: Server memory is finite and can become a bottleneck under high load\n\n## 2. **",
+      "raw_timings": {
+        "cache_n": 0,
+        "prompt_n": 41,
+        "prompt_ms": 1642.804,
+        "prompt_per_token_ms": 40.06839024390244,
+        "prompt_per_second": 24.957329054470286,
+        "predicted_n": 96,
+        "predicted_ms": 11378.584,
+        "predicted_per_token_ms": 119.77456842105263,
+        "predicted_per_second": 8.349017768819037
+      },
+      "error": null
+    }
+  ]
+}

@@ -34,19 +34,373 @@
   "runs": {
     "14b_control": {
       "CH01": {
-        "status": "error",
-        "error": "<HTTPError 500: 'Internal Server Error'>",
-        "mechanical_pass": false
+        "task_id": "CH01",
+        "class": "CHALLENGE_ONLY",
+        "prompt": "Given a FastAPI proxy that sometimes returns 200 with an upstream error body, propose the smallest code-level invariant to prevent this bug. Answer in 4 bullets.",
+        "criteria": {
+          "contains_all": [
+            "status",
+            "upstream",
+            "test"
+          ]
+        },
+        "request": {
+          "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nGiven a FastAPI proxy that sometimes returns 200 with an upstream error body, propose the smallest code-level invariant to prevent this bug. Answer in 4 bullets.<|im_end|>\n<|im_start|>assistant\n",
+          "stream": false,
+          "temperature": 0,
+          "top_p": 1,
+          "top_k": 40,
+          "seed": 42,
+          "n_predict": 96,
+          "cache_prompt": false
+        },
+        "ttft_ms": null,
+        "ttft_note": "Non-streaming matched historical Qwen3 quality method; not measured.",
+        "status": "ok",
+        "output": "- Implement a middleware in FastAPI to intercept responses.\n- Check if the response status code is 200 and the body indicates an error.\n- If both conditions are met, modify the response status code to an appropriate error code (e.g., 500).\n- Return the modified response to ensure consistency in error handling.",
+        "raw_response": {
+          "index": 0,
+          "content": "- Implement a middleware in FastAPI to intercept responses.\n- Check if the response status code is 200 and the body indicates an error.\n- If both conditions are met, modify the response status code to an appropriate error code (e.g., 500).\n- Return the modified response to ensure consistency in error handling.",
+          "tokens": [],
+          "id_slot": 3,
+          "stop": true,
+          "model": "D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+          "tokens_predicted": 69,
+          "tokens_evaluated": 64,
+          "generation_settings": {
+            "seed": 42,
+            "temperature": 0.0,
+            "dynatemp_range": 0.0,
+            "dynatemp_exponent": 1.0,
+            "top_k": 40,
+            "top_p": 1.0,
+            "min_p": 0.05000000074505806,
+            "top_n_sigma": -1.0,
+            "xtc_probability": 0.0,
+            "xtc_threshold": 0.10000000149011612,
+            "typical_p": 1.0,
+            "repeat_last_n": 64,
+            "repeat_penalty": 1.0,
+            "presence_penalty": 0.0,
+            "frequency_penalty": 0.0,
+            "dry_multiplier": 0.0,
+            "dry_base": 1.75,
+            "dry_allowed_length": 2,
+            "dry_penalty_last_n": 64,
+            "dry_sequence_breakers": [
+              "\n",
+              ":",
+              "\"",
+              "*"
+            ],
+            "mirostat": 0,
+            "mirostat_tau": 5.0,
+            "mirostat_eta": 0.10000000149011612,
+            "adaptive_target": -1.0,
+            "adaptive_decay": 0.8999999761581421,
+            "stop": [],
+            "max_tokens": 96,
+            "n_predict": 96,
+            "n_keep": 0,
+            "n_discard": 0,
+            "ignore_eos": false,
+            "stream": false,
+            "logit_bias": [],
+            "n_probs": 0,
+            "min_keep": 0,
+            "grammar": "",
+            "grammar_lazy": false,
+            "grammar_triggers": [],
+            "preserved_tokens": [],
+            "chat_format": "Content-only",
+            "reasoning_format": "deepseek",
+            "reasoning_in_content": false,
+            "generation_prompt": "",
+            "samplers": [
+              "penalties",
+              "dry",
+              "top_n_sigma",
+              "top_k",
+              "typ_p",
+              "top_p",
+              "min_p",
+              "xtc",
+              "temperature"
+            ],
+            "speculative.types": "none",
+            "timings_per_token": false,
+            "post_sampling_probs": false,
+            "backend_sampling": false,
+            "lora": []
+          },
+          "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nGiven a FastAPI proxy that sometimes returns 200 with an upstream error body, propose the smallest code-level invariant to prevent this bug. Answer in 4 bullets.<|im_end|>\n<|im_start|>assistant\n",
+          "has_new_line": true,
+          "truncated": false,
+          "stop_type": "eos",
+          "stopping_word": "",
+          "tokens_cached": 132,
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 64,
+            "prompt_ms": 4904.757,
+            "prompt_per_token_ms": 76.636828125,
+            "prompt_per_second": 13.048556737877128,
+            "predicted_n": 69,
+            "predicted_ms": 15510.34,
+            "predicted_per_token_ms": 228.09323529411765,
+            "predicted_per_second": 4.384172107123377
+          }
+        },
+        "mechanical_pass": false,
+        "output_tokens": 69,
+        "truncation": false,
+        "wall_ms": 20422.541
       },
       "CH02": {
-        "status": "error",
-        "error": "<HTTPError 500: 'Internal Server Error'>",
-        "mechanical_pass": false
+        "task_id": "CH02",
+        "class": "CHALLENGE_ONLY",
+        "prompt": "Design a minimal context ownership record for a local/cloud LLM router. Include fields and one failure mode it prevents.",
+        "criteria": {
+          "contains_all": [
+            "context",
+            "backend",
+            "failure"
+          ]
+        },
+        "request": {
+          "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nDesign a minimal context ownership record for a local/cloud LLM router. Include fields and one failure mode it prevents.<|im_end|>\n<|im_start|>assistant\n",
+          "stream": false,
+          "temperature": 0,
+          "top_p": 1,
+          "top_k": 40,
+          "seed": 42,
+          "n_predict": 96,
+          "cache_prompt": false
+        },
+        "ttft_ms": null,
+        "ttft_note": "Non-streaming matched historical Qwen3 quality method; not measured.",
+        "status": "ok",
+        "output": "Designing a minimal context ownership record for a local/cloud Large Language Model (LLM) router involves identifying the essential fields that ensure proper management and routing of requests. The goal is to prevent specific failure modes, such as unauthorized access or incorrect routing, while keeping the record as simple as possible.\n\n### Fields in the Context Ownership Record:\n\n1. **Context ID**: A unique identifier for the context. This helps in tracking and managing the context throughout its lifecycle.\n2. **Owner",
+        "raw_response": {
+          "index": 0,
+          "content": "Designing a minimal context ownership record for a local/cloud Large Language Model (LLM) router involves identifying the essential fields that ensure proper management and routing of requests. The goal is to prevent specific failure modes, such as unauthorized access or incorrect routing, while keeping the record as simple as possible.\n\n### Fields in the Context Ownership Record:\n\n1. **Context ID**: A unique identifier for the context. This helps in tracking and managing the context throughout its lifecycle.\n2. **Owner",
+          "tokens": [],
+          "id_slot": 3,
+          "stop": true,
+          "model": "D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+          "tokens_predicted": 96,
+          "tokens_evaluated": 52,
+          "generation_settings": {
+            "seed": 42,
+            "temperature": 0.0,
+            "dynatemp_range": 0.0,
+            "dynatemp_exponent": 1.0,
+            "top_k": 40,
+            "top_p": 1.0,
+            "min_p": 0.05000000074505806,
+            "top_n_sigma": -1.0,
+            "xtc_probability": 0.0,
+            "xtc_threshold": 0.10000000149011612,
+            "typical_p": 1.0,
+            "repeat_last_n": 64,
+            "repeat_penalty": 1.0,
+            "presence_penalty": 0.0,
+            "frequency_penalty": 0.0,
+            "dry_multiplier": 0.0,
+            "dry_base": 1.75,
+            "dry_allowed_length": 2,
+            "dry_penalty_last_n": 64,
+            "dry_sequence_breakers": [
+              "\n",
+              ":",
+              "\"",
+              "*"
+            ],
+            "mirostat": 0,
+            "mirostat_tau": 5.0,
+            "mirostat_eta": 0.10000000149011612,
+            "adaptive_target": -1.0,
+            "adaptive_decay": 0.8999999761581421,
+            "stop": [],
+            "max_tokens": 96,
+            "n_predict": 96,
+            "n_keep": 0,
+            "n_discard": 0,
+            "ignore_eos": false,
+            "stream": false,
+            "logit_bias": [],
+            "n_probs": 0,
+            "min_keep": 0,
+            "grammar": "",
+            "grammar_lazy": false,
+            "grammar_triggers": [],
+            "preserved_tokens": [],
+            "chat_format": "Content-only",
+            "reasoning_format": "deepseek",
+            "reasoning_in_content": false,
+            "generation_prompt": "",
+            "samplers": [
+              "penalties",
+              "dry",
+              "top_n_sigma",
+              "top_k",
+              "typ_p",
+              "top_p",
+              "min_p",
+              "xtc",
+              "temperature"
+            ],
+            "speculative.types": "none",
+            "timings_per_token": false,
+            "post_sampling_probs": false,
+            "backend_sampling": false,
+            "lora": []
+          },
+          "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nDesign a minimal context ownership record for a local/cloud LLM router. Include fields and one failure mode it prevents.<|im_end|>\n<|im_start|>assistant\n",
+          "has_new_line": true,
+          "truncated": false,
+          "stop_type": "limit",
+          "stopping_word": "",
+          "tokens_cached": 147,
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 52,
+            "prompt_ms": 4999.008,
+            "prompt_per_token_ms": 96.13476923076922,
+            "prompt_per_second": 10.40206376945186,
+            "predicted_n": 96,
+            "predicted_ms": 21423.495,
+            "predicted_per_token_ms": 225.51047368421052,
+            "predicted_per_second": 4.43438383886476
+          }
+        },
+        "mechanical_pass": false,
+        "output_tokens": 96,
+        "truncation": true,
+        "wall_ms": 26429.5
       },
       "CH03": {
-        "status": "error",
-        "error": "<HTTPError 500: 'Internal Server Error'>",
-        "mechanical_pass": false
+        "task_id": "CH03",
+        "class": "CHALLENGE_ONLY",
+        "prompt": "A streaming endpoint emits chunks but never sends [DONE]. Explain one likely bug and one pytest-style assertion to catch it.",
+        "criteria": {
+          "contains_all": [
+            "DONE",
+            "pytest",
+            "stream"
+          ]
+        },
+        "request": {
+          "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA streaming endpoint emits chunks but never sends [DONE]. Explain one likely bug and one pytest-style assertion to catch it.<|im_end|>\n<|im_start|>assistant\n",
+          "stream": false,
+          "temperature": 0,
+          "top_p": 1,
+          "top_k": 40,
+          "seed": 42,
+          "n_predict": 96,
+          "cache_prompt": false
+        },
+        "ttft_ms": null,
+        "ttft_note": "Non-streaming matched historical Qwen3 quality method; not measured.",
+        "status": "ok",
+        "output": "One likely bug in this scenario is that the streaming endpoint is not properly signaling the end of the stream. This can happen if the endpoint is not designed to send a [DONE] message or if there is a bug in the code that prevents the [DONE] message from being sent.\n\nTo catch this bug using a pytest-style assertion, you could write a test that checks for the presence of the [DONE] message in the stream. Here's an example of what the test might",
+        "raw_response": {
+          "index": 0,
+          "content": "One likely bug in this scenario is that the streaming endpoint is not properly signaling the end of the stream. This can happen if the endpoint is not designed to send a [DONE] message or if there is a bug in the code that prevents the [DONE] message from being sent.\n\nTo catch this bug using a pytest-style assertion, you could write a test that checks for the presence of the [DONE] message in the stream. Here's an example of what the test might",
+          "tokens": [],
+          "id_slot": 3,
+          "stop": true,
+          "model": "D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+          "tokens_predicted": 96,
+          "tokens_evaluated": 53,
+          "generation_settings": {
+            "seed": 42,
+            "temperature": 0.0,
+            "dynatemp_range": 0.0,
+            "dynatemp_exponent": 1.0,
+            "top_k": 40,
+            "top_p": 1.0,
+            "min_p": 0.05000000074505806,
+            "top_n_sigma": -1.0,
+            "xtc_probability": 0.0,
+            "xtc_threshold": 0.10000000149011612,
+            "typical_p": 1.0,
+            "repeat_last_n": 64,
+            "repeat_penalty": 1.0,
+            "presence_penalty": 0.0,
+            "frequency_penalty": 0.0,
+            "dry_multiplier": 0.0,
+            "dry_base": 1.75,
+            "dry_allowed_length": 2,
+            "dry_penalty_last_n": 64,
+            "dry_sequence_breakers": [
+              "\n",
+              ":",
+              "\"",
+              "*"
+            ],
+            "mirostat": 0,
+            "mirostat_tau": 5.0,
+            "mirostat_eta": 0.10000000149011612,
+            "adaptive_target": -1.0,
+            "adaptive_decay": 0.8999999761581421,
+            "stop": [],
+            "max_tokens": 96,
+            "n_predict": 96,
+            "n_keep": 0,
+            "n_discard": 0,
+            "ignore_eos": false,
+            "stream": false,
+            "logit_bias": [],
+            "n_probs": 0,
+            "min_keep": 0,
+            "grammar": "",
+            "grammar_lazy": false,
+            "grammar_triggers": [],
+            "preserved_tokens": [],
+            "chat_format": "Content-only",
+            "reasoning_format": "deepseek",
+            "reasoning_in_content": false,
+            "generation_prompt": "",
+            "samplers": [
+              "penalties",
+              "dry",
+              "top_n_sigma",
+              "top_k",
+              "typ_p",
+              "top_p",
+              "min_p",
+              "xtc",
+              "temperature"
+            ],
+            "speculative.types": "none",
+            "timings_per_token": false,
+            "post_sampling_probs": false,
+            "backend_sampling": false,
+            "lora": []
+          },
+          "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA streaming endpoint emits chunks but never sends [DONE]. Explain one likely bug and one pytest-style assertion to catch it.<|im_end|>\n<|im_start|>assistant\n",
+          "has_new_line": true,
+          "truncated": false,
+          "stop_type": "limit",
+          "stopping_word": "",
+          "tokens_cached": 148,
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 53,
+            "prompt_ms": 4507.89,
+            "prompt_per_token_ms": 85.0545283018868,
+            "prompt_per_second": 11.757163551018325,
+            "predicted_n": 96,
+            "predicted_ms": 21609.333,
+            "predicted_per_token_ms": 227.46666315789471,
+            "predicted_per_second": 4.396248602397862
+          }
+        },
+        "mechanical_pass": true,
+        "output_tokens": 96,
+        "truncation": true,
+        "wall_ms": 26123.471
       }
     },
     "qwen3_sparse": {
@@ -114,5 +468,61 @@
         "mechanical_pass": true
       }
     }
+  },
+  "original_failed_control_attempts": {
+    "CH01": {
+      "status": "error",
+      "error": "<HTTPError 500: 'Internal Server Error'>",
+      "mechanical_pass": false
+    },
+    "CH02": {
+      "status": "error",
+      "error": "<HTTPError 500: 'Internal Server Error'>",
+      "mechanical_pass": false
+    },
+    "CH03": {
+      "status": "error",
+      "error": "<HTTPError 500: 'Internal Server Error'>",
+      "mechanical_pass": false
+    }
+  },
+  "audit_note": "Same three predeclared prompts/criteria and 96-token cap, CPuFriend CPU runtime. Candidate outputs retained; control rerun with Qwen3 unloaded. Separate sessions, no latency comparison. Generic challenges do not establish multi-file repository capability.",
+  "manual_review": {
+    "qwen3_sparse": {
+      "CH01": {
+        "score": 1,
+        "note": "Flags upstream status before 200, but suggests generic 502 remapping and stops in the second bullet; no complete status-preservation invariant or test."
+      },
+      "CH02": {
+        "score": 1,
+        "note": "Ownership/TTL fields are relevant but omit reconstructible context and backend relationship; named failure mode is not explained before truncation."
+      },
+      "CH03": {
+        "score": 1,
+        "note": "Plausible missing-DONE bug explanation; test stops at response assignment, with no assertion delivered."
+      }
+    },
+    "14b_control": {
+      "CH01": {
+        "score": 1,
+        "note": "Four bullets delivered, but body-error heuristic and arbitrary 500 rewrite do not preserve upstream status or establish a reliable invariant."
+      },
+      "CH02": {
+        "score": 1,
+        "note": "Generic introduction reaches only context ID and an unfinished Owner field; no usable ownership record and failure explanation."
+      },
+      "CH03": {
+        "score": 1,
+        "note": "Plausible missing-DONE explanation and suggestion to check its presence, but no requested pytest-style assertion is delivered."
+      }
+    }
+  },
+  "14b_control_keyword_score": {
+    "passed": 1,
+    "total": 3
+  },
+  "qwen3_sparse_keyword_score": {
+    "passed": 1,
+    "total": 3
   }
 }

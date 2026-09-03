@@ -1,0 +1,6 @@
+In Server-Sent Events (SSE), the `[DONE]` token is not a standard part of the SSE protocol itself. Instead, it's a convention used by some implementations (like certain LLM APIs) to signal the end of a stream of data.
+
+To test whether an SSE stream terminates with `[DONE]`, you would typically:
+
+1. **Listen to the SSE stream**: Use a client (e.g., JavaScript `EventSource`, Python `requests`, or a custom SSE client) to connect to the SSE endpoint.
+2. **Monitor the data events**: Capture and inspect the data received in the `message` events.

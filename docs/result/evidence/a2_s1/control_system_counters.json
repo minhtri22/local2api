@@ -1,0 +1,186 @@
+{
+  "phase": "14B CPU control audit; Qwen3 is not loaded",
+  "note": "System-wide samples; GPU counters include desktop applications. Page input/output can include mapped files and are not exclusive pagefile I/O.",
+  "samples": [
+    {
+      "timestamp": "2026-09-03T14:01:35.9373905Z",
+      "counters": [
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\committed bytes",
+          "CookedValue": 30652604416.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\commit limit",
+          "CookedValue": 50559246336.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\available mbytes",
+          "CookedValue": 2776.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\pages input/sec",
+          "CookedValue": 210.68645532142187,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\pages output/sec",
+          "CookedValue": 0.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\physicaldisk(_total)\\disk read bytes/sec",
+          "CookedValue": 877252.5768995602,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\physicaldisk(_total)\\disk write bytes/sec",
+          "CookedValue": 548792.89113019,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x000133de_phys_0)\\shared usage",
+          "CookedValue": 1239646208.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x00013821_phys_0)\\shared usage",
+          "CookedValue": 8192.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x0001389c_phys_0)\\shared usage",
+          "CookedValue": 349114368.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\paging file(_total)\\% usage",
+          "CookedValue": 9.942799229775707,
+          "Status": 0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-03T14:01:37.9472699Z",
+      "counters": [
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\committed bytes",
+          "CookedValue": 30818492416.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\commit limit",
+          "CookedValue": 50559246336.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\available mbytes",
+          "CookedValue": 2621.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\pages input/sec",
+          "CookedValue": 394.7382240951298,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\pages output/sec",
+          "CookedValue": 0.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\physicaldisk(_total)\\disk read bytes/sec",
+          "CookedValue": 1818698.8741199714,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\physicaldisk(_total)\\disk write bytes/sec",
+          "CookedValue": 197773.3080601314,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x000133de_phys_0)\\shared usage",
+          "CookedValue": 1408221184.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x00013821_phys_0)\\shared usage",
+          "CookedValue": 8192.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x0001389c_phys_0)\\shared usage",
+          "CookedValue": 349114368.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\paging file(_total)\\% usage",
+          "CookedValue": 9.942799229775707,
+          "Status": 0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-03T14:01:39.9571451Z",
+      "counters": [
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\committed bytes",
+          "CookedValue": 30873571328.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\commit limit",
+          "CookedValue": 50559246336.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\available mbytes",
+          "CookedValue": 2571.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\pages input/sec",
+          "CookedValue": 292.4439641555213,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\memory\\pages output/sec",
+          "CookedValue": 0.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\physicaldisk(_total)\\disk read bytes/sec",
+          "CookedValue": 1209818.796149448,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\physicaldisk(_total)\\disk write bytes/sec",
+          "CookedValue": 275016.6911895188,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x000133de_phys_0)\\shared usage",
+          "CookedValue": 1363652608.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x00013821_phys_0)\\shared usage",
+          "CookedValue": 8192.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\gpu adapter memory(luid_0x00000000_0x0001389c_phys_0)\\shared usage",
+          "CookedValue": 349114368.0,
+          "Status": 0
+        },
+        {
+          "Path": "\\\\desktop-4psd0g2\\paging file(_total)\\% usage",
+          "CookedValue": 9.942799229775707,
+          "Status": 0
+        }
+      ]
+    }
+  ]
+}

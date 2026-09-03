@@ -1,52 +1,189 @@
 {
-  "schema": "local2api.a2_s1.manual_quality.v1",
-  "source": "quality_results_128.json",
-  "control": "A2.1 Qwen2.5-Coder 14B manual_quality_review.json",
+  "schema": "local2api.a2_s1.manual_quality.v2",
   "rubric": {
-    "0": "unusable/wrong",
-    "1": "mostly wrong or incomplete",
-    "2": "usable with caveats",
-    "3": "directly useful"
+    "0": "wrong/unusable",
+    "1": "substantial repair required",
+    "2": "mostly correct/minor repair",
+    "3": "production acceptable"
   },
-  "score_distribution": {
-    "0": 0,
-    "1": 1,
-    "2": 5,
-    "3": 14
+  "candidate_cases": {
+    "A01": {
+      "score": 2,
+      "note": "Correct status-preservation rationale; incomplete trailing explanation needs cleanup."
+    },
+    "A02": {
+      "score": 2,
+      "note": "Two relevant validation examples, but nullable types do not themselves make fields optional to supply; final sentence also cut."
+    },
+    "A03": {
+      "score": 2,
+      "note": "Correct deterministic testing benefits; incomplete final bullet."
+    },
+    "A04": {
+      "score": 2,
+      "note": "Identifies empty input forwarded without validation. More explicit validation framing than 14B; unfinished ending requires cleanup."
+    },
+    "A05": {
+      "score": 3,
+      "note": "Clearly restricts fallback to degradable tasks and completes the summary."
+    },
+    "B01": {
+      "score": 2,
+      "note": "Clamp function is correct; remove syntactically incomplete optional example."
+    },
+    "B02": {
+      "score": 2,
+      "note": "Correct list/nonempty validator; remove cut final example."
+    },
+    "B03": {
+      "score": 1,
+      "note": "Only a long nested before example is delivered. No early-return refactor is supplied."
+    },
+    "B04": {
+      "score": 3,
+      "note": "Complete minimal FastAPI endpoint with correct payload."
+    },
+    "B05": {
+      "score": 2,
+      "note": "First helper is correct; incomplete alternative expression needs removal."
+    },
+    "C01": {
+      "score": 2,
+      "note": "A correct 503 assertion is present; live URL/placeholder scaffolding and empty trailing fence need cleanup."
+    },
+    "C02": {
+      "score": 2,
+      "note": "Unchecked empty-array indexing is relevant; null-pointer/undefined-behavior terminology is imprecise for Python."
+    },
+    "C03": {
+      "score": 1,
+      "note": "Response starts a mock setup but stops inside a string before exercising the gateway or asserting preserved 429."
+    },
+    "C04": {
+      "score": 1,
+      "note": "Explains the DONE convention and collecting events but never supplies the terminal-event/EOF assertion that would prove termination."
+    },
+    "C05": {
+      "score": 2,
+      "note": "Identifies enforcement of an explicit override as a test scenario; steps are cut."
+    },
+    "D01": {
+      "score": 2,
+      "note": "Generic stable HTTP interface discussion, no backend contract; incomplete ending."
+    },
+    "D02": {
+      "score": 3,
+      "note": "Exact requested call path."
+    },
+    "D03": {
+      "score": 2,
+      "note": "Reasonable request for missing diff; does not supply the requested general summary. No invented diff details."
+    },
+    "D04": {
+      "score": 2,
+      "note": "Correct async versus sync mismatch; unfinished final sentence."
+    },
+    "D05": {
+      "score": 2,
+      "note": "Explains volatile-session and scaling risks; does not reach explicit gateway-owned reconstructible context and ends mid-explanation."
+    }
   },
-  "average_score": 2.65,
-  "control_14b_average_score": 2.55,
-  "average_score_delta_vs_14b": 0.10,
-  "malformed_count": 0,
-  "hallucination_or_domain_drift_count": 0,
-  "repetition_count": 0,
-  "generation_cap_reached_count": 16,
-  "notes": [
-    "Generation-cap reach is recorded separately from usability. Many answers hit 128 tokens after already delivering the requested core answer.",
-    "D03 is a mechanical false positive: it contains the required words but asks the user to provide a diff instead of performing the requested summary.",
-    "A04 is a real improvement over the 14B control: Qwen3 correctly identifies that empty/falsy messages are sent to backend.chat without validation.",
-    "D01 and D05 remain mechanical failures, but D05 is manually useful and explains the hidden-session-memory risk correctly."
-  ],
-  "cases": [
-    {"id":"A01","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct upstream-status preservation explanation; requested core is complete before truncation."},
-    {"id":"A02","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Provides the requested two FastAPI validation bullets with correct examples."},
-    {"id":"A03","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correctly explains deterministic routing as reproducible software behavior without the 14B packet-routing drift."},
-    {"id":"A04","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correctly identifies that empty/falsy messages are forwarded instead of rejected/validated."},
-    {"id":"A05","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":[],"note":"Correct selective fallback semantics for degradable tasks."},
-    {"id":"B01","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct clamp helper is complete; only extra examples are truncated."},
-    {"id":"B02","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct non-empty-list validation helper is complete; only extra examples are truncated."},
-    {"id":"B03","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached"],"note":"States the correct early-return refactor direction but truncates during the before example before showing the full after version."},
-    {"id":"B04","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":[],"note":"Small valid FastAPI endpoint returning the requested payload."},
-    {"id":"B05","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Primary helper is complete and correct; truncation occurs only in an optional alternative implementation."},
-    {"id":"C01","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached","minor_noise"],"note":"Contains a correct 503 assertion but adds unnecessary live-request examples."},
-    {"id":"C02","class":"LOCAL_SAFE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached","generic"],"note":"Names a plausible empty-array access edge case but uses generic null/undefined-behavior language rather than the local Python/API context."},
-    {"id":"C03","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct upstream-429 preservation test setup and objective."},
-    {"id":"C04","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correctly describes consuming the SSE stream and verifying the terminal [DONE] marker."},
-    {"id":"C05","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":2,"flags":["generation_cap_reached","generic"],"note":"Correct explicit-override validation area but broader than a crisp local2api missing test."},
-    {"id":"D01","class":"LOCAL_ACCEPTABLE","auto_pass":false,"manual_score_0_3":2,"flags":["generation_cap_reached","generic"],"note":"Reasonable HTTP/router contract discussion but too broad and never reaches the backend contract required by the mechanical criterion."},
-    {"id":"D02","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":[],"note":"Exact requested call path."},
-    {"id":"D03","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":1,"flags":["mechanical_false_positive"],"note":"Asks for the missing diff instead of summarizing the stated route-reason-header change; materially worse than the 14B answer despite keyword pass."},
-    {"id":"D04","class":"LOCAL_ACCEPTABLE","auto_pass":true,"manual_score_0_3":3,"flags":["generation_cap_reached"],"note":"Correct async/sync protocol mismatch explanation."},
-    {"id":"D05","class":"LOCAL_ACCEPTABLE","auto_pass":false,"manual_score_0_3":3,"flags":["generation_cap_reached","mechanical_false_negative"],"note":"Correctly explains why hidden server session memory breaks backend switching, scaling and recovery even though it misses the literal state/context keywords."}
-  ]
+  "matched_control_cases": {
+    "A01": {
+      "score": 2,
+      "note": "Correct preservation and error-handling rationale; final example is incomplete."
+    },
+    "A02": {
+      "score": 2,
+      "note": "Two requested bullets delivered; numeric strings may be coerced successfully, so the type-error example needs qualification."
+    },
+    "A03": {
+      "score": 2,
+      "note": "Correct deterministic-test benefits without domain drift; final debugging bullet is cut."
+    },
+    "A04": {
+      "score": 2,
+      "note": "Correctly identifies inverted empty-input branch; unfinished explanation and no explicit validation criterion."
+    },
+    "A05": {
+      "score": 2,
+      "note": "Useful fallback rationale but says automatic switch is particularly useful for degradable tasks, weakening the required only-for-degradable boundary."
+    },
+    "B01": {
+      "score": 2,
+      "note": "Correct clamp helper; incomplete optional example and overly narrow return annotation need cleanup."
+    },
+    "B02": {
+      "score": 2,
+      "note": "Correct type/nonempty validator; remove incomplete example error formatting."
+    },
+    "B03": {
+      "score": 1,
+      "note": "Nested before example is supplied, but output stops at the refactored-function heading without the requested early returns."
+    },
+    "B04": {
+      "score": 2,
+      "note": "Complete correct endpoint; incomplete trailing explanation needs cleanup."
+    },
+    "B05": {
+      "score": 1,
+      "note": "Helper ends inside an unterminated return string; requested implementation is not usable without completing it."
+    },
+    "C01": {
+      "score": 2,
+      "note": "Correct 503 assertion, with live external URL scaffolding and unclosed fence requiring cleanup."
+    },
+    "C02": {
+      "score": 1,
+      "note": "Conflates an empty array with an array containing an empty string; does not actually describe the requested empty-array edge case."
+    },
+    "C03": {
+      "score": 2,
+      "note": "Test idea includes upstream 429 mock, gateway request and returned-429 assertion; last sentence is cut but the core idea is delivered."
+    },
+    "C04": {
+      "score": 1,
+      "note": "Correctly distinguishes SSE protocol from an application DONE convention, but supplies no test proving terminal marker and termination."
+    },
+    "C05": {
+      "score": 1,
+      "note": "Generic advice to investigate use case and override mechanism; never identifies a concrete missing override test."
+    },
+    "D01": {
+      "score": 2,
+      "note": "Reasonable generic public API contract discussion; backend criterion absent and ending cut."
+    },
+    "D02": {
+      "score": 3,
+      "note": "Exact requested call path, no extra content."
+    },
+    "D03": {
+      "score": 3,
+      "note": "Complete general summary of route-reason header addition without inventing specific code changes."
+    },
+    "D04": {
+      "score": 2,
+      "note": "Identifies async/sync contract mismatch; promise terminology is generic and final blocking explanation is cut."
+    },
+    "D05": {
+      "score": 2,
+      "note": "Useful scalability and session-loss rationale; no context reconstruction criterion and final load-balancing explanation is cut."
+    }
+  },
+  "policy": "Judge only the delivered output. A completed core helper followed by truncated examples requires minor cleanup. An absent requested refactor or assertion requires substantial work. Keyword matching remains unchanged. Both models use this same rubric.",
+  "malformed_protocol_count": 0,
+  "repetition_failure_count": 0,
+  "candidate_generation_cap_reached_count": 16,
+  "candidate_mean": 2,
+  "candidate_distribution": {
+    "2": 14,
+    "3": 3,
+    "1": 3
+  },
+  "control_mean": 1.85,
+  "control_distribution": {
+    "2": 13,
+    "1": 5,
+    "3": 2
+  }
 }

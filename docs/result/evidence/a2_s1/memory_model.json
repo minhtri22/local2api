@@ -1,0 +1,36 @@
+{
+  "source": "gguf_header_audit.json",
+  "weights_bytes": 18556688704,
+  "kv_payload_by_context": {
+    "1024": {
+      "f16_bytes": 100663296,
+      "q4_0_bytes": 28311552,
+      "q8_0_bytes": 53477376
+    },
+    "4096": {
+      "f16_bytes": 402653184,
+      "q4_0_bytes": 113246208,
+      "q8_0_bytes": 213909504
+    },
+    "8192": {
+      "f16_bytes": 805306368,
+      "q4_0_bytes": 226492416,
+      "q8_0_bytes": 427819008
+    },
+    "16384": {
+      "f16_bytes": 1610612736,
+      "q4_0_bytes": 452984832,
+      "q8_0_bytes": 855638016
+    }
+  },
+  "kv_formula": "context * 48 layers * 4 KV heads * 128 head dimension * (K+V); f16=2 bytes, q4_0=18 bytes/32 elements, q8_0=34/32",
+  "kv_limits": "Payload only, one sequence; allocation padding, multiple slots and runtime buffers add overhead.",
+  "windows_reserve_budget_bytes": 6442450944,
+  "editor_browser_reserve_budget_bytes": 4294967296,
+  "reserve_note": "Planning budgets, not measured per-app consumption. Do not sum GPU shared memory and process WS as independent physical allocations on UMA.",
+  "runtime_buffers_measured_bytes": null,
+  "runtime_buffer_evidence": "Ollama allocation errors record failed KV/compute requests, not a successful complete allocation.",
+  "resident_practical_verdict": "Not established; historical direct CPU smoke left only 572256 KiB physical memory available.",
+  "gpu_shared_allocation_bytes": null,
+  "sustained_paging_proven": false
+}

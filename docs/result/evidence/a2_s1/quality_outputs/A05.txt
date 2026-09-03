@@ -1,0 +1,11 @@
+**Summary: Safe Fallback Strategy**
+
+When cloud services fail, the system should only fall back to local processing for **degradable tasks** - those that can continue operating in a reduced capacity rather than failing completely.
+
+**Key Points:**
+- **Selective fallback**: Not all tasks should fall back locally
+- **Degradable tasks only**: Only tasks that can function at reduced capability
+- **Cloud failure scenario**: Primary trigger for fallback mechanism
+- **Local processing**: Backup option when cloud services are unavailable
+
+This approach ensures system resilience while maintaining operational capability during cloud outages.

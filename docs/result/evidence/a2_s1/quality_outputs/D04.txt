@@ -1,0 +1,14 @@
+The error message you're seeing:
+
+```
+Spot an interface mismatch: protocol expects async chat(), implementation defines sync chat().
+```
+
+indicates that there's a **mismatch between an asynchronous (async) method** expected by a protocol or interface, but the actual implementation provides a **synchronous (sync) method**.
+
+### Breakdown of the Issue
+
+- **Protocol/Interface expects**: `async chat()`
+  - This means the method is defined with `async def` and likely uses `await` internally.
+- **Implementation defines**: `chat()`
+  - This is a regular synchronous function defined with `def`, not

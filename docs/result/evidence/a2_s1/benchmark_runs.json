@@ -1,0 +1,232 @@
+{
+  "schema": "local2api.a2_s1.context_scale_runtime_minimal.v1",
+  "created_at": "2026-09-03T02:15:55.999441+00:00",
+  "provider": "direct_llama_server_CPU",
+  "runtime_config": {
+    "ctx": 4096,
+    "batch": 32,
+    "ubatch": 16,
+    "kv": "q4_0",
+    "flash_attn": "on",
+    "effective_ngl": 0,
+    "requested_ngl": 32
+  },
+  "levels": {
+    "1k": {
+      "token_count": 870,
+      "prompt_sha256": "b65e007d78603e3124e0e4a4379087cf6db78152a6d1280382c626a841d61512",
+      "samples": [
+        {
+          "wall_ms": 60525.719,
+          "ttft_ms": 50254.759,
+          "prompt_tokens": 870,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 17.350283456765975,
+          "generation_tokens_per_s": 6.135563224252109,
+          "text": "### **Reliability Risks and One-Line Fixes**\n\n1. **Code Duplication Risk**  \n   *Risk:* All handlers are functionally identical except for their names, leading to redundancy and maintenance overhead.  \n   *Fix:* Consolidate into a single generic handler function that accepts a handler index or identifier.\n\n2",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 870,
+            "prompt_ms": 50143.273,
+            "prompt_per_token_ms": 57.635945977011495,
+            "prompt_per_second": 17.350283456765975,
+            "predicted_n": 64,
+            "predicted_ms": 10268.006,
+            "predicted_per_token_ms": 162.9842222222222,
+            "predicted_per_second": 6.135563224252109
+          },
+          "run_wall_ms_outer": 60526.789
+        }
+      ],
+      "summary": {
+        "runs": 1,
+        "failures": 0,
+        "median_ttft_ms": 50254.759,
+        "median_wall_ms": 60525.719,
+        "median_prompt_tokens_per_s": 17.350283456765975,
+        "median_generation_tokens_per_s": 6.135563224252109
+      }
+    },
+    "4k": {
+      "token_count": 3573,
+      "prompt_sha256": "6c2480d298135275496deb98e0658a596ac67660083e6b5e872667a47ce100a1",
+      "samples": [
+        {
+          "wall_ms": 349820.414,
+          "ttft_ms": 333053.14,
+          "prompt_tokens": 3573,
+          "completion_tokens": 64,
+          "prompt_tokens_per_s": 10.72835540485027,
+          "generation_tokens_per_s": 3.7575004629777355,
+          "text": "Here are three concrete reliability risks identified in the provided code, along with one-line fixes:\n\n---\n\n### **1. Code Duplication Risk**\n**Risk:** The same logic is repeated across 67 functions (`handler_0` to `handler_66`), differing only in function name and comment. This makes",
+          "raw_timings": {
+            "cache_n": 0,
+            "prompt_n": 3573,
+            "prompt_ms": 333042.658,
+            "prompt_per_token_ms": 93.21093143017072,
+            "prompt_per_second": 10.72835540485027,
+            "predicted_n": 64,
+            "predicted_ms": 16766.465,
+            "predicted_per_token_ms": 266.13436507936507,
+            "predicted_per_second": 3.7575004629777355
+          },
+          "run_wall_ms_outer": 349820.65
+        }
+      ],
+      "summary": {
+        "runs": 1,
+        "failures": 0,
+        "median_ttft_ms": 333053.14,
+        "median_wall_ms": 349820.414,
+        "median_prompt_tokens_per_s": 10.72835540485027,
+        "median_generation_tokens_per_s": 3.7575004629777355
+      },
+      "gate": {
+        "status": "COMPLETED_BUT_TTFT_GATE_EXCEEDED",
+        "threshold_ms": 300000,
+        "cancellation_enforced": false
+      }
+    },
+    "8k": {
+      "status": "NOT_COMPLETED",
+      "reason": "No larger direct run after 4K exceeded TTFT threshold."
+    },
+    "16k": {
+      "status": "NOT_COMPLETED",
+      "reason": "No larger direct run after 4K exceeded TTFT threshold."
+    }
+  },
+  "source_raw": "benchmark_direct_llama_server_minimal.json",
+  "cold_load_ttft_ms": null,
+  "cache_policy": "model previously loaded; cache_prompt=false; raw cache_n=0. Not cold disk/model startup.",
+  "comparison_limit": "Historical Ollama control used repeated warmed prompts; cache counts not retained. No cross-runtime speed ratios.",
+  "ollama_attempts": [
+    {
+      "file": "load_smoke.json",
+      "options": {
+        "temperature": 0,
+        "top_p": 1,
+        "seed": 42,
+        "num_predict": 4,
+        "num_ctx": 16384
+      },
+      "status": "error",
+      "wall_ms": 26829.056,
+      "error": "<HTTPError 500: 'Internal Server Error'>"
+    },
+    {
+      "file": "load_smoke_q4kv_16k.json",
+      "options": {
+        "num_ctx": 16384,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 18082.367599999998,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: alloc_tensor_range: failed to allocate Vulkan0 buffer of size 452984832\\nllama_init_from_model: failed to initialize the context: failed to allocate buffer for kv cache\"}"
+    },
+    {
+      "file": "load_smoke_q4kv_4k.json",
+      "options": {
+        "num_ctx": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 21695.954599999823,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 257517568\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}"
+    },
+    {
+      "file": "load_smoke_q4kv_4k_batch_128.json",
+      "options": {
+        "num_ctx": 4096,
+        "num_gpu": 32,
+        "num_batch": 128,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 19454.864100000123,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 184091648\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}"
+    },
+    {
+      "file": "load_smoke_q4kv_4k_batch_32.json",
+      "options": {
+        "num_ctx": 4096,
+        "num_gpu": 32,
+        "num_batch": 32,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 17624.105800001416,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 169149056\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}"
+    },
+    {
+      "file": "load_smoke_q4kv_4k_batch_64.json",
+      "options": {
+        "num_ctx": 4096,
+        "num_gpu": 32,
+        "num_batch": 64,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 17876.69599999208,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 174260992\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}"
+    },
+    {
+      "file": "load_smoke_q4kv_4k_numgpu_24.json",
+      "options": {
+        "num_ctx": 4096,
+        "num_gpu": 24,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 19707.89839999634,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 233204224\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}"
+    },
+    {
+      "file": "load_smoke_q4kv_4k_numgpu_32.json",
+      "options": {
+        "num_ctx": 4096,
+        "num_gpu": 32,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 22494.39999999595,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 233204224\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}"
+    },
+    {
+      "file": "load_smoke_q4kv_4k_numgpu_40.json",
+      "options": {
+        "num_ctx": 4096,
+        "num_gpu": 40,
+        "temperature": 0,
+        "top_p": 1,
+        "top_k": 40,
+        "num_predict": 16
+      },
+      "status": "http_error",
+      "wall_ms": 22990.042799996445,
+      "error": "{\"error\":\"llama-server reported out-of-memory during startup: ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 233204224\\ngraph_reserve: failed to allocate compute buffers\\nllama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers\"}"
+    }
+  ],
+  "optional_cpu_moe_ab": "NOT_RUN: repeated primary OOM and no qualified GPU baseline."
+}

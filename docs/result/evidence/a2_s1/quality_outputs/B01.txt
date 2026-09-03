@@ -1,0 +1,20 @@
+Here's a Python helper function that clamps a value to the range 1-100:
+
+```python
+def clamp(n):
+    """
+    Clamp a value to the range 1-100.
+    
+    Args:
+        n: The value to clamp (int or float)
+        
+    Returns:
+        The clamped value (int or float)
+    """
+    return max(1, min(100, n))
+
+# Example usage:
+if __name__ == "__main__":
+    # Test cases
+    print(clamp(50))   # Output: 50
+    print(clamp(

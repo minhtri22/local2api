@@ -14,20 +14,19 @@
   "architecture_prefix_detected": "qwen3moe",
   "parameter_count": 30532122624,
   "parameter_size": "30.5B",
-  "active_parameters_per_token": 3353032704,
-  "active_parameters_source": "Derived from local GGUF tensor inventory; conventional active footprint includes the whole input embedding table.",
+  "active_parameters_per_token": null,
+  "active_parameters_source": "NOT_PROVEN from local GGUF metadata unless populated below",
   "layer_count": 48,
   "hidden_size": 2048,
   "attention_heads": 32,
   "kv_heads": 4,
-  "head_dim": 128,
+  "head_dim": 64,
   "expert_count": 128,
   "experts_selected_per_token": 8,
-  "shared_experts": 0,
+  "shared_experts": null,
   "ffn_dimensions": {
     "feed_forward_length": 5472,
-    "expert_feed_forward_length": 768,
-    "expert_shared_feed_forward_length": 0
+    "expert_feed_forward_length": 768
   },
   "context_limit": 262144,
   "rope": {
@@ -68,10 +67,5 @@
     "qwen3moe.feed_forward_length": 5472,
     "qwen3moe.rope.freq_base": 10000000
   },
-  "active_parameters_note": "Structural count derived from real tensor dimensions and 8/128 routing. Full embedding table is counted in the conventional nonexpert footprint, but an input token looks up one row. Neither count is a measured FLOP count or weight-I/O volume.",
-  "all_expert_parameters": 28991029248,
-  "selected_expert_parameters_per_token": 1811939328,
-  "nonexpert_parameters_resident": 1541093376,
-  "touched_parameter_estimate_one_embedding_row": 3041869824,
-  "audit_source": "gguf_header_audit.json"
+  "active_parameters_note": "Local GGUF confirms MoE routing shape; exact active parameter count is not directly encoded as one scalar in Ollama metadata."
 }

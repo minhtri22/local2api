@@ -1,0 +1,20 @@
+{
+  "qwen3_source": "post-smoke snapshots, not peak trace",
+  "qwen3_working_set_bytes": 18504175616,
+  "qwen3_private_bytes": 14432628736,
+  "qwen3_available_ram_bytes": 585990144,
+  "qwen3_peak_working_set_bytes": null,
+  "qwen3_peak_system_commit_bytes": null,
+  "qwen3_gpu_shared_bytes": null,
+  "qwen3_pagefile_activity": null,
+  "qwen3_disk_activity": null,
+  "qwen3_system_usability": "SYSTEM_PRESSURED",
+  "classification_basis": "Only about 559 MiB available after smoke; no direct window responsiveness test or sustained pagefile measurement.",
+  "control_audit_sources": [
+    "control_audit_telemetry.json",
+    "control_system_counters.json"
+  ],
+  "control_data_must_not_be_attributed_to_qwen3": true,
+  "control_sampled_peak_commit_bytes": 31125352448,
+  "control_sampled_min_available_bytes": 2345873408
+}

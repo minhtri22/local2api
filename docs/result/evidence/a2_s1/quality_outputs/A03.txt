@@ -1,0 +1,11 @@
+A deterministic router in testing provides several key benefits:
+
+## Predictable Behavior
+- **Consistent routing decisions** - The same input always produces the same output path
+- **Reproducible test results** - Tests can be run multiple times with identical outcomes
+- **Easier debugging** - When issues occur, you know exactly which path was taken
+
+## Simplified Test Design
+- **Deterministic test cases** - You can design tests with known expected behaviors
+- **Reduced test complexity** - No need to account for random variations in routing
+- **Clearer test coverage** - Easier to verify all possible paths are

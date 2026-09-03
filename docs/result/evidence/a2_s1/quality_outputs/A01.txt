@@ -1,0 +1,6 @@
+Preserving upstream HTTP status codes is crucial for maintaining the integrity and reliability of web applications, especially in proxy, load balancing, or API gateway scenarios. Here's why it matters:
+
+### 1. **Accurate Error Handling**
+When a proxy or gateway forwards requests to upstream servers, preserving the HTTP status codes ensures that clients receive accurate information about the outcome of their requests. For example:
+- If an upstream server returns a `404 Not Found`, the client should know that the requested resource doesn't exist.
+- If an upstream server returns a `500 Internal Server Error`, the client should be aware that something went wrong

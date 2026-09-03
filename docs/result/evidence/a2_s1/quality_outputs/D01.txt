@@ -1,0 +1,8 @@
+In the context of `router.py` and `http.py`, the **interface contract** that should remain stable across these modules typically refers to the **APIs and protocols** that define how components interact with each other, especially in an HTTP-based system. Here's a general breakdown of what should remain stable:
+
+### 1. **HTTP Request/Response Interface**
+   - The structure of HTTP requests and responses (e.g., headers, status codes, body formats) should remain consistent.
+   - This includes how routes are defined, how parameters are passed, and how responses are formatted.
+
+### 2. **Router Interface**
+   -

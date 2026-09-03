@@ -1,0 +1,75 @@
+{
+  "cases": [
+    {
+      "task_id": "A04",
+      "prompt": "Identify the bug: if not messages: return backend.chat(messages).",
+      "expected_criteria": {
+        "contains_all": [
+          "empty",
+          "valid"
+        ]
+      },
+      "14b_output": "The bug in the code snippet you provided is related to the condition check and the function call. The condition `if not messages:` checks if the `messages` list is empty. If it is, the function `backend.chat(messages)` is called. However, this code does not handle the case where `messages` is not empty, which might be the intended behavior.\n\nHere are a few potential issues and improvements:\n\n1. **Handling Non-Empty Messages**: If the intention is to call `backend.chat(messages)` only when `messages` is not empty, you should add an `else` clause or modify the condition.\n\n2. **",
+      "missing_keywords_14b": [
+        "valid"
+      ],
+      "14b_failure_reason": "Identifies inverted empty-input branch but focuses on missing nonempty handling; incomplete answer.",
+      "qwen3_output": "Looking at this code snippet, I can identify a potential bug:\n\n**The bug:**\nThe condition `if not messages:` will evaluate to `True` when `messages` is an empty list `[]`, `None`, or any other falsy value. However, the code returns immediately without checking if `messages` is a valid list with content.\n\n**The issue:**\nIf `messages` is an empty list `[]`, the function returns `backend.chat(messages)` without any validation. This could lead to:\n1. **Unexpected behavior** - calling `backend.chat()` with an empty message list\n2. **Silent failures",
+      "qwen3_mechanical_pass": true,
+      "manual_14b_score": 2,
+      "manual_qwen3_score": 2,
+      "manual_score_delta": 0,
+      "capability_delta": "Clearer empty-input validation framing; no change in usability band.",
+      "matched_control_output": "The bug in the code snippet you provided is related to the condition check and the function call. The issue is that the condition `if not messages:` will evaluate to `True` if `messages` is an empty list, `None`, or any other \"falsy\" value. However, the intention of the code seems to be to call the `backend.chat(messages)` function only if `messages` is not empty.\n\nHere's a breakdown of the potential issues:\n\n1. **Empty List**: If `messages` is an empty list, the condition `if not messages:` will be `True`, and the function `backend.chat(messages",
+      "matched_control_mechanical_pass": false
+    },
+    {
+      "task_id": "D01",
+      "prompt": "Across router.py and http.py, what interface contract should remain stable? Answer generally.",
+      "expected_criteria": {
+        "contains_all": [
+          "backend"
+        ]
+      },
+      "14b_output": "When considering the stability of an interface contract across files like `router.py` and `http.py`, it's important to focus on the public-facing APIs that other parts of the system or external systems might rely on. Here are some general guidelines to ensure stability:\n\n1. **Public Methods and Functions**: Ensure that any public methods or functions that are part of the interface remain consistent in terms of their names, parameters, and return types. Changes to these can break other parts of the system that depend on them.\n\n2. **Data Structures**: If your interface involves data structures (like classes or data classes), ensure that their public attributes and methods",
+      "missing_keywords_14b": [
+        "backend"
+      ],
+      "14b_failure_reason": "Reasonable general interface stability discussion; backend contract not addressed.",
+      "qwen3_output": "In the context of `router.py` and `http.py`, the **interface contract** that should remain stable across these modules typically refers to the **APIs and protocols** that define how components interact with each other, especially in an HTTP-based system. Here's a general breakdown of what should remain stable:\n\n### 1. **HTTP Request/Response Interface**\n   - The structure of HTTP requests and responses (e.g., headers, status codes, body formats) should remain consistent.\n   - This includes how routes are defined, how parameters are passed, and how responses are formatted.\n\n### 2. **Router Interface**\n   -",
+      "qwen3_mechanical_pass": false,
+      "manual_14b_score": 2,
+      "manual_qwen3_score": 2,
+      "manual_score_delta": 0,
+      "capability_delta": "No recovered backend/context reasoning criterion.",
+      "matched_control_output": "When considering the stability of interface contracts across files like `router.py` and `http.py`, it's important to focus on the public interfaces that other parts of the system or external systems might rely on. Here are some general guidelines to ensure stability:\n\n1. **Public API**: Any functions, classes, or methods that are intended to be used by other modules or external systems should have a stable interface. This includes the parameters they accept, the return values they provide, and any exceptions they might raise.\n\n2. **Configuration Interfaces**: If these files expose configuration options, ensure that the way these configurations are accessed and modified remains consistent. Avoid",
+      "matched_control_mechanical_pass": false
+    },
+    {
+      "task_id": "D05",
+      "prompt": "Why should backend switching not depend on hidden server session memory?",
+      "expected_criteria": {
+        "contains_all": [
+          "state",
+          "context"
+        ]
+      },
+      "14b_output": "Backend switching should not depend on hidden server session memory for several reasons:\n\n1. **Scalability**: Relying on server session memory can limit the scalability of your application. If you have multiple servers, each server would need to maintain its own session data, which can lead to inconsistencies and difficulties in managing user sessions across different servers.\n\n2. **Redundancy and Reliability**: Server session memory is volatile and can be lost if the server goes down or is restarted. This can lead to loss of user sessions and a poor user experience. Using a centralized session management system, such as a database or a dedicated session store, can",
+      "missing_keywords_14b": [
+        "state",
+        "context"
+      ],
+      "14b_failure_reason": "Useful session loss/scaling rationale; recommendation and final sentence cut before explicit context reconstruction.",
+      "qwen3_output": "Backend switching should not depend on hidden server session memory for several important reasons:\n\n## 1. **Scalability Issues**\n- **Single Point of Failure**: When backend switching relies on server-side session memory, all requests must be routed to the same server instance\n- **Load Balancing Problems**: Load balancers can't distribute traffic effectively across multiple servers\n- **Resource Limitations**: Server memory is finite and can become a bottleneck under high load\n\n## 2. **Session Persistence Challenges**\n- **Server Crashes**: If a server goes down, all session data is lost\n- **Memory Limits**: Server memory constraints prevent scaling",
+      "qwen3_mechanical_pass": false,
+      "manual_14b_score": 2,
+      "manual_qwen3_score": 2,
+      "manual_score_delta": 0,
+      "capability_delta": "No recovered backend/context reasoning criterion.",
+      "matched_control_output": "Backend switching should not depend on hidden server session memory for several reasons:\n\n1. **Scalability**: Relying on server session memory can limit the scalability of your application. If you have multiple servers, each server would need to maintain its own session data, which can lead to inconsistencies and difficulties in managing user sessions across different servers.\n\n2. **Redundancy**: Server session memory is a single point of failure. If a server goes down, all sessions stored in its memory are lost. This can lead to user frustration and potential data loss.\n\n3. **Load Balancing**: In a load-balanced environment, requests from the",
+      "matched_control_mechanical_pass": false
+    }
+  ],
+  "recovered": 1,
+  "total": 3
+}

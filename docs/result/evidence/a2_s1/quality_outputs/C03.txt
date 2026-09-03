@@ -1,0 +1,16 @@
+Here's a pytest test idea for preserving an upstream 429 status code:
+
+```python
+import pytest
+import requests
+from unittest.mock import Mock, patch
+from requests.exceptions import HTTPError
+
+def test_preserve_upstream_429_status_code():
+    """Test that upstream 429 status codes are preserved in the response"""
+    
+    # Mock the upstream request to return 429
+    mock_response = Mock()
+    mock_response.status_code = 429
+    mock_response.json.return_value = {"error": "rate limited"}
+    mock_response.text = '{"error": "rate limited"}

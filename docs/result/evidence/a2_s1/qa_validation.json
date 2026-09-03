@@ -1,0 +1,38 @@
+{
+  "utc": "2026-09-03T17:22:36.505137+00:00",
+  "python": "D:\\WORK\\RESEARCH\\local2api\\.venv\\Scripts\\python.exe",
+  "commands": [
+    {
+      "command": [
+        "D:\\WORK\\RESEARCH\\local2api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "stdout": "...............                                                          [100%]\n15 passed in 0.39s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\WORK\\RESEARCH\\local2api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tests",
+        "scripts"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "validation": {
+    "json_files_validated": 70,
+    "canonical_cases_per_model": 20,
+    "matched_challenges_per_model": 3,
+    "artifact_consistency": "PASS"
+  },
+  "passed": true
+}
