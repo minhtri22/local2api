@@ -29,3 +29,7 @@ class Settings:
     local_timeout: float = _env_float("LOCAL_TIMEOUT_SECONDS", 60.0)
     cloud_timeout: float = _env_float("CLOUD_TIMEOUT_SECONDS", 120.0)
     complexity_words: int = _env_int("ROUTER_COMPLEXITY_WORDS", 450)
+    context_db_path: str = os.getenv("LOCAL2API_CONTEXT_DB", "data/context.db")
+    context_budget_tokens: int = _env_int("LOCAL2API_CONTEXT_BUDGET", 4096)
+    context_soft_ceiling: int = _env_int("LOCAL2API_CONTEXT_SOFT_CEILING", 8192)
+    context_hard_ceiling: int = _env_int("LOCAL2API_CONTEXT_HARD_CEILING", 12288)

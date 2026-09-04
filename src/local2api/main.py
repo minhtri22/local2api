@@ -8,6 +8,7 @@ from local2api.api.chat import router as chat_router
 from local2api.api.meta import router as meta_router
 from local2api.backends.http import HTTPBackendAdapter
 from local2api.config import Settings
+from local2api.context_store import ContextStore, get_context_store
 from local2api.routing.router import RuleRouter
 
 
@@ -20,6 +21,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         "local": HTTPBackendAdapter("local", settings.local_url, settings.local_timeout),
         "cloud": HTTPBackendAdapter("cloud", settings.cloud_url, settings.cloud_timeout),
     }
+    app.state.context_store = get_context_store(settings)
     app.include_router(chat_router)
     app.include_router(meta_router)
     return app

@@ -1,0 +1,24 @@
+{
+  "schema": "local2api.context_contract.v1",
+  "ownership": "gateway",
+  "persistence": "sqlite",
+  "stateless_supported": true,
+  "recommended_local_context_budget": 4096,
+  "soft_local_context_ceiling": 8192,
+  "hard_local_context_ceiling": 12288,
+  "compaction_strategy": "priority-based reconstruction with recent-turn retention",
+  "hard_constraints_structured": true,
+  "backend_session_dependency": false,
+  "backend_switch_supported": true,
+  "gateway_restart_supported": true,
+  "same_conversation_concurrency_policy": "serialize_per_conversation",
+  "stream_commit_policy": "commit_on_complete_or_error",
+  "known_limits": [
+    "deterministic extraction only - no model-based summarization",
+    "recent turns limited to 20 in canonical state",
+    "artifact content not stored - only references",
+    "compaction drops oldest non-system messages first",
+    "streaming commits user+assistant turn on complete or user-only on error",
+    "no automatic summarization of older history"
+  ]
+}
