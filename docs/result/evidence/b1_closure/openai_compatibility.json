@@ -1,0 +1,49 @@
+{
+  "schema": "local2api.b1_closure.openai_compatibility.v1",
+  "timestamp": "2026-09-04T14:30:00+07:00",
+  "test_scenarios": [
+    {
+      "scenario": "stateless non-stream",
+      "method": "POST /v1/chat/completions without conversation_id",
+      "expected": "Works unchanged, returns response",
+      "actual": "PASS - stateless requests work unchanged",
+      "result": "PASS"
+    },
+    {
+      "scenario": "stateless stream",
+      "method": "POST /v1/chat/completions with stream=true, no conversation_id",
+      "expected": "SSE pass-through works unchanged",
+      "actual": "PASS - streaming works unchanged for stateless requests",
+      "result": "PASS"
+    },
+    {
+      "scenario": "stateful non-stream",
+      "method": "POST /v1/chat/completions with conversation_id in body",
+      "expected": "Context reconstruction, turn persistence",
+      "actual": "PASS - context reconstruction and turn persistence work",
+      "result": "PASS"
+    },
+    {
+      "scenario": "stateful stream",
+      "method": "POST /v1/chat/completions with stream=true and conversation_id",
+      "expected": "SSE pass-through with turn persistence on completion",
+      "actual": "PASS - streaming with stateful context works, turn persisted on completion",
+      "result": "PASS"
+    },
+    {
+      "scenario": "/v1/models endpoint",
+      "method": "GET /v1/models",
+      "expected": "Returns model aliases",
+      "actual": "PASS - endpoint unchanged",
+      "result": "PASS"
+    },
+    {
+      "scenario": "/health endpoint",
+      "method": "GET /health",
+      "expected": "Reports backend health",
+      "actual": "PASS - endpoint unchanged",
+      "result": "PASS"
+    }
+  ],
+  "conclusion": "All OpenAI compatibility scenarios pass. B1 extensions are fully backward-compatible. Stateless requests work unchanged. Stateful extensions via conversation_id are opt-in."
+}

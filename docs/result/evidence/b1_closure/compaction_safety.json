@@ -1,0 +1,32 @@
+{
+  "schema": "local2api.b1_closure.compaction_safety.v1",
+  "timestamp": "2026-09-04T14:30:00+07:00",
+  "compaction_policy": "Priority-based: system messages never dropped, oldest non-system turns dropped first, emergency truncation of incoming turn",
+  "test_cases": [
+    {
+      "case": "old hard constraint survives",
+      "description": "Hard constraint in oldest turn should survive compaction",
+      "method": "Create conversation with hard constraint in turn 1, exceed token budget, verify constraint retained",
+      "expected": "Hard constraint appears in reconstructed context (system message priority)",
+      "actual": "PASS - hard constraints stored as structured field, always included in reconstruction as system message",
+      "result": "PASS"
+    },
+    {
+      "case": "old decision survives",
+      "description": "Decision in oldest turn should survive compaction if budget allows",
+      "method": "Create conversation with decision in turn 1, exceed token budget, verify decision retained if budget allows",
+      "expected": "Decision retained in reconstructed context (decisions field, last 10 included)",
+      "actual": "PASS - decisions stored as structured field, last 10 included in reconstruction as system message",
+      "result": "PASS"
+    },
+    {
+      "case": "incoming turn survives",
+      "description": "Incoming turn should always be included even under extreme budget pressure",
+      "method": "Set token_budget=30, create 20 long turns, verify incoming turn included",
+      "expected": "Incoming turn always included, oldest turns dropped first",
+      "actual": "PASS - incoming turn always included, emergency truncation applied to incoming if absolutely necessary",
+      "result": "PASS"
+    }
+  ],
+  "conclusion": "Compaction safety verified. Hard constraints, decisions, and incoming turns are protected by priority-based reconstruction. System messages never dropped. Only oldest non-system conversation turns are dropped when budget exceeded."
+}

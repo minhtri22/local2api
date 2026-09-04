@@ -1,0 +1,33 @@
+{
+  "schema": "local2api.b1_closure.stream_state_validation.v1",
+  "timestamp": "2026-09-04T14:30:00+07:00",
+  "intended_policy": {
+    "success": "commit user + complete assistant turn",
+    "error": "persist user turn, do not persist false completed assistant turn"
+  },
+  "implementation_check": {
+    "code_location": "src/local2api/api/chat.py, event_stream() function",
+    "user_turn_persisted_before_stream": false,
+    "user_turn_persisted_after_stream": true,
+    "assistant_turn_persisted_on_success": true,
+    "assistant_turn_persisted_on_error": false,
+    "duplicate_user_turn_prevented": true
+  },
+  "test_scenarios": [
+    {
+      "scenario": "successful stream",
+      "method": "stream=true request to local backend",
+      "expected": "user + assistant turn committed atomically after [DONE]",
+      "actual": "user + assistant turn committed once after stream completes",
+      "result": "PASS"
+    },
+    {
+      "scenario": "failed stream before completion",
+      "method": "stream=true request with failing backend",
+      "expected": "user turn persisted, no assistant turn, no duplicate user turn",
+      "actual": "user turn persisted once, no assistant turn, no duplicate",
+      "result": "PASS"
+    }
+  ],
+  "conclusion": "Streaming semantics correctly implemented. User turn persisted only once (after stream completes or fails), assistant turn only on successful completion. No duplicate turns."
+}

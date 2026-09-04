@@ -1,0 +1,16 @@
+{
+  "schema": "local2api.b1_closure.concurrency_different_conversations.v1",
+  "timestamp": "2026-09-04T14:30:00+07:00",
+  "implementation": "single_global_rlock",
+  "description": "ContextStore uses a single RLock at store instance level. Different conversations are serialized through the same lock.",
+  "test_scenario": {
+    "description": "conversation A and conversation B in parallel",
+    "method": "Concurrent POST requests to /v1/chat/completions with different X-Local2API-Conversation-ID headers",
+    "expected": "no cross contamination, no unnecessary global serialization if per-conversation locks, but currently globally serialized",
+    "actual": "globally serialized through single RLock",
+    "result": "PARTIAL - no cross contamination (PASS), but unnecessary global serialization (suboptimal)",
+    "cross_contamination": "NO - conversations isolated by UUID",
+    "global_serialization": "YES - all conversations share same RLock"
+  },
+  "conclusion": "Different conversations are correctly isolated (no cross-contamination) but are unnecessarily serialized through a single global RLock. Per-conversation lock map would improve concurrency but not required for correctness."
+}

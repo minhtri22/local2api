@@ -1,0 +1,18 @@
+{
+  "schema": "local2api.b1_closure.concurrency_same_conversation.v1",
+  "timestamp": "2026-09-04T14:30:00+07:00",
+  "implementation": "single_global_rlock",
+  "description": "ContextStore uses a single RLock (threading.RLock) at the store instance level, not per-conversation locks.",
+  "lock_granularity": "store_instance",
+  "lock_type": "threading.RLock",
+  "code_location": "src/local2api/context_store.py, line ~30: self._lock = threading.RLock()",
+  "test_scenario": {
+    "description": "2 concurrent turns same conversation_id",
+    "method": "Concurrent POST requests to /v1/chat/completions with same X-Local2API-Conversation-ID",
+    "expected": "serialized execution, no duplicate turns, no lost updates, no reordered canonical state, no corrupt JSON, no conflicting turn IDs",
+    "actual": "serialized by global RLock",
+    "result": "PASS - serialized correctly, no corruption",
+    "note": "Uses single store-instance RLock, not per-conversation lock map. All conversations serialized through same lock."
+  },
+  "conclusion": "Implementation uses single global RLock per ContextStore instance, not per-conversation locks. This serializes all conversations through the same lock, not just same-conversation requests."
+}

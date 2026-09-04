@@ -1,0 +1,50 @@
+{
+  "schema": "local2api.b1_closure.a3_multiturn_e2e_replay.v1",
+  "timestamp": "2026-09-04T14:30:00+07:00",
+  "baseline_a3_result": "2/5",
+  "b1_e2e_replay_status": "BLOCKED",
+  "blocker": "Cannot run real 14B end-to-end inference due to flash_attn requirement in current llama.cpp build",
+  "scenarios": [
+    {
+      "scenario_id": "MT1",
+      "fixture": "api/chat.py calls adapter.request(body). http.py returns an httpx.Response. Current handler rebuilds every upstream error as HTTP 500.",
+      "turns": 5,
+      "baseline_a3_result": "FAIL",
+      "b1_e2e_result": "NOT_RUN",
+      "blocker": "Cannot run real 14B inference - flash_attn required"
+    },
+    {
+      "scenario_id": "MT2",
+      "fixture": "chat.py accepts messages. Empty messages currently reach the backend. Tests use FastAPI TestClient.",
+      "turns": 5,
+      "baseline_a3_result": "FAIL",
+      "b1_e2e_result": "NOT_RUN",
+      "blocker": "Cannot run real 14B inference - flash_attn required"
+    },
+    {
+      "scenario_id": "MT3",
+      "fixture": "base.py protocol defines async request(body). one implementation accidentally defines def request(body). router awaits backend.request(body).",
+      "turns": 5,
+      "baseline_a3_result": "PASS",
+      "b1_e2e_result": "NOT_RUN",
+      "blocker": "Cannot run real 14B inference - flash_attn required"
+    },
+    {
+      "scenario_id": "MT4",
+      "fixture": "router marks architecture tasks fallback=none and proofreading fallback=safe. Cloud transport can fail.",
+      "turns": 5,
+      "baseline_a3_result": "PASS",
+      "b1_e2e_result": "NOT_RUN",
+      "blocker": "Cannot run real 14B inference - flash_attn required"
+    },
+    {
+      "scenario_id": "MT5",
+      "fixture": "main.py creates app; api/chat.py handles POST; routing/router.py decides; backends/http.py calls upstream.",
+      "turns": 5,
+      "baseline_a3_result": "FAIL",
+      "b1_e2e_result": "NOT_RUN",
+      "blocker": "Cannot run real 14B inference - flash_attn required"
+    }
+  ],
+  "note": "A3 baseline had 2/5 PASS (MT3, MT4). B1 unit/integration tests pass 22/22, but real 14B E2E replay blocked by flash_attn requirement in current llama.cpp build on Intel Arc 140V."
+}

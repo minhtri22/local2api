@@ -1,0 +1,24 @@
+{
+  "schema": "local2api.b1_closure.runtime_verification.v1",
+  "timestamp": "2026-09-04T14:30:00+07:00",
+  "ollama_version": "0.33.3",
+  "intended_model": "local2api-qwen2.5-coder-14b:a2.1",
+  "intended_runtime": "Ollama 0.33.2 with Vulkan on Intel Arc 140V",
+  "actual_runtime": "Ollama 0.33.3 with Intel Arc 140V",
+  "vulkan_status": "detected",
+  "flash_attn_status": "unavailable",
+  "quantized_v_cache_status": "requires flash_attn",
+  "model_load_result": "failed",
+  "error_message": "llama_init_from_model: quantized V cache requires flash_attn to be enabled",
+  "models_tested": [
+    "local2api-qwen2.5-coder-14b:a2.1",
+    "qwen2.5-coder:7b",
+    "qwen3:14b",
+    "local2api-qwen3-coder-30b-a3b:a2.s1"
+  ],
+  "all_models_failed": true,
+  "root_cause": "Ollama 0.33.3 bundles llama.cpp build where quantized V cache requires flash_attn, which is unavailable on Intel Arc 140V GPU with current driver/llama.cpp build.",
+  "a3_baseline_runtime": "Ollama 0.33.2 with Vulkan on Intel Arc 140V (reported working in A3)",
+  "current_runtime_mismatch": "Ollama 0.33.3 vs 0.33.2; llama.cpp build requires flash_attn for quantized V cache",
+  "conclusion": "Cannot run real 14B end-to-end inference on this machine due to flash_attn requirement in current llama.cpp build. A3 baseline used Ollama 0.33.2 which had working Vulkan support."
+}
