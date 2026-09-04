@@ -1,0 +1,150 @@
+{
+  "schema": "local2api.h3_d1_r.preflight.v1",
+  "source_commit": "5c93548d81c9b9a93ae176fa3b9a0c68710ce20e",
+  "task_count": 12,
+  "token_measure": "deterministic lexical proxy; not billing tokens",
+  "median_reduction_ratio": 0.5448410711305053,
+  "tasks_ge_20pct_reduction": 12,
+  "tasks_compiled_gt_raw_10pct": 0,
+  "skill_overhead_proxy_tokens": 228,
+  "rows": [
+    {
+      "task_id": "D1-01",
+      "corpus_sha256": "41bcfee47af83d34dc273c73b0e5c276a06cff96eafb344a33da0c2d572db118",
+      "raw_proxy_tokens": 41957,
+      "compiled_evidence_proxy_tokens": 18852,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19138,
+      "reduction_ratio": 0.5438663393474271,
+      "selected_file_count": 26,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-02",
+      "corpus_sha256": "03f61125d924f52d99a19325e65713dd61a7197ba85c3a83295d65919229fbc2",
+      "raw_proxy_tokens": 41947,
+      "compiled_evidence_proxy_tokens": 18867,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19143,
+      "reduction_ratio": 0.5436384008391542,
+      "selected_file_count": 28,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-03",
+      "corpus_sha256": "d6b64afdec8660a7011b1f0e6d40e6c814ea14efc3c58a176cca127aa09d9533",
+      "raw_proxy_tokens": 41942,
+      "compiled_evidence_proxy_tokens": 18793,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19064,
+      "reduction_ratio": 0.5454675504267799,
+      "selected_file_count": 26,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-04",
+      "corpus_sha256": "acad2206a4e084f769ce78a87b5ce307f3f9da45388d064728e41cd5674b32d8",
+      "raw_proxy_tokens": 41951,
+      "compiled_evidence_proxy_tokens": 18832,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19112,
+      "reduction_ratio": 0.5444208719696789,
+      "selected_file_count": 26,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-05",
+      "corpus_sha256": "67078c5cb26d7adb26a60d3086b05f99521e7213f918ece35441afc9f4253e8a",
+      "raw_proxy_tokens": 41938,
+      "compiled_evidence_proxy_tokens": 18892,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19159,
+      "reduction_ratio": 0.5431589489246029,
+      "selected_file_count": 25,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-06",
+      "corpus_sha256": "00c1cdf3bf6f3dff67bb318404b0cacf047a08ad8d92133ffe83931a7669050f",
+      "raw_proxy_tokens": 41935,
+      "compiled_evidence_proxy_tokens": 18751,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19015,
+      "reduction_ratio": 0.5465601526171455,
+      "selected_file_count": 25,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-07",
+      "corpus_sha256": "085417ad5d57d09228f0648a3bf7a91a07ad2e597b80dabd339382bdb7a6512f",
+      "raw_proxy_tokens": 41942,
+      "compiled_evidence_proxy_tokens": 18777,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19048,
+      "reduction_ratio": 0.5458490296123217,
+      "selected_file_count": 24,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-08",
+      "corpus_sha256": "bb2a5db16c90eea0e611ebdc3745a9a30f19403fc135cb59cac14e2e6ab1b93a",
+      "raw_proxy_tokens": 41950,
+      "compiled_evidence_proxy_tokens": 18861,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19140,
+      "reduction_ratio": 0.5437425506555423,
+      "selected_file_count": 23,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-09",
+      "corpus_sha256": "855c304cbbbd68f39051993d9e016ca8bc41fd7cab0735d45b0b59f56869dc75",
+      "raw_proxy_tokens": 41950,
+      "compiled_evidence_proxy_tokens": 18830,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19109,
+      "reduction_ratio": 0.5444815256257449,
+      "selected_file_count": 25,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-10",
+      "corpus_sha256": "5975720eb2d0557ae5480a15c97913f3292752fd38e2adf280d2aab67b131099",
+      "raw_proxy_tokens": 41945,
+      "compiled_evidence_proxy_tokens": 18677,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 18951,
+      "reduction_ratio": 0.548194063654786,
+      "selected_file_count": 26,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-11",
+      "corpus_sha256": "eb0a549a9105c3bcff5ae60ffa262e4860d12bfac35223cf704b54de6af35e43",
+      "raw_proxy_tokens": 41941,
+      "compiled_evidence_proxy_tokens": 18673,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 18943,
+      "reduction_ratio": 0.5483417181278463,
+      "selected_file_count": 27,
+      "raw_file_count": 46
+    },
+    {
+      "task_id": "D1-12",
+      "corpus_sha256": "5563af7f673131c7074a8ee551b712c9616a1938dbf5fd9507feb6ad775122c3",
+      "raw_proxy_tokens": 41937,
+      "compiled_evidence_proxy_tokens": 18822,
+      "skill_overhead_proxy_tokens": 228,
+      "compiled_total_proxy_tokens": 19088,
+      "reduction_ratio": 0.5448410711305053,
+      "selected_file_count": 21,
+      "raw_file_count": 46
+    }
+  ],
+  "cloud_executed": false,
+  "preflight_gate": {
+    "median_reduction_ge_30pct": true,
+    "at_least_9_tasks_ge_20pct": true,
+    "no_task_compiled_gt_raw_10pct": true
+  }
+}

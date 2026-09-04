@@ -1,0 +1,555 @@
+{
+  "meta": {
+    "model": "google/gemma-4-31b-it",
+    "base_url": "https://integrate.api.nvidia.com/v1",
+    "normalized_endpoint": "https://integrate.api.nvidia.com/v1/chat/completions",
+    "api_key_env": "NVIDIA_API_KEY",
+    "max_tokens": 1024,
+    "temperature": 0.2,
+    "top_p": 0.7,
+    "task_ids": [
+      "D1-01",
+      "D1-02",
+      "D1-03",
+      "D1-04",
+      "D1-05",
+      "D1-06",
+      "D1-07",
+      "D1-08",
+      "D1-09",
+      "D1-10",
+      "D1-11",
+      "D1-12"
+    ]
+  },
+  "runs": [
+    {
+      "id": "D1-01",
+      "status": "ok",
+      "wall_ms": 69118.66499998723,
+      "usage": {
+        "prompt_tokens": 64785,
+        "completion_tokens": 507,
+        "total_tokens": 65292,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "Based on the repository evidence, here is the review of the non-streaming cloud fallback path:\n\n### Exact Condition for Local Fallback\nLocal fallback is allowed only when the following three conditions are met simultaneously:\n1. **Initial Routing**: The router must have initially selected the `cloud` backend.\n2. **Backend Failure**: The cloud backend must raise a `BackendUnavailable` exception during the request.\n3. **Fallback Mode**: The `RoutingDecision` for that specific request must have a `fallback_mode` set to `\"safe\"`.\n\nAccording to `src/local2api/routing/router.py`, the `fallback_mode` is set to `\"safe\"` under two specific scenarios:\n- **Large Context**: The word count of the prompt exceeds the `complexity_words` threshold (default 450).\n- **Safe Task Hints**: The prompt contains any of the `SAFE_LOCAL_FALLBACK_HINTS` (e.g., \"rewrite\", \"proofread\", \"summarize\", \"autocomplete\", \"complete this line\", \"format code\"), even if it also contains a cloud-triggering hint.\n\n### Silent Degradation of Hard Repository Tasks\n**No, a hard repository task cannot silently degrade.**\n\nThe system is explicitly designed to prevent this. In `src/local2api/routing/router.py`, tasks containing `CLOUD_TASK_HINTS` (which include `\"repository\"`, `\"repo-wide\"`, `\"architecture\"`, and `\"multi-file\"`) are routed to the cloud. If such a task does **not** also contain one of the \"safe\" hints, the `fallback_mode` is set to `\"none\"`.\n\nIn the request handler (`src/local2api/api/chat.py`), the fallback logic checks:\n`if decision.backend == \"cloud\" and decision.fallback_mode == \"safe\":`\n\nIf the `fallback_mode` is `\"none\"` (as it is for hard repository tasks), the system skips the local fallback attempt and immediately returns an `HTTP 503` error with the type `\"backend_unavailable\"`. This is further verified by the test case `test_unsafe_cloud_failure_does_not_silently_fallback` in `tests/test_api.py`, which asserts that a \"repository architecture review\" results in a 503 and zero calls to the local backend.",
+      "raw_response": {
+        "id": "5d936cc0577d4383b9a37088510bafbf",
+        "object": "chat.completion",
+        "created": 1788471681,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Based on the repository evidence, here is the review of the non-streaming cloud fallback path:\n\n### Exact Condition for Local Fallback\nLocal fallback is allowed only when the following three conditions are met simultaneously:\n1. **Initial Routing**: The router must have initially selected the `cloud` backend.\n2. **Backend Failure**: The cloud backend must raise a `BackendUnavailable` exception during the request.\n3. **Fallback Mode**: The `RoutingDecision` for that specific request must have a `fallback_mode` set to `\"safe\"`.\n\nAccording to `src/local2api/routing/router.py`, the `fallback_mode` is set to `\"safe\"` under two specific scenarios:\n- **Large Context**: The word count of the prompt exceeds the `complexity_words` threshold (default 450).\n- **Safe Task Hints**: The prompt contains any of the `SAFE_LOCAL_FALLBACK_HINTS` (e.g., \"rewrite\", \"proofread\", \"summarize\", \"autocomplete\", \"complete this line\", \"format code\"), even if it also contains a cloud-triggering hint.\n\n### Silent Degradation of Hard Repository Tasks\n**No, a hard repository task cannot silently degrade.**\n\nThe system is explicitly designed to prevent this. In `src/local2api/routing/router.py`, tasks containing `CLOUD_TASK_HINTS` (which include `\"repository\"`, `\"repo-wide\"`, `\"architecture\"`, and `\"multi-file\"`) are routed to the cloud. If such a task does **not** also contain one of the \"safe\" hints, the `fallback_mode` is set to `\"none\"`.\n\nIn the request handler (`src/local2api/api/chat.py`), the fallback logic checks:\n`if decision.backend == \"cloud\" and decision.fallback_mode == \"safe\":`\n\nIf the `fallback_mode` is `\"none\"` (as it is for hard repository tasks), the system skips the local fallback attempt and immediately returns an `HTTP 503` error with the type `\"backend_unavailable\"`. This is further verified by the test case `test_unsafe_cloud_failure_does_not_silently_fallback` in `tests/test_api.py`, which asserts that a \"repository architecture review\" results in a 503 and zero calls to the local backend."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64785,
+          "total_tokens": 65292,
+          "completion_tokens": 507,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-02",
+      "status": "ok",
+      "wall_ms": 92252.0548000175,
+      "usage": {
+        "prompt_tokens": 64771,
+        "completion_tokens": 766,
+        "total_tokens": 65537,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "Based on the provided repository context, here is the trace of how an explicit model override reaches the backend and how the model name is rewritten.\n\n### 1. Entry Point: Request Reception\nThe process begins in `src/local2api/api/chat.py` in the `chat_completions` function. The gateway receives a JSON body from the client.\n\n### 2. Routing Decision (The Override)\nThe gateway calls the router to determine the destination:\n```python\ndecision = request.app.state.router.decide(body)\n```\nInside `src/local2api/routing/router.py`, the `RuleRouter.decide` method checks for explicit model overrides before evaluating any task complexity or keywords:\n\n```python\nrequested_model = str(body.get(\"model\", \"local2api-auto\")).lower()\nif requested_model in {\"local\", \"local2api-local\"}:\n    return RoutingDecision(\"local\", \"explicit_model_override\", \"none\", 1.0)\nif requested_model in {\"cloud\", \"local2api-cloud\"}:\n    return RoutingDecision(\"cloud\", \"explicit_model_override\", \"none\", 1.0)\n```\nIf the client sends `model=\"local\"` or `model=\"cloud\"`, the router immediately returns a `RoutingDecision` with the corresponding backend name and the reason `\"explicit_model_override\"`.\n\n### 3. Backend Selection\nBack in `src/local2api/api/chat.py`, the gateway uses the `decision.backend` (either `\"local\"` or `\"cloud\"`) to select the appropriate adapter from the application state:\n```python\nselected = request.app.state.backends[decision.backend]\n```\n\n### 4. Upstream Model Name Rewriting\nBefore forwarding the request, the gateway rewrites the `model` field in the request body. It replaces the alias (e.g., `\"local\"`) with the actual model ID configured for that backend in `src/local2api/main.py` (which are sourced from `.env` via `Settings`).\n\n```python\nupstream_body = dict(body)\nupstream_body[\"model\"] = request.app.state.backend_models[decision.backend]\n```\n*   If `decision.backend` is `\"local\"`, the model is rewritten to the value of `LOCAL_LLM_MODEL`.\n*   If `decision.backend` is `\"cloud\"`, the model is rewritten to the value of `CLOUD_API_MODEL`.\n\n### 5. Forwarding to Backend\nThe rewritten `upstream_body` is passed to the selected backend adapter. In `src/local2api/backends/http.py`, the `HTTPBackendAdapter` forwards this body as a JSON payload to the configured upstream URL:\n\n```python\nasync with httpx.AsyncClient(timeout=self.timeout) as client:\n    return await client.post(self.url, json=body) # 'body' here is the rewritten upstream_body\n```\n\n### Summary Flow\n**Client Request** (`model=\"local\"`) $\\rightarrow$ **`RuleRouter`** (detects override $\\rightarrow$ returns `\"local\"`) $\\rightarrow$ **`chat_completions`** (looks up `backend_models[\"local\"]`) $\\rightarrow$ **Rewrite** (`model=\"qwen2.5-coder-7b-instruct-q4_k_m\"`) $\\rightarrow$ **`HTTPBackendAdapter`** $\\rightarrow$ **Upstream API**.",
+      "raw_response": {
+        "id": "c99dbeb04fd44ed0bf065f24bc0ba409",
+        "object": "chat.completion",
+        "created": 1788471774,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Based on the provided repository context, here is the trace of how an explicit model override reaches the backend and how the model name is rewritten.\n\n### 1. Entry Point: Request Reception\nThe process begins in `src/local2api/api/chat.py` in the `chat_completions` function. The gateway receives a JSON body from the client.\n\n### 2. Routing Decision (The Override)\nThe gateway calls the router to determine the destination:\n```python\ndecision = request.app.state.router.decide(body)\n```\nInside `src/local2api/routing/router.py`, the `RuleRouter.decide` method checks for explicit model overrides before evaluating any task complexity or keywords:\n\n```python\nrequested_model = str(body.get(\"model\", \"local2api-auto\")).lower()\nif requested_model in {\"local\", \"local2api-local\"}:\n    return RoutingDecision(\"local\", \"explicit_model_override\", \"none\", 1.0)\nif requested_model in {\"cloud\", \"local2api-cloud\"}:\n    return RoutingDecision(\"cloud\", \"explicit_model_override\", \"none\", 1.0)\n```\nIf the client sends `model=\"local\"` or `model=\"cloud\"`, the router immediately returns a `RoutingDecision` with the corresponding backend name and the reason `\"explicit_model_override\"`.\n\n### 3. Backend Selection\nBack in `src/local2api/api/chat.py`, the gateway uses the `decision.backend` (either `\"local\"` or `\"cloud\"`) to select the appropriate adapter from the application state:\n```python\nselected = request.app.state.backends[decision.backend]\n```\n\n### 4. Upstream Model Name Rewriting\nBefore forwarding the request, the gateway rewrites the `model` field in the request body. It replaces the alias (e.g., `\"local\"`) with the actual model ID configured for that backend in `src/local2api/main.py` (which are sourced from `.env` via `Settings`).\n\n```python\nupstream_body = dict(body)\nupstream_body[\"model\"] = request.app.state.backend_models[decision.backend]\n```\n*   If `decision.backend` is `\"local\"`, the model is rewritten to the value of `LOCAL_LLM_MODEL`.\n*   If `decision.backend` is `\"cloud\"`, the model is rewritten to the value of `CLOUD_API_MODEL`.\n\n### 5. Forwarding to Backend\nThe rewritten `upstream_body` is passed to the selected backend adapter. In `src/local2api/backends/http.py`, the `HTTPBackendAdapter` forwards this body as a JSON payload to the configured upstream URL:\n\n```python\nasync with httpx.AsyncClient(timeout=self.timeout) as client:\n    return await client.post(self.url, json=body) # 'body' here is the rewritten upstream_body\n```\n\n### Summary Flow\n**Client Request** (`model=\"local\"`) $\\rightarrow$ **`RuleRouter`** (detects override $\\rightarrow$ returns `\"local\"`) $\\rightarrow$ **`chat_completions`** (looks up `backend_models[\"local\"]`) $\\rightarrow$ **Rewrite** (`model=\"qwen2.5-coder-7b-instruct-q4_k_m\"`) $\\rightarrow$ **`HTTPBackendAdapter`** $\\rightarrow$ **Upstream API**."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64771,
+          "total_tokens": 65537,
+          "completion_tokens": 766,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-03",
+      "status": "ok",
+      "wall_ms": 26514.950500015402,
+      "usage": {
+        "prompt_tokens": 64770,
+        "completion_tokens": 247,
+        "total_tokens": 65017,
+        "prompt_tokens_details": {
+          "cached_tokens": 5
+        }
+      },
+      "text": "Streaming fallback is intentionally different from non-streaming fallback because **switching backends mid-stream is unsafe**. As noted in the documentation (`docs/index.md`, Section 5), once stream bytes have started being emitted to the client, switching to a different backend could mix two different generations into a single response, leading to corrupted or incoherent output.\n\n### Exact Failure Behavior After Streaming Begins\n\nWhen a backend failure occurs **after** the stream has already started, the system cannot fall back to an alternative backend. Instead, it follows this exact failure sequence (implemented in `src/local2api/api/chat.py`):\n\n1. **Catch Exception**: The `event_stream` generator catches the `BackendUnavailable` exception.\n2. **Emit Error Event**: It yields a JSON-encoded error object as an SSE data chunk:\n   `data: {\"error\": {\"type\": \"backend_unavailable\", \"message\": \"<error_message>\"}}\\n\\n`\n3. **Terminate Stream**: It immediately yields the terminal marker:\n   `data: [DONE]\\n\\n`\n4. **Close Connection**: The `StreamingResponse` finishes, closing the HTTP connection.",
+      "raw_response": {
+        "id": "428c6121c6bc467eafd3e3ec1b4bcb72",
+        "object": "chat.completion",
+        "created": 1788471800,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Streaming fallback is intentionally different from non-streaming fallback because **switching backends mid-stream is unsafe**. As noted in the documentation (`docs/index.md`, Section 5), once stream bytes have started being emitted to the client, switching to a different backend could mix two different generations into a single response, leading to corrupted or incoherent output.\n\n### Exact Failure Behavior After Streaming Begins\n\nWhen a backend failure occurs **after** the stream has already started, the system cannot fall back to an alternative backend. Instead, it follows this exact failure sequence (implemented in `src/local2api/api/chat.py`):\n\n1. **Catch Exception**: The `event_stream` generator catches the `BackendUnavailable` exception.\n2. **Emit Error Event**: It yields a JSON-encoded error object as an SSE data chunk:\n   `data: {\"error\": {\"type\": \"backend_unavailable\", \"message\": \"<error_message>\"}}\\n\\n`\n3. **Terminate Stream**: It immediately yields the terminal marker:\n   `data: [DONE]\\n\\n`\n4. **Close Connection**: The `StreamingResponse` finishes, closing the HTTP connection."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64770,
+          "total_tokens": 65017,
+          "completion_tokens": 247,
+          "prompt_tokens_details": {
+            "cached_tokens": 5
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-04",
+      "status": "ok",
+      "wall_ms": 36555.67499998142,
+      "usage": {
+        "prompt_tokens": 64781,
+        "completion_tokens": 458,
+        "total_tokens": 65239,
+        "prompt_tokens_details": {
+          "cached_tokens": 5
+        }
+      },
+      "text": "Based on the code ordering in `src/local2api/routing/router.py`, here is the audit of the routing heuristic:\n\n### 1. Which wins?\n**The cloud-task hint wins.**\n\nThe `decide` method evaluates hints in the following order:\n1. **Explicit Model Overrides:** Checks `requested_model` first.\n2. **Cloud Task Hints:** It checks `CLOUD_TASK_HINTS` before any other heuristic. If any cloud hint is found, it returns a `RoutingDecision` for the `\"cloud\"` backend immediately.\n3. **Complexity/Length:** Checks `word_count > self.complexity_words`.\n4. **Local Task Hints:** Checks `LOCAL_TASK_HINTS` only after the cloud and complexity checks have failed.\n\nTherefore, if a prompt contains both a cloud-task hint (e.g., \"repository\") and a local-task hint (e.g., \"rewrite\"), the `if cloud_hits:` block triggers first, and the request is routed to the cloud.\n\n### 2. How is `fallback_mode` chosen?\nWhen a cloud-task hint triggers the routing decision, the `fallback_mode` is determined by a secondary check against `SAFE_LOCAL_FALLBACK_HINTS`:\n\n```python\nif cloud_hits:\n    fallback = \"safe\" if any(h in text for h in SAFE_LOCAL_FALLBACK_HINTS) else \"none\"\n    return RoutingDecision(\"cloud\", f\"complex_task:{cloud_hits[0]}\", fallback, 0.95)\n```\n\n*   **`fallback_mode = \"safe\"`**: Chosen if the prompt text contains any hint present in the `SAFE_LOCAL_FALLBACK_HINTS` set (e.g., \"rewrite\", \"summarize\", \"autocomplete\").\n*   **`fallback_mode = \"none\"`**: Chosen if no safe fallback hints are present in the text.\n\n**Summary of Logic Flow:**\n`Cloud Hint` $\\rightarrow$ `Check for Safe Fallback Hint` $\\rightarrow$ `Route to Cloud (with safe/none fallback)`.",
+      "raw_response": {
+        "id": "10430d990d6b46b19174937149baa222",
+        "object": "chat.completion",
+        "created": 1788471837,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Based on the code ordering in `src/local2api/routing/router.py`, here is the audit of the routing heuristic:\n\n### 1. Which wins?\n**The cloud-task hint wins.**\n\nThe `decide` method evaluates hints in the following order:\n1. **Explicit Model Overrides:** Checks `requested_model` first.\n2. **Cloud Task Hints:** It checks `CLOUD_TASK_HINTS` before any other heuristic. If any cloud hint is found, it returns a `RoutingDecision` for the `\"cloud\"` backend immediately.\n3. **Complexity/Length:** Checks `word_count > self.complexity_words`.\n4. **Local Task Hints:** Checks `LOCAL_TASK_HINTS` only after the cloud and complexity checks have failed.\n\nTherefore, if a prompt contains both a cloud-task hint (e.g., \"repository\") and a local-task hint (e.g., \"rewrite\"), the `if cloud_hits:` block triggers first, and the request is routed to the cloud.\n\n### 2. How is `fallback_mode` chosen?\nWhen a cloud-task hint triggers the routing decision, the `fallback_mode` is determined by a secondary check against `SAFE_LOCAL_FALLBACK_HINTS`:\n\n```python\nif cloud_hits:\n    fallback = \"safe\" if any(h in text for h in SAFE_LOCAL_FALLBACK_HINTS) else \"none\"\n    return RoutingDecision(\"cloud\", f\"complex_task:{cloud_hits[0]}\", fallback, 0.95)\n```\n\n*   **`fallback_mode = \"safe\"`**: Chosen if the prompt text contains any hint present in the `SAFE_LOCAL_FALLBACK_HINTS` set (e.g., \"rewrite\", \"summarize\", \"autocomplete\").\n*   **`fallback_mode = \"none\"`**: Chosen if no safe fallback hints are present in the text.\n\n**Summary of Logic Flow:**\n`Cloud Hint` $\\rightarrow$ `Check for Safe Fallback Hint` $\\rightarrow$ `Route to Cloud (with safe/none fallback)`."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64781,
+          "total_tokens": 65239,
+          "completion_tokens": 458,
+          "prompt_tokens_details": {
+            "cached_tokens": 5
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-05",
+      "status": "ok",
+      "wall_ms": 23172.84529999597,
+      "usage": {
+        "prompt_tokens": 64766,
+        "completion_tokens": 283,
+        "total_tokens": 65049,
+        "prompt_tokens_details": {
+          "cached_tokens": 8
+        }
+      },
+      "text": "The observable routing metadata returned to clients is provided via two custom HTTP response headers:\n\n1.  **`X-Local2API-Backend`**: Indicates the backend that ultimately served the request (values: `local or cloud).\n2.  **`X-Local2API-Route-Reason`**: Explains the logic behind the routing decision or the event that triggered a fallback.\n\n### Reflection of Successful Cloud-to-Local Fallback\nThese headers explicitly reflect a successful cloud-to-local fallback through the value of the `X-Local2API-Route-Reason` header.\n\nAccording to the implementation in `src/local2api/api/chat.py`, when a request is initially routed to the cloud but the cloud backend is unavailable, the system checks if the `fallback_mode` is set to `\"safe\"`. If it is, the request is redirected to the local backend. Upon a successful local response, the headers are updated as follows:\n\n*   **`X-Local2API-Backend`**: `local`\n*   **`X-Local2API-Route-Reason`**: `fallback_from_cloud:<original_reason>`\n\nThe prefix **`fallback_from_cloud:`** serves as the observable indicator to the client that the request did not start locally but was successfully recovered by the local fallback mechanism.",
+      "raw_response": {
+        "id": "a27aca17250c412fa8d8b05f5d9be903",
+        "object": "chat.completion",
+        "created": 1788471860,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "The observable routing metadata returned to clients is provided via two custom HTTP response headers:\n\n1.  **`X-Local2API-Backend`**: Indicates the backend that ultimately served the request (values: `local or cloud).\n2.  **`X-Local2API-Route-Reason`**: Explains the logic behind the routing decision or the event that triggered a fallback.\n\n### Reflection of Successful Cloud-to-Local Fallback\nThese headers explicitly reflect a successful cloud-to-local fallback through the value of the `X-Local2API-Route-Reason` header.\n\nAccording to the implementation in `src/local2api/api/chat.py`, when a request is initially routed to the cloud but the cloud backend is unavailable, the system checks if the `fallback_mode` is set to `\"safe\"`. If it is, the request is redirected to the local backend. Upon a successful local response, the headers are updated as follows:\n\n*   **`X-Local2API-Backend`**: `local`\n*   **`X-Local2API-Route-Reason`**: `fallback_from_cloud:<original_reason>`\n\nThe prefix **`fallback_from_cloud:`** serves as the observable indicator to the client that the request did not start locally but was successfully recovered by the local fallback mechanism."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64766,
+          "total_tokens": 65049,
+          "completion_tokens": 283,
+          "prompt_tokens_details": {
+            "cached_tokens": 8
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-06",
+      "status": "ok",
+      "wall_ms": 28682.972199982032,
+      "usage": {
+        "prompt_tokens": 64759,
+        "completion_tokens": 402,
+        "total_tokens": 65161,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "### Assessment: Persistent Conversation Context Ownership\n\nBased on the provided repository context, the current gateway **does not** own persistent conversation context across backend switches.\n\n#### Current Implementation\nThe current implementation (`v0.0.1`) is a **stateless pass-through gateway**. \n- **Request Handling:** In `src/local2api/api/chat.py`, the gateway receives a request, makes a routing decision via `RuleRouter`, and forwards the `messages` list directly to the selected backend.\n- **State Management:** There is no internal database, session store, or state management logic to track `conversation_id` or reconstruct context.\n- **Backend Interaction:** Backends are treated as the primary owners of state (if they support it), or the client is expected to send the full history in every request.\n- **Explicit Limitation:** `docs/index.md` (Section 7) explicitly lists: *\"No persistent conversation/context brain yet.\"*\n\n#### Research Roadmap\nThe need for context ownership is recognized as a high-risk architectural gap and is tracked as a research objective rather than a current feature:\n- **Hypothesis (H1):** The research document `docs/research/architecture_challenge_and_router_landscape.md` identifies that routing multi-turn sessions across heterogeneous backends (Local $\\leftrightarrow$ Cloud) can fragment constraints and task state.\n- **Proposed Solution:** The roadmap suggests the gateway must eventually own \"canonical conversation/session state\" and treat backends as \"near-stateless executors.\"\n- **Proof Gate:** Implementation of gateway-owned context is gated behind **H1 — Context Ownership Proof**, which requires 20 controlled multi-turn sessions to measure degradation across backend switches before promotion to the active implementation line.\n- **Future Integration:** This is mapped to **Track B (Smart Router) $\\rightarrow$ B1 (Context Ownership)** in `plan.md`.",
+      "raw_response": {
+        "id": "4c8837bedd6847b08e45b8eb52a9f36c",
+        "object": "chat.completion",
+        "created": 1788471889,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "### Assessment: Persistent Conversation Context Ownership\n\nBased on the provided repository context, the current gateway **does not** own persistent conversation context across backend switches.\n\n#### Current Implementation\nThe current implementation (`v0.0.1`) is a **stateless pass-through gateway**. \n- **Request Handling:** In `src/local2api/api/chat.py`, the gateway receives a request, makes a routing decision via `RuleRouter`, and forwards the `messages` list directly to the selected backend.\n- **State Management:** There is no internal database, session store, or state management logic to track `conversation_id` or reconstruct context.\n- **Backend Interaction:** Backends are treated as the primary owners of state (if they support it), or the client is expected to send the full history in every request.\n- **Explicit Limitation:** `docs/index.md` (Section 7) explicitly lists: *\"No persistent conversation/context brain yet.\"*\n\n#### Research Roadmap\nThe need for context ownership is recognized as a high-risk architectural gap and is tracked as a research objective rather than a current feature:\n- **Hypothesis (H1):** The research document `docs/research/architecture_challenge_and_router_landscape.md` identifies that routing multi-turn sessions across heterogeneous backends (Local $\\leftrightarrow$ Cloud) can fragment constraints and task state.\n- **Proposed Solution:** The roadmap suggests the gateway must eventually own \"canonical conversation/session state\" and treat backends as \"near-stateless executors.\"\n- **Proof Gate:** Implementation of gateway-owned context is gated behind **H1 — Context Ownership Proof**, which requires 20 controlled multi-turn sessions to measure degradation across backend switches before promotion to the active implementation line.\n- **Future Integration:** This is mapped to **Track B (Smart Router) $\\rightarrow$ B1 (Context Ownership)** in `plan.md`."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64759,
+          "total_tokens": 65161,
+          "completion_tokens": 402,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-07",
+      "status": "ok",
+      "wall_ms": 43838.198799989186,
+      "usage": {
+        "prompt_tokens": 64768,
+        "completion_tokens": 653,
+        "total_tokens": 65421,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "### The Contract between Track A and Track B\n\nBased on the documented project architecture (`plan.md`), the relationship between the two tracks is defined as a unidirectional data dependency:\n\n**`Track A (Local Engine) -> Local Capability Profile -> Track B (Smart Router)`**\n\n*   **Track A's Responsibility:** To qualify local models and runtimes on the target hardware (Intel Core Ultra 7 258V / 32GB) and emit a measured **Local Capability Profile**. This profile includes empirical data on quality, latency (TTFT), throughput, and resource impact.\n*   **Track B's Responsibility:** To consume that profile to make routing decisions. Track B decides whether to route a task to the local or cloud backend based on the task's requirements (capability, privacy, latency) and the known limits provided by Track A.\n\nThe architecture explicitly separates **model qualification** (Track A) from **routing logic** (Track B).\n\n---\n\n### Why a Failed Sparse-Model Experiment Does Not Invalidate Track B\n\nThe failure of the sparse-model experiment (A2.S1) does not invalidate Track B for the following reasons:\n\n**1. Independence of the Routing Logic**\nTrack B is designed to be \"backend-agnostic.\" Its purpose is to route based on *whatever* capability profile Track A provides. Whether Track A produces a profile for a 7B dense model, a 14B dense model, or a 30B sparse model, Track B's logic for matching a task to a capability remains valid.\n\n**2. The \"Selective Quality Tier\" Fallback**\nThe A2.1 experiment proved that the **Qwen2.5-Coder 14B** model provides a \"strong quality uplift\" (17/20 on the quality suite) over the 7B baseline. Even though the sparse Qwen3-Coder 30B-A3B experiment was deemed `SPARSE_INCONCLUSIVE` due to runtime blockers and marginal quality gains, Track A still has a viable, qualified candidate in the 14B model. Track B can simply continue to use the 14B profile as the \"selective quality-sensitive local tier.\"\n\n**3. Decoupled Product Thesis**\nAs stated in `plan.md` and `docs/research/architecture_challenge_and_router_landscape.md`, the value of `local2api` is not tied to a specific model size, but to the **execution gateway** concept (owning context, planning execution, and verifying results). Track B's evolution toward a \"Local-first AI Execution Gateway\" depends on the *existence* of a local tier, not specifically a *sparse* local tier.\n\n**4. Evidence-Driven Roadmap**\nThe project follows a \"proof-before-build\" rule. The failure of A2.S1 is a successful application of this rule—it prevents the project from implementing a complex sparse-runtime infrastructure that lacks proven production value, without impacting the existing functional gateway (v0.0.1) or the routing logic.",
+      "raw_response": {
+        "id": "008e2345fdc1432481b9f15f306b38ba",
+        "object": "chat.completion",
+        "created": 1788471932,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "### The Contract between Track A and Track B\n\nBased on the documented project architecture (`plan.md`), the relationship between the two tracks is defined as a unidirectional data dependency:\n\n**`Track A (Local Engine) -> Local Capability Profile -> Track B (Smart Router)`**\n\n*   **Track A's Responsibility:** To qualify local models and runtimes on the target hardware (Intel Core Ultra 7 258V / 32GB) and emit a measured **Local Capability Profile**. This profile includes empirical data on quality, latency (TTFT), throughput, and resource impact.\n*   **Track B's Responsibility:** To consume that profile to make routing decisions. Track B decides whether to route a task to the local or cloud backend based on the task's requirements (capability, privacy, latency) and the known limits provided by Track A.\n\nThe architecture explicitly separates **model qualification** (Track A) from **routing logic** (Track B).\n\n---\n\n### Why a Failed Sparse-Model Experiment Does Not Invalidate Track B\n\nThe failure of the sparse-model experiment (A2.S1) does not invalidate Track B for the following reasons:\n\n**1. Independence of the Routing Logic**\nTrack B is designed to be \"backend-agnostic.\" Its purpose is to route based on *whatever* capability profile Track A provides. Whether Track A produces a profile for a 7B dense model, a 14B dense model, or a 30B sparse model, Track B's logic for matching a task to a capability remains valid.\n\n**2. The \"Selective Quality Tier\" Fallback**\nThe A2.1 experiment proved that the **Qwen2.5-Coder 14B** model provides a \"strong quality uplift\" (17/20 on the quality suite) over the 7B baseline. Even though the sparse Qwen3-Coder 30B-A3B experiment was deemed `SPARSE_INCONCLUSIVE` due to runtime blockers and marginal quality gains, Track A still has a viable, qualified candidate in the 14B model. Track B can simply continue to use the 14B profile as the \"selective quality-sensitive local tier.\"\n\n**3. Decoupled Product Thesis**\nAs stated in `plan.md` and `docs/research/architecture_challenge_and_router_landscape.md`, the value of `local2api` is not tied to a specific model size, but to the **execution gateway** concept (owning context, planning execution, and verifying results). Track B's evolution toward a \"Local-first AI Execution Gateway\" depends on the *existence* of a local tier, not specifically a *sparse* local tier.\n\n**4. Evidence-Driven Roadmap**\nThe project follows a \"proof-before-build\" rule. The failure of A2.S1 is a successful application of this rule—it prevents the project from implementing a complex sparse-runtime infrastructure that lacks proven production value, without impacting the existing functional gateway (v0.0.1) or the routing logic."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64768,
+          "total_tokens": 65421,
+          "completion_tokens": 653,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-08",
+      "status": "ok",
+      "wall_ms": 60529.157899989514,
+      "usage": {
+        "prompt_tokens": 64778,
+        "completion_tokens": 622,
+        "total_tokens": 65400,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "Based on the H3 research results (`result_h3_p0_s`, `result_h3_p0_l_lite`, `result_h3_d0`, and `result_h3_d1_s`), here is the state of what has been proven versus what remains unproven.\n\n### Proven: Context Reduction\nThe research has proven that **structural, dependency-aware selection** is a viable method for reducing context volume without losing critical task evidence in synthetic environments.\n\n*   **Material Reduction is Feasible:** Multiple pipelines (Rules, Retrieval, Hybrid, and Structural) consistently exceeded the $\\ge 30\\%$ reduction gate. The `STRUCTURAL_HYBRID_TIGHT` pipeline achieved a median reduction of $\\sim 56\\%$.\n*   **Fidelity can be Maintained:** While simple lexical retrieval and rules failed on indirect-module tasks, the **Structural Selector** (which uses function call providers and anchor expansion) achieved $100\\%$ mean evidence recall and $100\\%$ hard-constraint retention across both the frozen adversarial holdout and a post-freeze validation set.\n*   **Delivery Mechanism:** It is proven that a \"Skill + Local Tool\" delivery model is feasible. A local deterministic compiler can reduce cloud input by a median of $43.61\\%$ before the request is sent, whereas a cloud-only prompt skill actually increases input size (by $\\sim 13.36\\%$) because the raw context must still be uploaded for the cloud model to process the skill.\n*   **Baseline Establishment:** Structural selection is now the proven baseline; a small local LLM is not yet justified for evidence selection because the deterministic structural method already hits the $100\\%$ recall gate in synthetic tests.\n\n### Unproven: Cloud Task Quality\nWhile the \"input\" side of the equation (reduction) is proven, the \"output\" side (task quality) remains entirely **unproven**.\n\n*   **Downstream Task Success:** There is no evidence that the reduced \"Compiled\" context preserves the cloud model's ability to solve the task. No actual cloud models (Claude, GPT, etc.) have been called to verify if the structural reduction causes reasoning losses or hallucinations.\n*   **Real-World Generalization:** All proofs were conducted on synthetic repository fixtures. Performance on real-world repositories, diverse programming languages, and complex build systems is unproven.\n*   **Provider Economics:** Results are based on a **lexical-token proxy**. Actual provider billing-token savings, prompt-cache hits/misses, and monetary cost reductions have not been measured.\n*   **Integration Friction:** The latency, setup overhead, and reliability of integrating this as a tool within real agent ecosystems (e.g., Continue, Cline) remain unproven.\n*   **Security/Privacy:** While the volume of data sent to the cloud is reduced, the actual quality of redaction or privacy-preserving filtering has not been tested.",
+      "raw_response": {
+        "id": "a0a99c903a6940cda9d32fbd009fa0c2",
+        "object": "chat.completion",
+        "created": 1788471993,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Based on the H3 research results (`result_h3_p0_s`, `result_h3_p0_l_lite`, `result_h3_d0`, and `result_h3_d1_s`), here is the state of what has been proven versus what remains unproven.\n\n### Proven: Context Reduction\nThe research has proven that **structural, dependency-aware selection** is a viable method for reducing context volume without losing critical task evidence in synthetic environments.\n\n*   **Material Reduction is Feasible:** Multiple pipelines (Rules, Retrieval, Hybrid, and Structural) consistently exceeded the $\\ge 30\\%$ reduction gate. The `STRUCTURAL_HYBRID_TIGHT` pipeline achieved a median reduction of $\\sim 56\\%$.\n*   **Fidelity can be Maintained:** While simple lexical retrieval and rules failed on indirect-module tasks, the **Structural Selector** (which uses function call providers and anchor expansion) achieved $100\\%$ mean evidence recall and $100\\%$ hard-constraint retention across both the frozen adversarial holdout and a post-freeze validation set.\n*   **Delivery Mechanism:** It is proven that a \"Skill + Local Tool\" delivery model is feasible. A local deterministic compiler can reduce cloud input by a median of $43.61\\%$ before the request is sent, whereas a cloud-only prompt skill actually increases input size (by $\\sim 13.36\\%$) because the raw context must still be uploaded for the cloud model to process the skill.\n*   **Baseline Establishment:** Structural selection is now the proven baseline; a small local LLM is not yet justified for evidence selection because the deterministic structural method already hits the $100\\%$ recall gate in synthetic tests.\n\n### Unproven: Cloud Task Quality\nWhile the \"input\" side of the equation (reduction) is proven, the \"output\" side (task quality) remains entirely **unproven**.\n\n*   **Downstream Task Success:** There is no evidence that the reduced \"Compiled\" context preserves the cloud model's ability to solve the task. No actual cloud models (Claude, GPT, etc.) have been called to verify if the structural reduction causes reasoning losses or hallucinations.\n*   **Real-World Generalization:** All proofs were conducted on synthetic repository fixtures. Performance on real-world repositories, diverse programming languages, and complex build systems is unproven.\n*   **Provider Economics:** Results are based on a **lexical-token proxy**. Actual provider billing-token savings, prompt-cache hits/misses, and monetary cost reductions have not been measured.\n*   **Integration Friction:** The latency, setup overhead, and reliability of integrating this as a tool within real agent ecosystems (e.g., Continue, Cline) remain unproven.\n*   **Security/Privacy:** While the volume of data sent to the cloud is reduced, the actual quality of redaction or privacy-preserving filtering has not been tested."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64778,
+          "total_tokens": 65400,
+          "completion_tokens": 622,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-09",
+      "status": "ok",
+      "wall_ms": 26332.322299975203,
+      "usage": {
+        "prompt_tokens": 64783,
+        "completion_tokens": 330,
+        "total_tokens": 65113,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "Based on the research results in `docs/result/result_h3_d0_skill_first.md`, the **skill-plus-local-tool** approach is the only one capable of reducing initial external context exposure.\n\n### Comparison\n\n| Delivery Path | Cloud Input Effect (vs RAW) | Evidence Recall | Hard Constraints | Interpretation |\n| :--- | :--- | :--- | :--- | :--- |\n| **Skill-only** | **+13.36% (Increase)** | 100% | 100% | Increases input size due to added policy instructions. |\n| **Skill-plus-local-tool** | **-43.61% (Reduction)** | 100% | 100% | Materially reduces input via local structural compaction. |\n\n### Why Skill-plus-Local-Tool reduces exposure\nThe **skill-only** approach fails to reduce initial exposure because the cloud agent must receive the raw repository context first in order to decide what to remove or select. Consequently, the first request's input is not reduced; it is actually increased by the addition of the skill's policy instructions.\n\nIn contrast, the **skill-plus-local-tool** approach moves the compaction logic to the local machine. The local tool performs dependency-aware structural selection and emits a compact \"Context IR\" *before* the handoff. The cloud agent then receives only the skill policy and the already-compacted IR, ensuring that the raw, unselected context never leaves the local environment.",
+      "raw_response": {
+        "id": "b5718c7cc4c04b49a142d43277b9e545",
+        "object": "chat.completion",
+        "created": 1788472019,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Based on the research results in `docs/result/result_h3_d0_skill_first.md`, the **skill-plus-local-tool** approach is the only one capable of reducing initial external context exposure.\n\n### Comparison\n\n| Delivery Path | Cloud Input Effect (vs RAW) | Evidence Recall | Hard Constraints | Interpretation |\n| :--- | :--- | :--- | :--- | :--- |\n| **Skill-only** | **+13.36% (Increase)** | 100% | 100% | Increases input size due to added policy instructions. |\n| **Skill-plus-local-tool** | **-43.61% (Reduction)** | 100% | 100% | Materially reduces input via local structural compaction. |\n\n### Why Skill-plus-Local-Tool reduces exposure\nThe **skill-only** approach fails to reduce initial exposure because the cloud agent must receive the raw repository context first in order to decide what to remove or select. Consequently, the first request's input is not reduced; it is actually increased by the addition of the skill's policy instructions.\n\nIn contrast, the **skill-plus-local-tool** approach moves the compaction logic to the local machine. The local tool performs dependency-aware structural selection and emits a compact \"Context IR\" *before* the handoff. The cloud agent then receives only the skill policy and the already-compacted IR, ensuring that the raw, unselected context never leaves the local environment."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64783,
+          "total_tokens": 65113,
+          "completion_tokens": 330,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-10",
+      "status": "ok",
+      "wall_ms": 29921.043000009377,
+      "usage": {
+        "prompt_tokens": 64774,
+        "completion_tokens": 402,
+        "total_tokens": 65176,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "Based on an audit of the provided repository context, the current context compiler prototype (detailed in the `H3` research track) is research-research only for the following two reasons:\n\n### 1. Lack of Downstream Task-Success Validation\nThe prototype has only been validated using **evidence recall** (whether the required code blocks were present in the compiled output) on synthetic fixtures. It has not yet been proven that the \"compiled\" (compressed) context preserves the actual reasoning capability of the downstream LLM.\n*   **Evidence:** `result_h3_p0_l_lite_structural_selector.md` explicitly states: *\"This is still synthetic and not a real-repository or downstream-model proof\"* and *\"downstream cloud task success is preserved [is NOT proven].\"*\n*   **Production Risk:** A compiler could achieve 100% evidence recall but strip away the subtle semantic cues or \"connective tissue\" required for a model to actually solve the task, leading to a high rate of hallucinations or failures in production.\n\n### 2. Absence of Real-World Hardware and Runtime Economics\nThe prototype exists as a standalone Python script (`context_compile.py`) tested in a sandbox. There is no measurement of the latency, CPU/RAM overhead, or energy impact of running this compilation process on the target developer workstation (Intel Core Ultra 7 258V) during a live request loop.\n*   **Evidence:** `result_h3_p0_s_context_compression.md` notes that *\"local compiler latency, Arc 140V utilization, RAM or energy economics are also out of scope.\"*\n*   **Production Risk:** If the structural dependency analysis or lexical ranking introduces significant wall-clock latency (TTFT) or competes for memory with the local LLM, the \"savings\" in cloud tokens would be offset by a degraded user experience on the local machine.",
+      "raw_response": {
+        "id": "f3af1e07a6a2428e86a3ff837573e1cc",
+        "object": "chat.completion",
+        "created": 1788472049,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Based on an audit of the provided repository context, the current context compiler prototype (detailed in the `H3` research track) is research-research only for the following two reasons:\n\n### 1. Lack of Downstream Task-Success Validation\nThe prototype has only been validated using **evidence recall** (whether the required code blocks were present in the compiled output) on synthetic fixtures. It has not yet been proven that the \"compiled\" (compressed) context preserves the actual reasoning capability of the downstream LLM.\n*   **Evidence:** `result_h3_p0_l_lite_structural_selector.md` explicitly states: *\"This is still synthetic and not a real-repository or downstream-model proof\"* and *\"downstream cloud task success is preserved [is NOT proven].\"*\n*   **Production Risk:** A compiler could achieve 100% evidence recall but strip away the subtle semantic cues or \"connective tissue\" required for a model to actually solve the task, leading to a high rate of hallucinations or failures in production.\n\n### 2. Absence of Real-World Hardware and Runtime Economics\nThe prototype exists as a standalone Python script (`context_compile.py`) tested in a sandbox. There is no measurement of the latency, CPU/RAM overhead, or energy impact of running this compilation process on the target developer workstation (Intel Core Ultra 7 258V) during a live request loop.\n*   **Evidence:** `result_h3_p0_s_context_compression.md` notes that *\"local compiler latency, Arc 140V utilization, RAM or energy economics are also out of scope.\"*\n*   **Production Risk:** If the structural dependency analysis or lexical ranking introduces significant wall-clock latency (TTFT) or competes for memory with the local LLM, the \"savings\" in cloud tokens would be offset by a degraded user experience on the local machine."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64774,
+          "total_tokens": 65176,
+          "completion_tokens": 402,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-11",
+      "status": "ok",
+      "wall_ms": 16824.5775999967,
+      "usage": {
+        "prompt_tokens": 64767,
+        "completion_tokens": 82,
+        "total_tokens": 64849,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "When a request is routed to an external backend, the intended privacy boundary is that the request **leaves the local machine**.\n\nAccording to the project documentation (`docs/index.md`, Section 6), any request routed to an external backend inherits the privacy and data-use policies of that specific provider. The system explicitly clarifies that the router cannot make an external request private simply because it passes through localhost.",
+      "raw_response": {
+        "id": "803e37069b394d07af86eec3fcd8bcc0",
+        "object": "chat.completion",
+        "created": 1788472066,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "When a request is routed to an external backend, the intended privacy boundary is that the request **leaves the local machine**.\n\nAccording to the project documentation (`docs/index.md`, Section 6), any request routed to an external backend inherits the privacy and data-use policies of that specific provider. The system explicitly clarifies that the router cannot make an external request private simply because it passes through localhost."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64767,
+          "total_tokens": 64849,
+          "completion_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    },
+    {
+      "id": "D1-12",
+      "status": "ok",
+      "wall_ms": 52402.82489999663,
+      "usage": {
+        "prompt_tokens": 64767,
+        "completion_tokens": 577,
+        "total_tokens": 65344,
+        "prompt_tokens_details": {
+          "cached_tokens": 4
+        }
+      },
+      "text": "Based on the current roadmap and the established governance rules in the repository, H-track work must not automatically become Track B implementation for the following reasons:\n\n### 1. The \"Proof-Before-Build\" Governance Rule\nThe project operates under a strict **proof-before-build** mandate. As explicitly stated in `docs/research/architecture_challenge_and_router_landscape.md` and `plan.md`, the H-track is explicitly designated as **\"research-only\"** and **\"intentionally isolated from the active implementation line.\"** \n\nThe roadmap explicitly forbids automatic promotion:\n> \"No H-track subsystem may move into Track B implementation merely because it is architecturally attractive.\"\n\n### 2. Requirement for Measured Failure Modes\nFor an H-track hypothesis to be promoted to Track B, it must pass a rigorous promotion gate. It is not enough for a feature to be \"feasible\" (as seen in the H3.D0 prototype); it must prove it solves a specific, measured problem. The required evidence for promotion includes:\n*   **A measured failure mode:** Proof that the current Track B implementation is failing or suboptimal in a specific way.\n*   **A frozen baseline:** A stable point of comparison.\n*   **Predeclared proof metrics:** Success must be measured against a gate defined *before* the experiment.\n*   **Material improvement:** Evidence that the mechanism measurably improves the outcome (e.g., task success or resource cost) rather than just providing a technical capability.\n\n### 3. Distinction Between \"Feasibility\" and \"Production Readiness\"\nRecent H-track results demonstrate why this separation is critical. For example, the **H3.D0** and **H3.P0-L-lite** experiments proved that a \"Skill + Local Tool\" delivery for context compilation is *technically feasible* and can reduce token counts. However, the project has not yet proven:\n*   That this preserves downstream cloud task success on real repositories.\n*   The actual impact on provider billing and prompt-cache economics.\n*   The latency and resource overhead on the target Intel Arc hardware.\n\nPromoting these to Track B without this evidence would violate the project's goal of remaining a \"lightweight\" gateway and risk introducing unproven complexity into the production line.\n\n### 4. Preservation of Track B's Independence\nThe roadmap defines the relationship between tracks as:\n`Track A -> Local Capability Profile -> Track B`\n\nTrack B is designed to be useful regardless of the architectural breakthroughs in Track H. By keeping H-track work isolated, the project ensures that the core gateway remains stable and observable while high-risk architectural experiments (like the Context Planner or Execution Planner) are validated in a sandbox.",
+      "raw_response": {
+        "id": "cc17b0a734f94715b3d4608daacef6ae",
+        "object": "chat.completion",
+        "created": 1788472118,
+        "model": "google/gemma-4-31b-it",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Based on the current roadmap and the established governance rules in the repository, H-track work must not automatically become Track B implementation for the following reasons:\n\n### 1. The \"Proof-Before-Build\" Governance Rule\nThe project operates under a strict **proof-before-build** mandate. As explicitly stated in `docs/research/architecture_challenge_and_router_landscape.md` and `plan.md`, the H-track is explicitly designated as **\"research-only\"** and **\"intentionally isolated from the active implementation line.\"** \n\nThe roadmap explicitly forbids automatic promotion:\n> \"No H-track subsystem may move into Track B implementation merely because it is architecturally attractive.\"\n\n### 2. Requirement for Measured Failure Modes\nFor an H-track hypothesis to be promoted to Track B, it must pass a rigorous promotion gate. It is not enough for a feature to be \"feasible\" (as seen in the H3.D0 prototype); it must prove it solves a specific, measured problem. The required evidence for promotion includes:\n*   **A measured failure mode:** Proof that the current Track B implementation is failing or suboptimal in a specific way.\n*   **A frozen baseline:** A stable point of comparison.\n*   **Predeclared proof metrics:** Success must be measured against a gate defined *before* the experiment.\n*   **Material improvement:** Evidence that the mechanism measurably improves the outcome (e.g., task success or resource cost) rather than just providing a technical capability.\n\n### 3. Distinction Between \"Feasibility\" and \"Production Readiness\"\nRecent H-track results demonstrate why this separation is critical. For example, the **H3.D0** and **H3.P0-L-lite** experiments proved that a \"Skill + Local Tool\" delivery for context compilation is *technically feasible* and can reduce token counts. However, the project has not yet proven:\n*   That this preserves downstream cloud task success on real repositories.\n*   The actual impact on provider billing and prompt-cache economics.\n*   The latency and resource overhead on the target Intel Arc hardware.\n\nPromoting these to Track B without this evidence would violate the project's goal of remaining a \"lightweight\" gateway and risk introducing unproven complexity into the production line.\n\n### 4. Preservation of Track B's Independence\nThe roadmap defines the relationship between tracks as:\n`Track A -> Local Capability Profile -> Track B`\n\nTrack B is designed to be useful regardless of the architectural breakthroughs in Track H. By keeping H-track work isolated, the project ensures that the core gateway remains stable and observable while high-risk architectural experiments (like the Context Planner or Execution Planner) are validated in a sandbox."
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 106
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 64767,
+          "total_tokens": 65344,
+          "completion_tokens": 577,
+          "prompt_tokens_details": {
+            "cached_tokens": 4
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "local2api.h3_d1_r.comparison.v1",
+  "provider": "NVIDIA NIM hosted API",
+  "base_url_class": "https://integrate.api.nvidia.com/v1",
+  "model": "google/gemma-4-31b-it",
+  "task_count": 12,
+  "generation": {
+    "temperature": 0.2,
+    "top_p": 0.7,
+    "max_tokens": 1024,
+    "stream": false
+  },
+  "provider_prompt_token_telemetry": true,
+  "raw": {
+    "pass": 6,
+    "partial": 3,
+    "fail": 3,
+    "median_prompt_tokens": 64771,
+    "mean_prompt_tokens": 64772,
+    "median_wall_seconds": 36.6
+  },
+  "compiled": {
+    "pass": 7,
+    "partial": 3,
+    "fail": 2,
+    "median_prompt_tokens": 26980,
+    "mean_prompt_tokens": 26987,
+    "median_wall_seconds": 20.6
+  },
+  "median_prompt_token_reduction_ratio": 0.583,
+  "hard_constraint_failures": 0,
+  "critical_context_omission_failures": 0,
+  "raw_pass_compiled_degraded": [],
+  "cache_telemetry_available": true,
+  "verdict": "H3_D1_R_SKILL_FIRST_DOWNSTREAM_VALIDATED"
+}
