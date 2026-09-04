@@ -1,0 +1,286 @@
+{
+  "schema": "local2api.h3_d1_r.quality_audit.v1",
+  "source_commit": "f44f39c018686952bcaa2f065eb12e0882657dbf",
+  "audit_commit": "AUDIT_PENDING",
+  "task_count": 12,
+  "answer_count": 24,
+  "blinding_strength": "partial",
+  "scores": [
+    {
+      "task_id": "D1-01",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points satisfied: fallback conditions, safe vs hard distinction, backend_unavailable for hard tasks"
+    },
+    {
+      "task_id": "D1-01",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points satisfied: fallback conditions, safe vs hard distinction, backend_unavailable for hard tasks"
+    },
+    {
+      "task_id": "D1-02",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: explicit override, backend selection, backend_models rewrite"
+    },
+    {
+      "task_id": "D1-02",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: explicit override, backend selection, backend_models rewrite"
+    },
+    {
+      "task_id": "D1-03",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: backend switch unsafe mid-stream, SSE error+DONE, distinguishes from non-streaming"
+    },
+    {
+      "task_id": "D1-03",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: backend switch unsafe mid-stream, SSE error+DONE, distinguishes from non-streaming"
+    },
+    {
+      "task_id": "D1-04",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: cloud hint precedence, fallback_mode safe only with safe hints, confidence/reason behavior"
+    },
+    {
+      "task_id": "D1-04",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: cloud hint precedence, fallback_mode safe only with safe hints, confidence/reason behavior"
+    },
+    {
+      "task_id": "D1-05",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: names X-Local2API-Backend, names X-Local2API-Route-Reason, notes headers rewritten on fallback"
+    },
+    {
+      "task_id": "D1-05",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: names X-Local2API-Backend, names X-Local2API-Route-Reason, notes headers rewritten on fallback"
+    },
+    {
+      "task_id": "D1-06",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: no persistent context, distinguishes B1/H1 research, does not claim canonical context exists"
+    },
+    {
+      "task_id": "D1-06",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: no persistent context, distinguishes B1/H1 research, does not claim canonical context exists"
+    },
+    {
+      "task_id": "D1-07",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: Local Capability Profile contract, Track B independent, does not promote Qwen3 sparse tier"
+    },
+    {
+      "task_id": "D1-07",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: Local Capability Profile contract, Track B independent, does not promote Qwen3 sparse tier"
+    },
+    {
+      "task_id": "D1-08",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: structural selector fidelity, skill+local-tool reduction, cloud success/billing/cache unproven"
+    },
+    {
+      "task_id": "D1-08",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: structural selector fidelity, skill+local-tool reduction, cloud success/billing/cache unproven"
+    },
+    {
+      "task_id": "D1-09",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: skill-only increases exposure, local compilation before cloud, lossless constraints/provenance"
+    },
+    {
+      "task_id": "D1-09",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: skill-only increases exposure, local compilation before cloud, lossless constraints/provenance"
+    },
+    {
+      "task_id": "D1-10",
+      "arm": "RAW",
+      "score": "PARTIAL",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [
+        "mentions regex/lightweight parsing limitations"
+      ],
+      "notes": "2/3 rubric points: synthetic validation and hardware economics covered; regex/lightweight parsing limitations not explicitly mentioned"
+    },
+    {
+      "task_id": "D1-10",
+      "arm": "COMPILED",
+      "score": "PARTIAL",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [
+        "mentions regex/lightweight parsing limitations"
+      ],
+      "notes": "2/3 rubric points: synthetic validation and proxy metrics covered; regex/lightweight parsing limitations not explicitly mentioned"
+    },
+    {
+      "task_id": "D1-11",
+      "arm": "RAW",
+      "score": "PARTIAL",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [
+        "local request stays on configured local endpoint"
+      ],
+      "notes": "2/3 rubric points: external request leaves machine, inherits provider policy; local boundary not explicitly stated"
+    },
+    {
+      "task_id": "D1-11",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: local boundary, external boundary, inherits provider policy, localhost clarification"
+    },
+    {
+      "task_id": "D1-12",
+      "arm": "RAW",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: measured failure mode, frozen baseline/gate, material improvement evidence"
+    },
+    {
+      "task_id": "D1-12",
+      "arm": "COMPILED",
+      "score": "PASS",
+      "hard_constraint_adherence": true,
+      "critical_failure": false,
+      "unsupported_claims": 0,
+      "missing_required_points": [],
+      "notes": "All 3 rubric points: measured failure mode, frozen baseline/gate, material improvement evidence"
+    }
+  ],
+  "summary": {
+    "raw": {
+      "PASS": 10,
+      "PARTIAL": 2,
+      "FAIL": 0
+    },
+    "compiled": {
+      "PASS": 11,
+      "PARTIAL": 1,
+      "FAIL": 0
+    },
+    "raw_pass_compiled_degraded": [],
+    "compiled_pass_raw_degraded": [
+      {
+        "task_id": "D1-11",
+        "cause": "D_SCORING_VARIANCE"
+      }
+    ],
+    "hard_constraint_failures_raw": 0,
+    "hard_constraint_failures_compiled": 0,
+    "critical_context_omission_failures": 0,
+    "gates": {
+      "G1_provider_token_reduction": true,
+      "G2_hard_constraint_fidelity": true,
+      "G3_downstream_task_success": true,
+      "G4_critical_context_omission": true,
+      "G5_causal_degradation": true
+    }
+  },
+  "verdict": "H3_D1_R_AUDIT_CONFIRMS_VALIDATED"
+}
