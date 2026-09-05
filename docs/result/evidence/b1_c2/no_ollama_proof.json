@@ -1,0 +1,32 @@
+{
+  "schema": "local2api.b1_c2.no_ollama_proof.v1",
+  "timestamp": "2026-09-05T14:30:00+07:00",
+  "proofs": [
+    {
+      "check": "no_ollama_endpoint_in_config",
+      "evidence": "LOCAL_LLM_URL=http://127.0.0.1:8081/v1/chat/completions (llama-server port 8081, not Ollama default 11434)"
+    },
+    {
+      "check": "no_ollama_process_invoked",
+      "evidence": "llama-server.exe started directly from D:\\WORK\\RESEARCH\\CPuFriend\\bin\\llama-server.exe, not ollama serve"
+    },
+    {
+      "check": "no_localhost_11434_requests",
+      "evidence": "LOCAL_LLM_URL points to port 8081 (llama-server), not 11434 (Ollama default)"
+    },
+    {
+      "check": "backend_base_url_points_to_llama_server",
+      "evidence": "local2api .env has LOCAL_LLM_URL=http://127.0.0.1:8081/v1/chat/completions"
+    }
+  ],
+  "config_evidence": {
+    "LOCAL_LLM_URL": "http://127.0.0.1:8081/v1/chat/completions",
+    "LOCAL_LLM_MODEL": "qwen2.5-coder-14b-instruct-q4_k_m",
+    "llama_server_executable": "D:\\WORK\\RESEARCH\\CPuFriend\\bin\\llama-server.exe"
+  },
+  "runtime_verification": {
+    "llama_server_port": 8081,
+    "ollama_default_port": 11434,
+    "port_mismatch_confirmed": true
+  }
+}

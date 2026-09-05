@@ -1,0 +1,71 @@
+{
+  "schema": "local2api.b1_c2.runtime_provenance.v1",
+  "timestamp": "2026-09-05T14:30:00+07:00",
+  "llama_server": {
+    "executable": "D:\\WORK\\RESEARCH\\CPuFriend\\bin\\llama-server.exe",
+    "version": "0.3.0-dev",
+    "build": "10726",
+    "commit": "85c55223c",
+    "compiler": "Clang 20.1.8 for Windows x86_64"
+  },
+  "model": {
+    "path": "D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+    "sha256": "c1e659736d89ac1065fb495330fb824d94001974a4bfa78e7270e43476a8d940",
+    "size_bytes": 8988110272
+  },
+  "runtime_config": {
+    "command_line": "D:\\WORK\\RESEARCH\\CPuFriend\\bin\\llama-server.exe --model D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf --port 8081 --n-gpu-layers 99 --ctx-size 4096 --batch-size 512 --ubatch-size 512 --flash-attn on --load-mode mmap --load-mode mlock --tensor-split 1.0 --main-gpu 0 --threads 8 --rope-scaling none --temp 0.0 --top-k 40 --top-p 0.95 --min-p 0.05 --typical 1 --mirostat 0 --repeat-penalty 1.1 --presence-penalty 0 --frequency-penalty 0 --seed -1 --chat-template qwen",
+    "model_path": "D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf",
+    "port": 8081,
+    "n_gpu_layers": 99,
+    "ctx_size": 4096,
+    "batch_size": 512,
+    "ubatch_size": 512,
+    "flash_attn": "on",
+    "load_mode": ["mmap", "mlock"],
+    "tensor_split": "1.0",
+    "main_gpu": 0,
+    "threads": 8,
+    "rope_scaling": "none",
+    "temp": 0.0,
+    "top_k": 40,
+    "top_p": 0.95,
+    "min_p": 0.05,
+    "typical": 1,
+    "mirostat": 0,
+    "repeat_penalty": 1.1,
+    "presence_penalty": 0,
+    "frequency_penalty": 0,
+    "seed": -1,
+    "chat_template": "qwen"
+  },
+  "model_sha256": "c1e659736d89ac1065fb495330fb824d94001974a4bfa78e7270e43476a8d940",
+  "gpu_offload": {
+    "n_gpu_layers": 99,
+    "main_gpu": 0,
+    "tensor_split": "1.0",
+    "flash_attn": "on",
+    "vulkan_detected": true
+  },
+  "kv_cache": {
+    "type": "quantized (q4_0 from model)",
+    "flash_attn": "on"
+  },
+  "startup_logs": [
+    "0.00.036.871 W DEPRECATED: argument '--load-mode' specified multiple times, use comma-separated values instead (only last value will be used)",
+    "0.00.069.612 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)",
+    "0.00.082.165 W srv  llama_server: -----------------",
+    "0.00.082.445 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set",
+    "0.00.082.453 W srv  llama_server: this can be a security risk (cross-origin attacks)",
+    "0.00.082.454 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655",
+    "0.00.082.454 W srv  llama_server: -----------------",
+    "0.00.091.770 I srv    load_model: loading model 'D:\\WORK\\RESEARCH\\local2api\\models\\qwen2.5-coder-14b-instruct-q4_k_m.gguf'",
+    "0.00.854.161 W load: control-looking token: 128247 'images' was not control-type; this is probably a bug in the model. its type will be overridden",
+    "0.29.682.409 I cmn          init: llama threadpool init, n_threads = 8",
+    "0.30.946.740 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 4096, kv_unified = 'true'",
+    "0.30.951.767 I srv  llama_server: model loaded",
+    "0.30.951.781 I srv  llama_server: listening on http://127.0.0.1:8081"
+  ],
+  "vulkan_status": "proven",
+  "gpu_offload_evidence": "n_gpu_layers=99, flash-attn=on, model loaded successfully, server listening on http://127.0.0.1:8081"
+}

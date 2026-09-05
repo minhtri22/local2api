@@ -1,0 +1,66 @@
+{
+  "scenario_id": "MT2",
+  "conversation_id": "245fea53-58dd-40f9-8d3c-24700b777764",
+  "turns": [
+    {
+      "turn": 1,
+      "turn_id": "57d669ef-73ec-444b-9a02-d3cf61d2b61a",
+      "request": "Restate the relevant facts only.",
+      "response": "\n2019-03-14 15:08:07\n阅读量：60\n\n# 如何在Python中使用requests库发送HTTP请求？\n\n在Python中，`requests`库是一个非常流行的用于发送HTTP请求的第三方库。它提供了简单易用的API来处理各种HTTP请求，包括GET、POST、PUT、DELETE等。\n\n首先，你需要确保已经安装了`requests`库。如果没有安装，可以使用以下命令进行安装：\n\n```bash\npip install requests\n```\n\n接下来，我们来看一个简单的例子，展示如何使用`requests`库发送一个GET请求并获取响应内容：\n\n```python\nimport requests\n\n# 发送GET请求\nresponse = requests.get('https://api.example.com/data')\n\n# 检查请求是否成功\nif response.status_code == 200:\n    # 打印响应内容\n    print(response.text)\nelse:\n    print(f\"请求失败，状态码: {respons...",
+      "ttft_ms": 407.04,
+      "wall_time_ms": 220430.62,
+      "prompt_tokens": 2,
+      "completion_tokens": 465,
+      "total_tokens": 467,
+      "status": "ok"
+    },
+    {
+      "turn": 2,
+      "turn_id": "a5bd5611-29a2-4afa-bc4e-74f09ba867e7",
+      "request": "Identify the issue.",
+      "response": "\n2019-03-14 15:08:07\n阅读量：60\n\n# 如何在Python中使用requests库发送HTTP请求？\n\n在Python中，`requests`库是一个非常流行的用于发送HTTP请求的第三方库。它提供了简单易用的API来处理各种HTTP请求，包括GET、POST、PUT、DELETE等。\n\n首先，你需要确保已经安装了`requests`库。如果没有安装，可以使用以下命令进行安装：\n\n```bash\npip install requests\n```\n\n接下来，我们来看一个简单的例子，展示如何使用`requests`库发送一个GET请求并获取响应内容：\n\n```python\nimport requests\n\n# 发送GET请求\nresponse = requests.get('https://api.example.com/data')\n\n# 检查请求是否成功\nif response.status_code == 200:\n    # 获取响应内容\n    data = response.json()\n    print(data)\nelse:\n    print(f\"...",
+      "ttft_ms": 472.888,
+      "wall_time_ms": 196988.801,
+      "prompt_tokens": 2,
+      "completion_tokens": 479,
+      "total_tokens": 481,
+      "status": "ok"
+    },
+    {
+      "turn": 3,
+      "turn_id": "34c82f54-c333-4eec-9f6b-133fc152962b",
+      "request": "Propose the smallest edit.",
+      "response": "\n2019-03-14 15:08:07\n阅读量：60\n\n# 如何在Python中使用requests库发送HTTP请求？\n\n在Python中，`requests`库是一个非常流行的用于发送HTTP请求的第三方库。它提供了简单易用的API来处理各种HTTP请求，包括GET、POST、PUT、DELETE等。\n\n首先，你需要确保已经安装了`requests`库。如果没有安装，可以使用以下命令进行安装：\n\n```bash\npip install requests\n```\n\n接下来，我们来看一个简单的例子，展示如何使用`requests`库发送一个GET请求并获取响应内容：\n\n```python\nimport requests\n\n# 发送GET请求\nresponse = requests.get('https://api.example.com/data')\n\n# 检查请求是否成功\nif response.status_code == 200:\n    # 获取响应内容\n    data = response.json()\n    print(data)\nelse:\n    print(f\"...",
+      "ttft_ms": 394.775,
+      "wall_time_ms": 189875.785,
+      "prompt_tokens": 2,
+      "completion_tokens": 479,
+      "total_tokens": 481,
+      "status": "ok"
+    },
+    {
+      "turn": 4,
+      "turn_id": "60293a19-5104-42cf-81cd-415dcf47c365",
+      "request": "A test failed with an unexpected 503. Diagnose without dropping constraints.",
+      "response": "\n2019-03-14 15:08:07\n阅读量：60\n\n# 如何在Python中使用requests库发送HTTP请求？\n\n在Python中，`requests`库是一个非常流行的用于发送HTTP请求的第三方库。它提供了简单易用的API来处理各种HTTP请求，包括GET、POST、PUT、DELETE等。\n\n首先，你需要确保已经安装了`requests`库。如果没有安装，可以使用以下命令进行安装：\n\n```bash\npip install requests\n```\n\n接下来，我们来看一个简单的例子，展示如何使用`requests`库发送一个GET请求并获取响应内容：\n\n```python\nimport requests\n\n# 发送GET请求\nresponse = requests.get('https://api.example.com/data')\n\n# 检查请求是否成功\nif response.status_code == 200:\n    # 获取响应内容\n    data = response.json()\n    print(data)\nelse:\n    print(f\"...",
+      "ttft_ms": 357.492,
+      "wall_time_ms": 201039.91199999998,
+      "prompt_tokens": 2,
+      "completion_tokens": 479,
+      "total_tokens": 481,
+      "status": "ok"
+    },
+    {
+      "turn": 5,
+      "turn_id": "96f99110-ee52-409a-92fd-975fca741c8c",
+      "request": "Give the corrected final recommendation and repeat the constraints you preserved.",
+      "response": "\n2019-03-14 15:08:07\n阅读量：60\n\n# 如何在Python中使用requests库发送HTTP请求？\n\n在Python中，`requests`库是一个非常流行的用于发送HTTP请求的第三方库。它提供了简单易用的API来处理各种HTTP请求，包括GET、POST、PUT、DELETE等。\n\n首先，你需要确保已经安装了`requests`库。如果没有安装，可以使用以下命令进行安装：\n\n```bash\npip install requests\n```\n\n接下来，我们来看一个简单的例子，展示如何使用`requests`库发送一个GET请求并获取响应内容：\n\n```python\nimport requests\n\n# 发送GET请求\nresponse = requests.get('https://api.example.com/data')\n\n# 检查请求是否成功\nif response.status_code == 200:\n    # 打印响应内容\n    print(response.text)\nelse:\n    print(f\"请求失败，状态码: {respons...",
+      "ttft_ms": 421.348,
+      "wall_time_ms": 186800.78900000002,
+      "prompt_tokens": 2,
+      "completion_tokens": 455,
+      "total_tokens": 457,
+      "status": "ok"
+    }
+  ]
+}

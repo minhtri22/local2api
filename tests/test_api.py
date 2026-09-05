@@ -36,7 +36,7 @@ async def test_short_chat_routes_local(client_and_backends):
     assert response.status_code == 200
     assert response.headers["x-local2api-backend"] == "local"
     assert len(local.calls) == 1
-    assert local.calls[0]["model"] == "local-model"
+    assert local.calls[0]["model"] == "qwen2.5-coder-14b-instruct-q4_k_m"
     assert len(cloud.calls) == 0
 
 

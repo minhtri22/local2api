@@ -1,0 +1,8 @@
+{
+  "schema": "local2api.runtime_contract.v1",
+  "canonical_runtime": "llama-server",
+  "production_acceptance_runtime": "llama-server",
+  "ollama_status": "historical_control_only",
+  "fallback_to_ollama": false,
+  "acceptance_requires_llama_server": true
+}
